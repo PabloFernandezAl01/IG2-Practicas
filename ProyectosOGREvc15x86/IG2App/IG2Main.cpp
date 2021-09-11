@@ -3,6 +3,7 @@
 
 int main(int argc, char *argv[])     
 {
+    //Comentario de prueba
 	IG2App app;
   try {
     app.initApp();
