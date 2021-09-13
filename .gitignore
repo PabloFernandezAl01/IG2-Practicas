@@ -77,6 +77,8 @@ StyleCopReport.xml
 *.rsp
 *.sbr
 *.tlb
+*.exe
+*.cfg
 *.tli
 *.tlh
 *.tmp
