@@ -70,7 +70,7 @@ void IG2App::setupScene(void)
   
   // and tell it to render into the main window
   Viewport* vp = getRenderWindow()->addViewport(cam);
-  //vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+  vp->setBackgroundColour(Ogre::ColourValue(0.7, 0.8, 0.9));
 
   //------------------------------------------------------------------------
 
@@ -84,31 +84,66 @@ void IG2App::setupScene(void)
   //mLightNode = mCamNode->createChildSceneNode("nLuz");
   mLightNode->attachObject(luz);
 
-  mLightNode->setDirection(Ogre::Vector3(0, 0, -1));  //vec3.normalise();
+  mLightNode->setDirection(Ogre::Vector3(-1, 0, 0));  //vec3.normalise();
   //lightNode->setPosition(0, 0, 1000);
  
   //------------------------------------------------------------------------
 
   // finally something to render
 
+
   //Simbad
-  /*Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
+  Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
 
   mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
-  mSinbadNode->attachObject(ent);*/
+  mSinbadNode->attachObject(ent);
+  mSinbadNode->setScale(20, 20, 20);
 
   //mSinbadNode->setPosition(400, 100, -300);
-  //mSinbadNode->setScale(20, 20, 20);
   //mSinbadNode->yaw(Ogre::Degree(-45));
   //mSinbadNode->showBoundingBox(true);
   //mSinbadNode->setVisible(false);
 
-  //Sword
-  Ogre::Entity* ent = mSM->createEntity("Sword.mesh");
 
-  mSwordNode = mSM->getRootSceneNode()->createChildSceneNode("nSword");
-  mSwordNode->attachObject(ent);
-  mSwordNode->setScale(20, 20, 20);
+  //Sword
+  //Ogre::Entity* ent1 = mSM->createEntity("Sword.mesh");
+
+  //mSwordNode = mSM->getRootSceneNode()->createChildSceneNode("nSword");
+  //mSwordNode->attachObject(ent1);
+  //mSwordNode->setScale(30, 30, 30);
+  //mSwordNode->yaw(Ogre::Degree(45)); //Giro la espada para que la luz le incida en todo su contorno
+
+
+  //Helmet
+  /*Ogre::Entity* ent2 = mSM->createEntity("DamagedHelmet.mesh");
+
+  mHelmetNode = mSM->getRootSceneNode()->createChildSceneNode("nHelmet");
+  mHelmetNode->attachObject(ent2);
+  mHelmetNode->setScale(30, 30, 30);
+  mHelmetNode->yaw(Ogre::Degree(90));*/
+
+
+  //Cabeza de Ogre
+  /*Ogre::Entity* ent3 = mSM->createEntity("ogrehead.mesh");
+
+  mOgreHeadNode = mSM->getRootSceneNode()->createChildSceneNode("nOgreHead");
+  mOgreHeadNode->attachObject(ent3);
+  mOgreHeadNode->setScale(10, 10, 10);*/
+
+  //Facial
+ /* Ogre::Entity* ent4 = mSM->createEntity("facial.mesh");
+
+  mFacialNode = mSM->getRootSceneNode()->createChildSceneNode("nFacial");
+  mFacialNode->attachObject(ent4);
+  mFacialNode->setScale(5, 5, 5);*/
+
+  //Escenario
+
+  /*Ogre::Entity* ent5 = mSM->createEntity("ROOM_NX.mesh");
+
+  mFacialNode = mSM->getRootSceneNode()->createChildSceneNode("nStage");
+  mFacialNode->attachObject(ent5);
+  mFacialNode->setScale(5, 5, 5);*/
 
   //------------------------------------------------------------------------
 
