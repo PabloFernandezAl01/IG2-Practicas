@@ -91,16 +91,24 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-  Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
+  //Simbad
+  /*Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
 
   mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
-  mSinbadNode->attachObject(ent);
+  mSinbadNode->attachObject(ent);*/
 
   //mSinbadNode->setPosition(400, 100, -300);
-  mSinbadNode->setScale(20, 20, 20);
+  //mSinbadNode->setScale(20, 20, 20);
   //mSinbadNode->yaw(Ogre::Degree(-45));
   //mSinbadNode->showBoundingBox(true);
   //mSinbadNode->setVisible(false);
+
+  //Sword
+  Ogre::Entity* ent = mSM->createEntity("Sword.mesh");
+
+  mSwordNode = mSM->getRootSceneNode()->createChildSceneNode("nSword");
+  mSwordNode->attachObject(ent);
+  mSwordNode->setScale(20, 20, 20);
 
   //------------------------------------------------------------------------
 

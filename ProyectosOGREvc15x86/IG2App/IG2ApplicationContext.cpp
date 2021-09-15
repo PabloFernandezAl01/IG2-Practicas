@@ -124,7 +124,7 @@ namespace OgreBites {
 	{
 		if (!mRoot->restoreConfig()) 
 		{
-			return mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
+			//return mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 		}
 		else return true;
 	}
