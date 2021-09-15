@@ -78,7 +78,6 @@ StyleCopReport.xml
 *.sbr
 *.tlb
 *.exe
-*.cfg
 *.tli
 *.tlh
 *.tmp
@@ -351,5 +350,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-#Archivos especificos de este proyecto
+# Archivos especificos de este proyecto
 ogre.cfg
