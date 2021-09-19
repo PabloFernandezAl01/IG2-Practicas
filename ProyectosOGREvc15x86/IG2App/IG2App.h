@@ -26,13 +26,23 @@ protected:
   Ogre::SceneNode* mLightNode = nullptr;
   Ogre::SceneNode* mCamNode = nullptr;
   Ogre::SceneNode* mSinbadNode = nullptr;
+  OgreBites::CameraMan* mCamMgr = nullptr;
+
+  //Practica 0
   Ogre::SceneNode* mSwordNode = nullptr;
   Ogre::SceneNode* mHelmetNode = nullptr;
   Ogre::SceneNode* mOgreHeadNode = nullptr;
   Ogre::SceneNode* mFacialNode = nullptr;
   Ogre::SceneNode* mStageNode = nullptr;
-  OgreBites::CameraMan* mCamMgr = nullptr;
+  Ogre::SceneNode* mColumnsNode = nullptr;
+  Ogre::SceneNode* mBathLower = nullptr;
+  Ogre::SceneNode* mBathUpper = nullptr;
+
+
+  Ogre::SceneNode* mHourNode = nullptr;
  
+private:
+    void sphereClockScene();
 };
 
 #endif

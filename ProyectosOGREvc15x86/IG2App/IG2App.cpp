@@ -84,7 +84,7 @@ void IG2App::setupScene(void)
   //mLightNode = mCamNode->createChildSceneNode("nLuz");
   mLightNode->attachObject(luz);
 
-  mLightNode->setDirection(Ogre::Vector3(-1, 0, 0));  //vec3.normalise();
+  mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
   //lightNode->setPosition(0, 0, 1000);
  
   //------------------------------------------------------------------------
@@ -139,11 +139,22 @@ void IG2App::setupScene(void)
 
   //Escenario
 
-  /*Ogre::Entity* ent5 = mSM->createEntity("ROOM_NX.mesh");
+  Ogre::Entity* ent5 = mSM->createEntity("Columns.mesh");
 
-  mFacialNode = mSM->getRootSceneNode()->createChildSceneNode("nStage");
-  mFacialNode->attachObject(ent5);
-  mFacialNode->setScale(5, 5, 5);*/
+  mColumnsNode = mSM->getRootSceneNode()->createChildSceneNode("nColumns");
+  mColumnsNode->attachObject(ent5);
+
+
+  Ogre::Entity* ent6 = mSM->createEntity("RomanBathLower.mesh");
+
+  mBathLower = mSM->getRootSceneNode()->createChildSceneNode("nBathLower");
+  mBathLower->attachObject(ent6);
+
+
+  Ogre::Entity* ent7 = mSM->createEntity("RomanBathUpper.mesh");
+
+  mBathUpper = mSM->getRootSceneNode()->createChildSceneNode("nBathUpper");
+  mBathUpper->attachObject(ent7);
 
   //------------------------------------------------------------------------
 
@@ -155,6 +166,11 @@ void IG2App::setupScene(void)
   //mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 
   //------------------------------------------------------------------------
+
+}
+
+void IG2App::sphereClockScene()
+{
 
 }
 
