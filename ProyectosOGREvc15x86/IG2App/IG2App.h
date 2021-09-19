@@ -38,10 +38,16 @@ protected:
   Ogre::SceneNode* mBathLower = nullptr;
   Ogre::SceneNode* mBathUpper = nullptr;
 
-
-  Ogre::SceneNode* mHourNode = nullptr;
+  //Practica 1
+  Ogre::SceneNode* mHourNode[12];
+  Ogre::SceneNode* clock = nullptr;
+  Ogre::SceneNode* spheres = nullptr;
+  Ogre::SceneNode* hoursNeedle = nullptr;
+  Ogre::SceneNode* minutesNeedle = nullptr;
+  Ogre::SceneNode* secondsNeedle = nullptr;
  
 private:
+    void simbadScene();
     void sphereClockScene();
 };
 

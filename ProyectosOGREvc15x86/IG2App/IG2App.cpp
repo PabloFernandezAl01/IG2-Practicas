@@ -11,10 +11,14 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
   if (evt.keysym.sym == SDLK_ESCAPE)
   {
-    getRoot()->queueEndRendering();
+      getRoot()->queueEndRendering();
   }
-  //else if (evt.keysym.sym == SDLK_???)
-  
+  else if (evt.keysym.sym == SDLK_g) {
+	  clock->roll(Ogre::Degree(-1));
+  }
+  else if (evt.keysym.sym == SDLK_h) {
+	  spheres->roll(Ogre::Degree(-1));
+  }
   return true;
 }
 
@@ -91,70 +95,7 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-
-  //Simbad
-  Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
-
-  mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
-  mSinbadNode->attachObject(ent);
-  mSinbadNode->setScale(20, 20, 20);
-
-  //mSinbadNode->setPosition(400, 100, -300);
-  //mSinbadNode->yaw(Ogre::Degree(-45));
-  //mSinbadNode->showBoundingBox(true);
-  //mSinbadNode->setVisible(false);
-
-
-  //Sword
-  //Ogre::Entity* ent1 = mSM->createEntity("Sword.mesh");
-
-  //mSwordNode = mSM->getRootSceneNode()->createChildSceneNode("nSword");
-  //mSwordNode->attachObject(ent1);
-  //mSwordNode->setScale(30, 30, 30);
-  //mSwordNode->yaw(Ogre::Degree(45)); //Giro la espada para que la luz le incida en todo su contorno
-
-
-  //Helmet
-  /*Ogre::Entity* ent2 = mSM->createEntity("DamagedHelmet.mesh");
-
-  mHelmetNode = mSM->getRootSceneNode()->createChildSceneNode("nHelmet");
-  mHelmetNode->attachObject(ent2);
-  mHelmetNode->setScale(30, 30, 30);
-  mHelmetNode->yaw(Ogre::Degree(90));*/
-
-
-  //Cabeza de Ogre
-  /*Ogre::Entity* ent3 = mSM->createEntity("ogrehead.mesh");
-
-  mOgreHeadNode = mSM->getRootSceneNode()->createChildSceneNode("nOgreHead");
-  mOgreHeadNode->attachObject(ent3);
-  mOgreHeadNode->setScale(10, 10, 10);*/
-
-  //Facial
- /* Ogre::Entity* ent4 = mSM->createEntity("facial.mesh");
-
-  mFacialNode = mSM->getRootSceneNode()->createChildSceneNode("nFacial");
-  mFacialNode->attachObject(ent4);
-  mFacialNode->setScale(5, 5, 5);*/
-
-  //Escenario
-
-  Ogre::Entity* ent5 = mSM->createEntity("Columns.mesh");
-
-  mColumnsNode = mSM->getRootSceneNode()->createChildSceneNode("nColumns");
-  mColumnsNode->attachObject(ent5);
-
-
-  Ogre::Entity* ent6 = mSM->createEntity("RomanBathLower.mesh");
-
-  mBathLower = mSM->getRootSceneNode()->createChildSceneNode("nBathLower");
-  mBathLower->attachObject(ent6);
-
-
-  Ogre::Entity* ent7 = mSM->createEntity("RomanBathUpper.mesh");
-
-  mBathUpper = mSM->getRootSceneNode()->createChildSceneNode("nBathUpper");
-  mBathUpper->attachObject(ent7);
+  sphereClockScene();
 
   //------------------------------------------------------------------------
 
@@ -169,8 +110,120 @@ void IG2App::setupScene(void)
 
 }
 
-void IG2App::sphereClockScene()
-{
+void IG2App::simbadScene() {
+	//Simbad
+	Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
+
+	mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
+	mSinbadNode->attachObject(ent);
+	mSinbadNode->setScale(20, 20, 20);
+
+	//mSinbadNode->setPosition(400, 100, -300);
+	//mSinbadNode->yaw(Ogre::Degree(-45));
+	//mSinbadNode->showBoundingBox(true);
+	//mSinbadNode->setVisible(false);
+
+
+	//Sword
+	//Ogre::Entity* ent1 = mSM->createEntity("Sword.mesh");
+
+	//mSwordNode = mSM->getRootSceneNode()->createChildSceneNode("nSword");
+	//mSwordNode->attachObject(ent1);
+	//mSwordNode->setScale(30, 30, 30);
+	//mSwordNode->yaw(Ogre::Degree(45)); //Giro la espada para que la luz le incida en todo su contorno
+
+
+	//Helmet
+	/*Ogre::Entity* ent2 = mSM->createEntity("DamagedHelmet.mesh");
+
+	mHelmetNode = mSM->getRootSceneNode()->createChildSceneNode("nHelmet");
+	mHelmetNode->attachObject(ent2);
+	mHelmetNode->setScale(30, 30, 30);
+	mHelmetNode->yaw(Ogre::Degree(90));*/
+
+
+	//Cabeza de Ogre
+	/*Ogre::Entity* ent3 = mSM->createEntity("ogrehead.mesh");
+
+	mOgreHeadNode = mSM->getRootSceneNode()->createChildSceneNode("nOgreHead");
+	mOgreHeadNode->attachObject(ent3);
+	mOgreHeadNode->setScale(10, 10, 10);*/
+
+	//Facial
+   /* Ogre::Entity* ent4 = mSM->createEntity("facial.mesh");
+
+	mFacialNode = mSM->getRootSceneNode()->createChildSceneNode("nFacial");
+	mFacialNode->attachObject(ent4);
+	mFacialNode->setScale(5, 5, 5);*/
+
+	//Escenario
+
+	Ogre::Entity* ent5 = mSM->createEntity("Columns.mesh");
+
+	mColumnsNode = mSM->getRootSceneNode()->createChildSceneNode("nColumns");
+	mColumnsNode->attachObject(ent5);
+
+
+	Ogre::Entity* ent6 = mSM->createEntity("RomanBathLower.mesh");
+
+	mBathLower = mSM->getRootSceneNode()->createChildSceneNode("nBathLower");
+	mBathLower->attachObject(ent6);
+
+
+	Ogre::Entity* ent7 = mSM->createEntity("RomanBathUpper.mesh");
+
+	mBathUpper = mSM->getRootSceneNode()->createChildSceneNode("nBathUpper");
+	mBathUpper->attachObject(ent7);
+}
+
+void IG2App::sphereClockScene() {
+	clock = mSM->getRootSceneNode()->createChildSceneNode("Clock");
+	spheres = clock->createChildSceneNode("Spheres");
+
+	float ang = 90;
+	float x, y;
+
+	for (int i = 0; i < 12; i++) {
+		std::string name = "Hora" + std::to_string(i+1);
+		Ogre::Entity* ent = mSM->createEntity("sphere.mesh");
+		mHourNode[i] = spheres->createChildSceneNode(name);
+		mHourNode[i]->attachObject(ent);
+
+		x = 300 * Ogre::Math::Cos(Ogre::Math::DegreesToRadians(ang));
+		y = 300 * Ogre::Math::Sin(Ogre::Math::DegreesToRadians(ang));
+		ang += (360 / 12);
+
+		mHourNode[i]->setPosition(Vector3(x, y, 0));
+
+		mSM->getSceneNode(name)->setScale(0.4, 0.4, 0.4);
+
+		if(i % 2 == 0) mSM->getSceneNode(name)->setScale(0.2, 0.2, 0.2);
+		else mSM->getSceneNode(name)->setScale(0.4, 0.4, 0.4);
+	}
+
+
+	Ogre::Entity* ent1 = mSM->createEntity("cube.mesh");
+	Ogre::Entity* ent2 = mSM->createEntity("cube.mesh");
+	Ogre::Entity* ent3 = mSM->createEntity("cube.mesh");
+	hoursNeedle = clock->createChildSceneNode("HoursNeedle");
+	minutesNeedle = clock->createChildSceneNode("MinutesNeedle");
+	secondsNeedle = clock->createChildSceneNode("SecondsNeedle");
+
+	hoursNeedle->attachObject(ent1);
+	minutesNeedle->attachObject(ent2);
+	secondsNeedle->attachObject(ent3);
+
+	hoursNeedle->setScale(Vector3(0.08, 1, 0.1));
+	hoursNeedle->setPosition(Vector3(45, 0, 0));
+
+	minutesNeedle->setScale(Vector3(0.1, 2, 0.1));
+	minutesNeedle->setPosition(Vector3(0, 100, 0));
+
+	secondsNeedle->setScale(Vector3(0.1, 2, 0.1));
+	secondsNeedle->setPosition(Vector3(-65, -65, 0));
+
+	hoursNeedle->roll(Ogre::Degree(-90));
+	secondsNeedle->roll(Ogre::Degree(-225));
 
 }
 
