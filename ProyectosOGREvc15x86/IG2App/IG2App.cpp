@@ -14,7 +14,8 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
       getRoot()->queueEndRendering();
   }
   else if (evt.keysym.sym == SDLK_g) {
-	  clock->roll(Ogre::Degree(-1));
+	  //clock->roll(Ogre::Degree(-1)); //Practica 1.1
+	  aspasMolino->giraAspasMolino(1);
   }
   else if (evt.keysym.sym == SDLK_h) {
 	  spheres->roll(Ogre::Degree(-1));
@@ -95,7 +96,7 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-  sphereClockScene();
+  molinoScene();
 
   //------------------------------------------------------------------------
 
@@ -176,6 +177,10 @@ void IG2App::simbadScene() {
 	mBathUpper->attachObject(ent7);
 }
 
+void IG2App::molinoScene() {
+	aspasMolino = new AspasMolino(mSM, 12);
+}
+
 void IG2App::sphereClockScene() {
 	clock = mSM->getRootSceneNode()->createChildSceneNode("Clock");
 	spheres = clock->createChildSceneNode("Spheres");
@@ -213,17 +218,17 @@ void IG2App::sphereClockScene() {
 	minutesNeedle->attachObject(ent2);
 	secondsNeedle->attachObject(ent3);
 
-	hoursNeedle->setScale(Vector3(0.08, 1, 0.1));
-	hoursNeedle->setPosition(Vector3(45, 0, 0));
-
-	minutesNeedle->setScale(Vector3(0.1, 2, 0.1));
-	minutesNeedle->setPosition(Vector3(0, 100, 0));
-
-	secondsNeedle->setScale(Vector3(0.1, 2, 0.1));
-	secondsNeedle->setPosition(Vector3(-65, -65, 0));
-
+	hoursNeedle->setScale(Vector3(0.15, 2.5, 0.1));
+	hoursNeedle->setPosition(Vector3(100, 0, 0));
 	hoursNeedle->roll(Ogre::Degree(-90));
+
+	minutesNeedle->setScale(Vector3(0.1, 2.2, 0.1));
+	minutesNeedle->setPosition(Vector3(0, 90, 0));
+
+	secondsNeedle->setScale(Vector3(0.08, 1.8, 0.1));
+	secondsNeedle->setPosition(Vector3(-45, -45, 0));
 	secondsNeedle->roll(Ogre::Degree(-225));
+
 
 }
 

@@ -6,6 +6,7 @@
 #include <OgreSceneNode.h>
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+#include "AspasMolino.h"
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -38,17 +39,21 @@ protected:
   Ogre::SceneNode* mBathLower = nullptr;
   Ogre::SceneNode* mBathUpper = nullptr;
 
-  //Practica 1
+  //Practica 1.1
   Ogre::SceneNode* mHourNode[12];
   Ogre::SceneNode* clock = nullptr;
   Ogre::SceneNode* spheres = nullptr;
   Ogre::SceneNode* hoursNeedle = nullptr;
   Ogre::SceneNode* minutesNeedle = nullptr;
   Ogre::SceneNode* secondsNeedle = nullptr;
+
+  //Practica 1.2
+  AspasMolino* aspasMolino = nullptr;
  
 private:
     void simbadScene();
     void sphereClockScene();
+    void molinoScene();
 };
 
 #endif
