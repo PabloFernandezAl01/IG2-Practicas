@@ -6,7 +6,8 @@
 #include <OgreSceneNode.h>
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
-#include "AspasMolino.h"
+#include "Molino.h"
+#include "RotorDron.h"
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -48,12 +49,13 @@ protected:
   Ogre::SceneNode* secondsNeedle = nullptr;
 
   //Practica 1.2
-  AspasMolino* aspasMolino = nullptr;
+  Molino* molino = nullptr;
+  RotorDron* rotorDron = nullptr;
  
 private:
-    void simbadScene();
-    void sphereClockScene();
-    void molinoScene();
+    void simbadScene(); //Practica 0
+    void sphereClockScene(); //Practica 1.0
+    void molinoScene(); //Pratica 1.1
 };
 
 #endif

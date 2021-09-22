@@ -15,10 +15,17 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   }
   else if (evt.keysym.sym == SDLK_g) {
 	  //clock->roll(Ogre::Degree(-1)); //Practica 1.1
-	  aspasMolino->giraAspasMolino(1);
+	  //aspasMolino->giraAspasMolino(1);
+
+	  //molino->giraAspasMolino(2);
+	  rotorDron->giraAspas(2);
   }
   else if (evt.keysym.sym == SDLK_h) {
-	  spheres->roll(Ogre::Degree(-1));
+	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
+	  //molino->giraAspas(-2);
+  }
+  else if (evt.keysym.sym == SDLK_c) {
+	  //molino->mueveCilindroCentral(-1);
   }
   return true;
 }
@@ -94,23 +101,22 @@ void IG2App::setupScene(void)
  
   //------------------------------------------------------------------------
 
-  // finally something to render
-
-  molinoScene();
-
-  //------------------------------------------------------------------------
-
   mCamMgr = new OgreBites::CameraMan(mCamNode);
   addInputListener(mCamMgr);
-  mCamMgr->setStyle(OgreBites::CS_ORBIT);  
-  
+  mCamMgr->setStyle(OgreBites::CS_ORBIT);
+
   //mCamMgr->setTarget(mSinbadNode);  
   //mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 
   //------------------------------------------------------------------------
 
+  // finally something to render
+
+  molinoScene();
 }
 
+
+//Practica 0
 void IG2App::simbadScene() {
 	//Simbad
 	Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
@@ -177,10 +183,7 @@ void IG2App::simbadScene() {
 	mBathUpper->attachObject(ent7);
 }
 
-void IG2App::molinoScene() {
-	aspasMolino = new AspasMolino(mSM, 12);
-}
-
+//Practica 1.0
 void IG2App::sphereClockScene() {
 	clock = mSM->getRootSceneNode()->createChildSceneNode("Clock");
 	spheres = clock->createChildSceneNode("Spheres");
@@ -229,6 +232,11 @@ void IG2App::sphereClockScene() {
 	secondsNeedle->setPosition(Vector3(-45, -45, 0));
 	secondsNeedle->roll(Ogre::Degree(-225));
 
+}
 
+//Practica 1.1
+void IG2App::molinoScene() {
+	//molino = new Molino(mSM, 6);
+	rotorDron = new RotorDron(mSM, 6);
 }
 
