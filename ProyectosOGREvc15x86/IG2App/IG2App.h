@@ -7,8 +7,8 @@
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
 #include "Molino.h"
-#include "RotorDron.h"
-
+#include "BrazoDron.h"
+#include "Dron.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -51,6 +51,8 @@ protected:
   //Practica 1.2
   Molino* molino = nullptr;
   RotorDron* rotorDron = nullptr;
+  BrazoDron* brazoDron = nullptr;
+  Dron* dron = nullptr;
  
 private:
     void simbadScene(); //Practica 0

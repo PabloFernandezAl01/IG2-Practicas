@@ -18,7 +18,11 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  //aspasMolino->giraAspasMolino(1);
 
 	  //molino->giraAspasMolino(2);
-	  rotorDron->giraAspas(2);
+	  //rotorDron->giraAspas(2);
+	  
+	  //brazoDron->giraAspas(2);
+
+	  dron->giraAspas(5);
   }
   else if (evt.keysym.sym == SDLK_h) {
 	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
@@ -237,6 +241,8 @@ void IG2App::sphereClockScene() {
 //Practica 1.1
 void IG2App::molinoScene() {
 	//molino = new Molino(mSM, 6);
-	rotorDron = new RotorDron(mSM, 6);
+	//rotorDron = new RotorDron(mSM, 6);
+	//brazoDron = new BrazoDron(mSM, 6);
+	dron = new Dron(mSM, 12, 8);
 }
 

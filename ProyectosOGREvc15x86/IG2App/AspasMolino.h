@@ -9,7 +9,7 @@
 
 class AspasMolino {
 public:
-	AspasMolino(Ogre::SceneManager* sm, Ogre::SceneNode* node, int numAspas);
+	AspasMolino(Ogre::SceneManager* sm, Ogre::SceneNode* node, int numAspas, int indexAspasMolino);
 	void giraAspasMolino(float ang);
 	Ogre::SceneNode* getmNode();
 
@@ -20,5 +20,8 @@ private:
 	
 	Aspa** arrayAspas = nullptr;
 	int numAspas = 0;
+	int indexAspasMolino;
+
+	Ogre::SceneManager* msM;
 };
 

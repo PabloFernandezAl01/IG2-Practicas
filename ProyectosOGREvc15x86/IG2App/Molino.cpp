@@ -13,7 +13,7 @@ Molino::Molino(Ogre::SceneManager* sM, int numAspas) {
 	mCuerpo = mNode->createChildSceneNode("mCuerpo");
 	mCuerpo->attachObject(cuerpo);
 
-	aspas = new AspasMolino(sM, mNodoFicticio, numAspas);
+	//aspas = new AspasMolino(sM, mNodoFicticio, numAspas);
 
 	transformMolino();
 }
