@@ -49,6 +49,7 @@ protected:
   Ogre::SceneNode* secondsNeedle = nullptr;
 
   //Practica 1.2
+  AspasMolino* aspasMolino = nullptr;
   Molino* molino = nullptr;
   RotorDron* rotorDron = nullptr;
   BrazoDron* brazoDron = nullptr;

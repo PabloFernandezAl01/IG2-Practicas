@@ -1,14 +1,16 @@
 #include "BrazoDron.h"
 
-BrazoDron::BrazoDron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int numAspas, int iB) {
-	mNode = node->createChildSceneNode("mNodeBrazoDron" + std::to_string(iB));
+BrazoDron::BrazoDron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int numAspas, int index) {
+	indexBrazo = index;
+
+	mNode = node->createChildSceneNode("mNodeBrazoDron" + std::to_string(indexBrazo));
 
 	Ogre::Entity* c = sM->createEntity("Barrel.mesh");
-	cilindro = mNode->createChildSceneNode("mNodeCilindroBrazoDron" + std::to_string(iB));
+	cilindro = mNode->createChildSceneNode("mNodeCilindroBrazoDron" + std::to_string(indexBrazo));
 
 	cilindro->attachObject(c);
 
-	rotorDron = new RotorDron(sM, mNode, numAspas, iB);
+	rotorDron = new RotorDron(sM, mNode, numAspas, indexBrazo);
 	transformBrazoDron();
 }
 
@@ -23,7 +25,6 @@ void BrazoDron::giraAspas(float ang) {
 	rotorDron->giraAspas(ang);
 }
 
-Ogre::SceneNode* BrazoDron::getmNode()
-{
+Ogre::SceneNode* BrazoDron::getmNode() {
 	return mNode;
 }

@@ -1,21 +1,23 @@
 #include "RotorDron.h"
 
-RotorDron::RotorDron(Ogre::SceneManager* sm, Ogre::SceneNode* node, int numAs, int iRD) {
-	mNode = node->createChildSceneNode("mRotorDronNode" + std::to_string(iRD));
+RotorDron::RotorDron(Ogre::SceneManager* sm, Ogre::SceneNode* node, int numAs, int index) {
+	indexRotorDron = index;
+	
+	mNode = node->createChildSceneNode("mRotorDronNode" + std::to_string(indexRotorDron));
 
 	numAspas = numAs;
 
 	Ogre::Entity* esfera = sm->createEntity("sphere.mesh");
-	mEsferaNode = mNode->createChildSceneNode("mEsferaNode" + std::to_string(iRD));
+	mEsferaNode = mNode->createChildSceneNode("mEsferaNode" + std::to_string(indexRotorDron));
 	mEsferaNode->attachObject(esfera);
 
-	mHelicesNode = mNode->createChildSceneNode("mHelicesNode" + std::to_string(iRD));
+	mHelicesNode = mNode->createChildSceneNode("mHelicesNode" + std::to_string(indexRotorDron));
 
-	aspasMolino = new AspasMolino(sm, mHelicesNode, numAspas, iRD);
+	aspasMolino = new AspasMolino(sm, mHelicesNode, numAspas, indexRotorDron);
 
 	//Oculta los adornos
 	for (int i = 0; i < numAspas; i++) {
-		sm->getSceneNode("mAdorno" + std::to_string(i+iRD*numAspas))->setVisible(false); 
+		sm->getSceneNode("mAdorno" + std::to_string(i+ indexRotorDron * numAspas))->setVisible(false);
 	}
 
 	transformRotorDron();
@@ -33,7 +35,6 @@ void RotorDron::giraAspas(float ang) {
 	aspasMolino->giraAspasMolino(ang);
 }
 
-Ogre::SceneNode* RotorDron::getmNode()
-{
+Ogre::SceneNode* RotorDron::getmNode() {
 	return mNode;
 }

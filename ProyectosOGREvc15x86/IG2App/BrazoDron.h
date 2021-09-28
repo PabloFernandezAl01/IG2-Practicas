@@ -8,7 +8,7 @@
 
 class BrazoDron {
 public:
-	BrazoDron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int numAspas, int indexBrazo);
+	BrazoDron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int numAspas, int index);
 
 	void transformBrazoDron();
 	void giraAspas(float ang);

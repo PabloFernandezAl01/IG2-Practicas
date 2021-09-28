@@ -116,7 +116,7 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-  molinoScene();
+   molinoScene();
 }
 
 
@@ -195,6 +195,7 @@ void IG2App::sphereClockScene() {
 	float ang = 90;
 	float x, y;
 
+	//Esferas
 	for (int i = 0; i < 12; i++) {
 		std::string name = "Hora" + std::to_string(i+1);
 		Ogre::Entity* ent = mSM->createEntity("sphere.mesh");
@@ -213,7 +214,7 @@ void IG2App::sphereClockScene() {
 		else mSM->getSceneNode(name)->setScale(0.4, 0.4, 0.4);
 	}
 
-
+	//Agujas
 	Ogre::Entity* ent1 = mSM->createEntity("cube.mesh");
 	Ogre::Entity* ent2 = mSM->createEntity("cube.mesh");
 	Ogre::Entity* ent3 = mSM->createEntity("cube.mesh");
@@ -224,6 +225,12 @@ void IG2App::sphereClockScene() {
 	hoursNeedle->attachObject(ent1);
 	minutesNeedle->attachObject(ent2);
 	secondsNeedle->attachObject(ent3);
+
+	/*
+	* Yaw, pitch y roll -> eje TS::LOCAL
+	* setScale -> eje TS::LOCAL
+	* translate y setPosition -> TS::PARENT
+	*/
 
 	hoursNeedle->setScale(Vector3(0.15, 2.5, 0.1));
 	hoursNeedle->setPosition(Vector3(100, 0, 0));
@@ -240,6 +247,7 @@ void IG2App::sphereClockScene() {
 
 //Practica 1.1
 void IG2App::molinoScene() {
+	//aspasMolino = new AspasMolino(mSM, mSM->getRootSceneNode(), 12, 0);
 	//molino = new Molino(mSM, 6);
 	//rotorDron = new RotorDron(mSM, 6);
 	//brazoDron = new BrazoDron(mSM, 6);

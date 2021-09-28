@@ -8,7 +8,7 @@
 
 class RotorDron {
 public:
-	RotorDron(Ogre::SceneManager* sm, Ogre::SceneNode* mNode,  int numAspas, int iRD);
+	RotorDron(Ogre::SceneManager* sm, Ogre::SceneNode* mNode,  int numAspas, int index);
 	void transformRotorDron();
 	void giraAspas(float ang);
 

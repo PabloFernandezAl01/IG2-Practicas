@@ -1,4 +1,5 @@
 #include "Molino.h"
+#include <iostream>
 
 Molino::Molino(Ogre::SceneManager* sM, int numAspas) {
 	mNode = sM->getRootSceneNode()->createChildSceneNode("mNodeMolino");
@@ -13,7 +14,7 @@ Molino::Molino(Ogre::SceneManager* sM, int numAspas) {
 	mCuerpo = mNode->createChildSceneNode("mCuerpo");
 	mCuerpo->attachObject(cuerpo);
 
-	//aspas = new AspasMolino(sM, mNodoFicticio, numAspas);
+	aspas = new AspasMolino(sM, mNodoFicticio, numAspas, 0);
 
 	transformMolino();
 }
@@ -23,11 +24,25 @@ void Molino::giraAspasMolino(float ang) {
 }
 
 void Molino::mueveCilindroCentral(int x) {
-	aspas->getmNode()->getChild("mCilindroCentralNode")->translate(0, 0, x);
+	aspas->getCilindroCentral()->translate(0, 0, x);
 }
 
 void Molino::giraAspas(float ang) {
+	//Primera forma (nodo ficticio)
 	mNodoFicticio->yaw(Ogre::Degree(ang));
+
+	Ogre::Degree ang1 = Ogre::Degree(aspas->getmNode()->getOrientation().getYaw());
+	aspas->getmNode()->setPosition(0, 60, 0);
+	aspas->getmNode()->yaw(Ogre::Degree(1));
+	aspas->getmNode()->translate(0, 0, ang, aspas->getmNode()->TS_LOCAL);
+
+	//Segunda forma (el gran truco)
+	/*auto aspasNode = aspas->getmNode();
+
+	aspasNode->translate(0,-110,-110, SceneNode::TS_LOCAL);
+	aspasNode->yaw(Ogre::Degree(ang));
+	aspasNode->translate(0, 110, 110, Ogre::Node::TS_LOCAL);*/
+
 }
 
 void Molino::transformMolino() {

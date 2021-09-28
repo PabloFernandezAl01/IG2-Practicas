@@ -1,6 +1,6 @@
 #include "Dron.h"
 
-Dron::Dron(Ogre::SceneManager* sM, int nA, int nB) {
+Dron::Dron(Ogre::SceneManager* sM, int nAs, int nBr) {
 	mNode = sM->getRootSceneNode()->createChildSceneNode("mNodeDron");
 
 	Ogre::Entity* e = sM->createEntity("sphere.mesh");
@@ -8,7 +8,7 @@ Dron::Dron(Ogre::SceneManager* sM, int nA, int nB) {
 
 	esfera->attachObject(e);
 
-	numAspas = nA; numBrazos = nB;
+	numAspas = nAs; numBrazos = nBr;
 
 	float ang = 0;
 	arrayBrazos = new BrazoDron * [numBrazos];
