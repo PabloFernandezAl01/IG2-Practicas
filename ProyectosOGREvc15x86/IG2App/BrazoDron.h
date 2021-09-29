@@ -13,6 +13,8 @@ public:
 	void transformBrazoDron();
 	void giraAspas(float ang);
 	Ogre::SceneNode* getmNode();
+	Ogre::SceneNode* getCilindroNode();
+
 private:
 	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* cilindro = nullptr;

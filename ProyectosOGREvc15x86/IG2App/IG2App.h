@@ -54,11 +54,18 @@ protected:
   RotorDron* rotorDron = nullptr;
   BrazoDron* brazoDron = nullptr;
   Dron* dron = nullptr;
+
+  //Entrega 2
+  Ogre::SceneNode* planetaNode = nullptr;
+  Ogre::SceneNode* ficticioDronNode = nullptr;
+  Ogre::SceneNode* esferaPlaneta = nullptr;
+  Dron* dronPlaneta = nullptr;
  
 private:
     void simbadScene(); //Practica 0
     void sphereClockScene(); //Practica 1.0
     void molinoScene(); //Pratica 1.1
+    void planetScene(); //Entrega 2
 };
 
 #endif

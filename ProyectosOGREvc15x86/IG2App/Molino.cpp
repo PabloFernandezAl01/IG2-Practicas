@@ -31,17 +31,12 @@ void Molino::giraAspas(float ang) {
 	//Primera forma (nodo ficticio)
 	mNodoFicticio->yaw(Ogre::Degree(ang));
 
-	Ogre::Degree ang1 = Ogre::Degree(aspas->getmNode()->getOrientation().getYaw());
-	aspas->getmNode()->setPosition(0, 60, 0);
-	aspas->getmNode()->yaw(Ogre::Degree(1));
-	aspas->getmNode()->translate(0, 0, ang, aspas->getmNode()->TS_LOCAL);
-
 	//Segunda forma (el gran truco)
 	/*auto aspasNode = aspas->getmNode();
 
 	aspasNode->translate(0,-110,-110, SceneNode::TS_LOCAL);
 	aspasNode->yaw(Ogre::Degree(ang));
-	aspasNode->translate(0, 110, 110, Ogre::Node::TS_LOCAL);*/
+	aspasNode->translate(0, 110, 110, SceneNode::TS_LOCAL);*/
 
 }
 

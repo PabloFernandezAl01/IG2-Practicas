@@ -9,9 +9,10 @@
 
 class Dron {
 public:
-	Dron(Ogre::SceneManager* sM, int numAspas, int numBrazos);
+	Dron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int numAspas, int numBrazos);
 
 	void giraAspas(float ang);
+	Ogre::SceneNode* getNode();
 private:
 	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* esfera = nullptr;

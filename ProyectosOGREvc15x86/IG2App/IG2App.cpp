@@ -22,14 +22,19 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  
 	  //brazoDron->giraAspas(2);
 
-	  dron->giraAspas(5);
+	  //dron->giraAspas(5);
   }
   else if (evt.keysym.sym == SDLK_h) {
 	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
 	  //molino->giraAspas(-2);
+
+	  ficticioDronNode->roll(Ogre::Degree(-4));
   }
   else if (evt.keysym.sym == SDLK_c) {
 	  //molino->mueveCilindroCentral(-1);
+  }
+  else if (evt.keysym.sym == SDLK_j) {
+	  ficticioDronNode->yaw(Ogre::Degree(-4));
   }
   return true;
 }
@@ -116,6 +121,7 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
+   //planetScene();
    molinoScene();
 }
 
@@ -251,6 +257,22 @@ void IG2App::molinoScene() {
 	//molino = new Molino(mSM, 6);
 	//rotorDron = new RotorDron(mSM, 6);
 	//brazoDron = new BrazoDron(mSM, 6);
-	dron = new Dron(mSM, 12, 8);
+	//dron = new Dron(mSM, mSM->getRootSceneNode(),  12, 3);
+}
+
+void IG2App::planetScene() {
+	planetaNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanetaNode");
+
+	auto esferaP = mSM->createEntity("sphere.mesh");
+	esferaPlaneta = planetaNode->createChildSceneNode("mEsferaPlaneta");
+	esferaPlaneta->attachObject(esferaP);
+
+	ficticioDronNode = planetaNode->createChildSceneNode("mFicticioDronNode");
+
+	dronPlaneta = new Dron(mSM, ficticioDronNode, 12, 8);
+
+	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
+	dronPlaneta->getNode()->translate(0, 320, 0);
+	esferaPlaneta->setScale(3, 3, 3);	
 }
 

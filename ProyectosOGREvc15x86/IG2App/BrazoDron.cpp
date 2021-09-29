@@ -28,3 +28,8 @@ void BrazoDron::giraAspas(float ang) {
 Ogre::SceneNode* BrazoDron::getmNode() {
 	return mNode;
 }
+
+Ogre::SceneNode* BrazoDron::getCilindroNode()
+{
+	return cilindro;
+}
