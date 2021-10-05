@@ -66,6 +66,9 @@ private:
     void sphereClockScene(); //Practica 1.0
     void molinoScene(); //Pratica 1.1
     void planetScene(); //Entrega 2
+
+    void rotaDron();
+    void mueveDron();
 };
 
 #endif

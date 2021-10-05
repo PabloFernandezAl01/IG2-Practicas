@@ -28,13 +28,13 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
 	  //molino->giraAspas(-2);
 
-	  ficticioDronNode->roll(Ogre::Degree(-4));
+	  mueveDron();
   }
   else if (evt.keysym.sym == SDLK_c) {
 	  //molino->mueveCilindroCentral(-1);
   }
   else if (evt.keysym.sym == SDLK_j) {
-	  ficticioDronNode->yaw(Ogre::Degree(-4));
+	  rotaDron();
   }
   return true;
 }
@@ -121,8 +121,8 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-   //planetScene();
-   molinoScene();
+   planetScene();
+   //molinoScene();
 }
 
 
@@ -257,7 +257,7 @@ void IG2App::molinoScene() {
 	//molino = new Molino(mSM, 6);
 	//rotorDron = new RotorDron(mSM, 6);
 	//brazoDron = new BrazoDron(mSM, 6);
-	//dron = new Dron(mSM, mSM->getRootSceneNode(),  12, 3);
+	//dron = new Dron(mSM, mSM->getRootSceneNode(),  12, 8);
 }
 
 void IG2App::planetScene() {
@@ -274,5 +274,18 @@ void IG2App::planetScene() {
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
 	esferaPlaneta->setScale(3, 3, 3);	
+}
+
+void IG2App::mueveDron() {
+	//ficticioDronNode->roll(Ogre::Degree(-4));
+
+	dronPlaneta->getNode()->translate(0, -320, 0, SceneNode::TS_LOCAL);
+	dronPlaneta->getNode()->roll(Ogre::Degree(-4));
+	dronPlaneta->getNode()->translate(0, 320, 0, SceneNode::TS_LOCAL);
+}
+void IG2App::rotaDron() {
+	//ficticioDronNode->yaw(Ogre::Degree(-4));
+
+	dronPlaneta->getNode()->yaw(Ogre::Degree(-4));
 }
 
