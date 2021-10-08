@@ -23,6 +23,8 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  //brazoDron->giraAspas(2);
 
 	  //dron->giraAspas(5);
+
+	  avion->giraAspasAvion(3);
   }
   else if (evt.keysym.sym == SDLK_h) {
 	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
@@ -121,7 +123,8 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-   planetScene();
+  avionScene();
+   //planetScene();
    //molinoScene();
 }
 
@@ -274,6 +277,21 @@ void IG2App::planetScene() {
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
 	esferaPlaneta->setScale(3, 3, 3);	
+}
+
+void IG2App::avionScene() {
+	avion = new Avion(mSM, mSM->getRootSceneNode());
+
+	//Plano
+	MeshManager::getSingleton().createPlane("mPlane1080x800",
+		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Vector3::UNIT_Y, 0),
+		1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+
+	plano = mSM->createEntity("mPlane1080x800");
+	mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanoNode");
+	mPlanoNode->attachObject(plano);
+
 }
 
 void IG2App::mueveDron() {
