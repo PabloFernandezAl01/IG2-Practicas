@@ -10,6 +10,7 @@
 #include "BrazoDron.h"
 #include "Dron.h"
 #include "Avion.h"
+#include "Plano.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -62,19 +63,19 @@ protected:
   Ogre::SceneNode* esferaPlaneta = nullptr;
   Dron* dronPlaneta = nullptr;
 
-
-
   Avion* avion = nullptr;
+  Plano* plano = nullptr;
 
-  Ogre::SceneNode* mPlanoNode = nullptr;
-  Ogre::Entity* plano = nullptr;
+  Ogre::Light* luzFoco = nullptr;
 
 private:
     void simbadScene(); //Practica 0
     void sphereClockScene(); //Practica 1.0
     void molinoScene(); //Pratica 1.1
     void planetScene(); //Entrega 2
-    void avionScene();
+    void avionScene(); //Ejercicio 21
+    void escenaConFondo();
+    
 
     void rotaDron();
     void mueveDron();

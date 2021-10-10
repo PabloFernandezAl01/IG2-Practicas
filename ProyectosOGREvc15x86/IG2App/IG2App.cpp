@@ -24,19 +24,19 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 	  //dron->giraAspas(5);
 
-	  avion->giraAspasAvion(3);
+	  //avion->giraAspasAvion(3);
   }
   else if (evt.keysym.sym == SDLK_h) {
 	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
 	  //molino->giraAspas(-2);
 
-	  //mueveDron();
+	  mueveDron();
   }
   else if (evt.keysym.sym == SDLK_c) {
 	  //molino->mueveCilindroCentral(-1);
   }
   else if (evt.keysym.sym == SDLK_j) {
-	  //rotaDron();
+	  rotaDron();
   }
   return true;
 }
@@ -123,19 +123,10 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-  //Plano
-  /*MeshManager::getSingleton().createPlane("mPlane1080x800",
-	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	  Plane(Vector3::UNIT_Y, 0),
-	  1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
-
-  plano = mSM->createEntity("mPlane1080x800");
-  mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanoNode");
-  mPlanoNode->attachObject(plano);*/
-
-   avionScene();
+   //avionScene();
    //planetScene();
    //molinoScene();
+   escenaConFondo();
 }
 
 
@@ -291,6 +282,38 @@ void IG2App::planetScene() {
 
 void IG2App::avionScene() {
 	avion = new Avion(mSM->getRootSceneNode());
+}
+
+void IG2App::escenaConFondo() {
+	planetaNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanetaNode");
+
+	auto esferaP = mSM->createEntity("sphere.mesh");
+	esferaPlaneta = planetaNode->createChildSceneNode("mEsferaPlaneta");
+	esferaPlaneta->attachObject(esferaP);
+
+	ficticioDronNode = planetaNode->createChildSceneNode("mFicticioDronNode");
+
+
+	dronPlaneta = new Dron(ficticioDronNode, 12, 8);
+
+	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
+	dronPlaneta->getNode()->translate(0, 320, 0);
+	esferaPlaneta->setScale(3, 3, 3);
+
+	luzFoco = mSM->createLight("LuzFoco");
+	luzFoco->setType(Ogre::Light::LT_SPOTLIGHT);
+	luzFoco->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
+	luzFoco->setDirection(Ogre::Vector3(0, -1, 0));
+	luzFoco->setSpotlightInnerAngle(Ogre::Degree(5.0f));
+	luzFoco->setSpotlightOuterAngle(Ogre::Degree(45.0f));
+	luzFoco->setSpotlightFalloff(0.0f);
+	dronPlaneta->getNode()->attachObject(luzFoco);
+
+	//avion = new Avion(mSM->getRootSceneNode());
+
+	plano = new Plano(mSM->getRootSceneNode());
+	plano->getmPlanoNode()->pitch(Ogre::Degree(90));
+	plano->getmPlanoNode()->translate(0, 0, -300);
 }
 
 void IG2App::mueveDron() {

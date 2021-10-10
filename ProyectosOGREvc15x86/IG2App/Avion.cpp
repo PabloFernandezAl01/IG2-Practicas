@@ -28,8 +28,8 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	nodoFicticioAlaI = mNode->createChildSceneNode();
 	nodoFicticioAlaD = mNode->createChildSceneNode();
 
-	aspasMolinoI = new AspasMolino(nodoFicticioAlaI, 5, 0);
-	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 1);
+	aspasMolinoI = new AspasMolino(nodoFicticioAlaI, 5, 13);
+	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 14);
 
 	transformAvion();
 }
