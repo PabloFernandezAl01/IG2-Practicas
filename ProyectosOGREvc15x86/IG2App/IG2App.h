@@ -62,11 +62,13 @@ protected:
   Ogre::SceneNode* esferaPlaneta = nullptr;
   Dron* dronPlaneta = nullptr;
 
+
+
   Avion* avion = nullptr;
 
   Ogre::SceneNode* mPlanoNode = nullptr;
   Ogre::Entity* plano = nullptr;
- 
+
 private:
     void simbadScene(); //Practica 0
     void sphereClockScene(); //Practica 1.0

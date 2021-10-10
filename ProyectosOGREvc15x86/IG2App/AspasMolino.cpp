@@ -1,26 +1,26 @@
 #include "AspasMolino.h"
+#include <iostream>
 
-AspasMolino::AspasMolino(Ogre::SceneManager* sm, Ogre::SceneNode* node, int numAs, int index) {
+AspasMolino::AspasMolino(Ogre::SceneNode* node, int numAs, int index) : EntityIG(node){
 	indexAspasMolino = index;
-	msM = sm;
 
-	mNode = node->createChildSceneNode("mNodeAspasMolino" + std::to_string(indexAspasMolino));
-
-	Ogre::Entity* cilindro = sm->createEntity("Barrel.mesh");
+	Ogre::Entity* cilindro = mSM->createEntity("Barrel.mesh");
 
 	cilindroCentralNode = mNode->createChildSceneNode("mCilindroCentralNode" + std::to_string(indexAspasMolino));
 	cilindroCentralNode->attachObject(cilindro);
-	cilindroCentralNode->setScale(8, 8, 10);
+	cilindroCentralNode->setScale(10, 8, 10);
 	cilindroCentralNode->pitch(Ogre::Degree(90));
 
 	aspasNode = mNode->createChildSceneNode("mAspasNode" + std::to_string(indexAspasMolino));
-
 	numAspas = numAs;
 
 	float ang = 0;
 	arrayAspas = new Aspa* [numAspas];
 	for (int i = 0; i < numAspas; i++) {
-		arrayAspas[i] = new Aspa(sm, aspasNode, i + indexAspasMolino * numAspas);
+
+		SceneNode* auxNode = aspasNode->createChildSceneNode();
+
+		arrayAspas[i] = new Aspa(i + indexAspasMolino * numAspas, auxNode);
 		arrayAspas[i]->getNode()->roll(Ogre::Degree(ang), Ogre::Node::TS_PARENT);
 		arrayAspas[i]->getNode()->getChild("mAdorno" + std::to_string(i + indexAspasMolino * numAspas))->roll(Ogre::Degree(-ang), Ogre::Node::TS_LOCAL);
 		ang += (360 / numAspas);
@@ -28,10 +28,11 @@ AspasMolino::AspasMolino(Ogre::SceneManager* sm, Ogre::SceneNode* node, int numA
 }
 
 void AspasMolino::giraAspasMolino(float ang) {
-	for (int i = 0; i < numAspas; i++) {
-		arrayAspas[i]->getNode()->roll(Ogre::Degree(ang), Ogre::Node::TS_PARENT);
 
-		auto adorno = msM->getSceneNode("mAdorno" + std::to_string(i + indexAspasMolino * numAspas));
+	aspasNode->roll(Ogre::Degree(ang), Ogre::Node::TS_PARENT);
+
+	for (int i = 0; i < numAspas; i++) {
+		auto adorno = mSM->getSceneNode("mAdorno" + std::to_string(i + indexAspasMolino * numAspas));
 		adorno->roll(Ogre::Degree(-ang), Ogre::Node::TS_LOCAL);
 	}
 }

@@ -1,12 +1,11 @@
 #include "Aspa.h"
+#include <iostream>
 
-Aspa::Aspa(Ogre::SceneManager* sm, Ogre::SceneNode* node, int index) {
+Aspa::Aspa(int index, Ogre::SceneNode* node) : EntityIG(node){
 	aspaIndex = index;
 
-	mNode = node->createChildSceneNode("mNodeAspa" + std::to_string(aspaIndex));
-
-	Ogre::Entity* tab = sm->createEntity("cube.mesh");
-	Ogre::Entity* adorno = sm->createEntity("Barrel.mesh");
+	Ogre::Entity* tab = mSM->createEntity("cube.mesh");
+	Ogre::Entity* adorno = mSM->createEntity("Barrel.mesh");
 
 	tableroNode = mNode->createChildSceneNode("mTablero" + std::to_string(aspaIndex));
 	tableroNode->attachObject(tab);

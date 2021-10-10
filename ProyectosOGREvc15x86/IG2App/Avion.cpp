@@ -1,15 +1,15 @@
 #include "Avion.h"
 
-Avion::Avion(Ogre::SceneManager* sM, Ogre::SceneNode* node) {
+Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 
-	mNode = node->createChildSceneNode("mNodeAvion");
+	//mNode = node->createChildSceneNode("mNodeAvion");
 
-	Ogre::Entity* esfera = sM->createEntity("sphere.mesh");
+	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
 	cuerpoNode = mNode->createChildSceneNode("mCuerpoAvion");
 	cuerpoNode->attachObject(esfera);
 
-	Ogre::Entity* alaI = sM->createEntity("cube.mesh");
-	Ogre::Entity* alaD = sM->createEntity("cube.mesh");
+	Ogre::Entity* alaI = mSM->createEntity("cube.mesh");
+	Ogre::Entity* alaD = mSM->createEntity("cube.mesh");
 
 	alaINode = mNode->createChildSceneNode("mAlaINode");
 	alaDNode = mNode->createChildSceneNode("mAlaDNode");
@@ -17,16 +17,19 @@ Avion::Avion(Ogre::SceneManager* sM, Ogre::SceneNode* node) {
 	alaINode->attachObject(alaI);
 	alaDNode->attachObject(alaD);
 
-	Ogre::Entity* frente = sM->createEntity("Barrel.mesh");
+	Ogre::Entity* frente = mSM->createEntity("Barrel.mesh");
 	frenteNode = mNode->createChildSceneNode("mFrenteNode");
 	frenteNode->attachObject(frente);
 
-	Ogre::Entity* ninja = sM->createEntity("ninja.mesh");
+	Ogre::Entity* ninja = mSM->createEntity("ninja.mesh");
 	pilotoNode = mNode->createChildSceneNode("mPilotoNode");
 	pilotoNode->attachObject(ninja);
 
-	aspasMolinoI = new AspasMolino(sM, mNode, 5, 0);
-	aspasMolinoD = new AspasMolino(sM, mNode, 5, 1);
+	nodoFicticioAlaI = mNode->createChildSceneNode();
+	nodoFicticioAlaD = mNode->createChildSceneNode();
+
+	aspasMolinoI = new AspasMolino(nodoFicticioAlaI, 5, 0);
+	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 1);
 
 	transformAvion();
 }

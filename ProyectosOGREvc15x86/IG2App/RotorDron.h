@@ -5,16 +5,16 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include "AspasMolino.h"
+#include "EntityIG.h"
 
-class RotorDron {
+class RotorDron : public EntityIG{
 public:
-	RotorDron(Ogre::SceneManager* sm, Ogre::SceneNode* mNode,  int numAspas, int index);
+	RotorDron(Ogre::SceneNode* mNode,  int numAspas, int index);
 	void transformRotorDron();
 	void giraAspas(float ang);
 
 	Ogre::SceneNode* getmNode();
 private:
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* mEsferaNode = nullptr;
 	Ogre::SceneNode* mHelicesNode = nullptr;
 

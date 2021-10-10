@@ -30,13 +30,13 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
 	  //molino->giraAspas(-2);
 
-	  mueveDron();
+	  //mueveDron();
   }
   else if (evt.keysym.sym == SDLK_c) {
 	  //molino->mueveCilindroCentral(-1);
   }
   else if (evt.keysym.sym == SDLK_j) {
-	  rotaDron();
+	  //rotaDron();
   }
   return true;
 }
@@ -123,7 +123,17 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-  avionScene();
+  //Plano
+  /*MeshManager::getSingleton().createPlane("mPlane1080x800",
+	  ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	  Plane(Vector3::UNIT_Y, 0),
+	  1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
+
+  plano = mSM->createEntity("mPlane1080x800");
+  mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanoNode");
+  mPlanoNode->attachObject(plano);*/
+
+   avionScene();
    //planetScene();
    //molinoScene();
 }
@@ -256,11 +266,11 @@ void IG2App::sphereClockScene() {
 
 //Practica 1.1
 void IG2App::molinoScene() {
-	//aspasMolino = new AspasMolino(mSM, mSM->getRootSceneNode(), 12, 0);
-	//molino = new Molino(mSM, 6);
-	//rotorDron = new RotorDron(mSM, 6);
-	//brazoDron = new BrazoDron(mSM, 6);
-	//dron = new Dron(mSM, mSM->getRootSceneNode(),  12, 8);
+	//aspasMolino = new AspasMolino(mSM->getRootSceneNode(), 12, 0);
+	//molino = new Molino(mSM->getRootSceneNode(), 6);
+	//rotorDron = new RotorDron(mSM->getRootSceneNode(), 6, 0);
+	//brazoDron = new BrazoDron(mSM->getRootSceneNode(), 6, 0);
+	//dron = new Dron(mSM->getRootSceneNode(),  12, 8);
 }
 
 void IG2App::planetScene() {
@@ -272,7 +282,7 @@ void IG2App::planetScene() {
 
 	ficticioDronNode = planetaNode->createChildSceneNode("mFicticioDronNode");
 
-	dronPlaneta = new Dron(mSM, ficticioDronNode, 12, 8);
+	dronPlaneta = new Dron(ficticioDronNode, 12, 8);
 
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
@@ -280,18 +290,7 @@ void IG2App::planetScene() {
 }
 
 void IG2App::avionScene() {
-	avion = new Avion(mSM, mSM->getRootSceneNode());
-
-	//Plano
-	MeshManager::getSingleton().createPlane("mPlane1080x800",
-		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		Plane(Vector3::UNIT_Y, 0),
-		1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
-
-	plano = mSM->createEntity("mPlane1080x800");
-	mPlanoNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanoNode");
-	mPlanoNode->attachObject(plano);
-
+	avion = new Avion(mSM->getRootSceneNode());
 }
 
 void IG2App::mueveDron() {

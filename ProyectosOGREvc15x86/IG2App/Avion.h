@@ -5,22 +5,24 @@
 #include <OgreInput.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
+#include "EntityIG.h"
 
-class Avion {
+class Avion : public EntityIG{
 public:
-	Avion(Ogre::SceneManager* sM, Ogre::SceneNode* node);
+	Avion(Ogre::SceneNode* node);
 	void giraAspasAvion(float ang);
 
 private:
 	void transformAvion();
 
-
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
 	Ogre::SceneNode* alaDNode = nullptr;
 	Ogre::SceneNode* frenteNode = nullptr;
 	Ogre::SceneNode* pilotoNode = nullptr;
+
+	Ogre::SceneNode* nodoFicticioAlaI = nullptr;
+	Ogre::SceneNode* nodoFicticioAlaD = nullptr;
 
 	AspasMolino* aspasMolinoI = nullptr;
 	AspasMolino* aspasMolinoD = nullptr;

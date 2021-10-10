@@ -5,10 +5,11 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include "RotorDron.h"
+#include "EntityIG.h"
 
-class BrazoDron {
+class BrazoDron : public EntityIG{
 public:
-	BrazoDron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int numAspas, int index);
+	BrazoDron(Ogre::SceneNode* node, int numAspas, int index);
 
 	void transformBrazoDron();
 	void giraAspas(float ang);
@@ -16,7 +17,6 @@ public:
 	Ogre::SceneNode* getCilindroNode();
 
 private:
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* cilindro = nullptr;
 
 	RotorDron* rotorDron = nullptr;

@@ -1,9 +1,7 @@
 #include "Dron.h"
 
-Dron::Dron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int nAs, int nBr) {
-	mNode = node->createChildSceneNode("mNodeDron");
-
-	Ogre::Entity* e = sM->createEntity("sphere.mesh");
+Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr) : EntityIG(node){
+	Ogre::Entity* e = mSM->createEntity("sphere.mesh");
 	esfera = mNode->createChildSceneNode("mNodeEsferaDron");
 
 	esfera->attachObject(e);
@@ -13,9 +11,10 @@ Dron::Dron(Ogre::SceneManager* sM, Ogre::SceneNode* node, int nAs, int nBr) {
 	float ang = 0;
 	arrayBrazos = new BrazoDron * [numBrazos];
 	for (int i = 0; i < numBrazos; i++) {
-		arrayBrazos[i] = new BrazoDron(sM, mNode, numAspas, i);
+		SceneNode* auxNode = mNode->createChildSceneNode();
+		arrayBrazos[i] = new BrazoDron(auxNode, numAspas, i);
 		arrayBrazos[i]->getmNode()->yaw(Ogre::Degree(ang), Ogre::Node::TS_PARENT);
-		arrayBrazos[i]->getmNode()->translate(400, 0, 0, Ogre::Node::TS_LOCAL);
+		arrayBrazos[i]->getmNode()->translate(600, 0, 0, Ogre::Node::TS_LOCAL);
 		ang += (360 / numBrazos);
 	}
 

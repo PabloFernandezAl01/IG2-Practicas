@@ -5,18 +5,20 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include "AspasMolino.h"
+#include "EntityIG.h"
 
-class Molino {
+class Molino : public EntityIG{
 public:
-	Molino(Ogre::SceneManager* sM, int numAspas);
+	Molino(Ogre::SceneNode* node, int numAspas);
+
 	void giraAspasMolino(float ang);
 	void mueveCilindroCentral(int x);
 	void giraAspas(float ang);
 
 private:
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* mTecho = nullptr;
 	Ogre::SceneNode* mCuerpo = nullptr;
+	Ogre::SceneNode* mNodoAspas = nullptr;
 	Ogre::SceneNode* mNodoFicticio = nullptr;
 	AspasMolino* aspas = nullptr;
 
