@@ -11,6 +11,7 @@ class Avion : public EntityIG{
 public:
 	Avion(Ogre::SceneNode* node);
 	void giraAspasAvion(float ang);
+	Ogre::SceneNode* getNode();
 
 private:
 	void transformAvion();

@@ -34,3 +34,12 @@ void Dron::giraAspas(float ang) {
 Ogre::SceneNode* Dron::getNode() {
 	return mNode;
 }
+
+bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt) {
+	if (evt.keysym.sym == SDLK_h) {
+
+	}
+	else if (evt.keysym.sym == SDLK_j) {
+
+	}
+}

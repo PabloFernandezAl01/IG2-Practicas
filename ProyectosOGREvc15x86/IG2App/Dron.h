@@ -8,12 +8,14 @@
 #include "RotorDron.h"
 #include "EntityIG.h"
 
-class Dron : public EntityIG{
+class Dron : public EntityIG {
 public:
 	Dron(Ogre::SceneNode* node, int numAspas, int numBrazos);
 
 	void giraAspas(float ang);
 	Ogre::SceneNode* getNode();
+
+	bool keyPressed(const OgreBites::KeyboardEvent& evt);
 private:
 	Ogre::SceneNode* esfera = nullptr;
 

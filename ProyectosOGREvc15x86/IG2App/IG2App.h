@@ -58,15 +58,20 @@ protected:
   Dron* dron = nullptr;
 
   //Entrega 2
-  Ogre::SceneNode* planetaNode = nullptr;
   Ogre::SceneNode* ficticioDronNode = nullptr;
+  Ogre::SceneNode* dronNode = nullptr;
+
+  Ogre::SceneNode* ficticioAvionNode = nullptr;
+  Ogre::SceneNode* avionNode = nullptr;
+
   Ogre::SceneNode* esferaPlaneta = nullptr;
   Dron* dronPlaneta = nullptr;
-
   Avion* avion = nullptr;
+
   Plano* plano = nullptr;
 
-  Ogre::Light* luzFoco = nullptr;
+  Ogre::Light* luzFocoDron = nullptr;
+  Ogre::Light* luzFocoAvion = nullptr;
 
 private:
     void simbadScene(); //Practica 0
@@ -79,6 +84,9 @@ private:
 
     void rotaDron();
     void mueveDron();
+
+    void rotaAvion();
+    void mueveAvion();
 };
 
 #endif

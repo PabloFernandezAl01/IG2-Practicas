@@ -26,18 +26,30 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 	  //avion->giraAspasAvion(3);
   }
-  else if (evt.keysym.sym == SDLK_h) {
-	  //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
-	  //molino->giraAspas(-2);
+  else {
+	  for (auto a : EntityIG::appListeners) {
+		  a->keyPressed(evt);
+	  }
+  }
+  //else if (evt.keysym.sym == SDLK_c) {
+	 // //molino->mueveCilindroCentral(-1);
+  //}
+  //else if (evt.keysym.sym == SDLK_h) {
+	 // //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
+	 // //molino->giraAspas(-2);
 
-	  mueveDron();
-  }
-  else if (evt.keysym.sym == SDLK_c) {
-	  //molino->mueveCilindroCentral(-1);
-  }
-  else if (evt.keysym.sym == SDLK_j) {
-	  rotaDron();
-  }
+	 // mueveDron();
+  //}
+  //else if (evt.keysym.sym == SDLK_j) {
+	 // rotaDron();
+  //}
+  //else if (evt.keysym.sym == SDLK_k) {
+	 // mueveAvion();
+  //}
+  //else if (evt.keysym.sym == SDLK_l) {
+	 // rotaAvion();
+  //}
+  
   return true;
 }
 
@@ -265,13 +277,11 @@ void IG2App::molinoScene() {
 }
 
 void IG2App::planetScene() {
-	planetaNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanetaNode");
-
 	auto esferaP = mSM->createEntity("sphere.mesh");
-	esferaPlaneta = planetaNode->createChildSceneNode("mEsferaPlaneta");
+	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode("mEsferaPlaneta");
 	esferaPlaneta->attachObject(esferaP);
 
-	ficticioDronNode = planetaNode->createChildSceneNode("mFicticioDronNode");
+	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioDronNode");
 
 	dronPlaneta = new Dron(ficticioDronNode, 12, 8);
 
@@ -285,47 +295,70 @@ void IG2App::avionScene() {
 }
 
 void IG2App::escenaConFondo() {
-	planetaNode = mSM->getRootSceneNode()->createChildSceneNode("mPlanetaNode");
-
 	auto esferaP = mSM->createEntity("sphere.mesh");
-	esferaPlaneta = planetaNode->createChildSceneNode("mEsferaPlaneta");
+	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode("mEsferaPlaneta");
 	esferaPlaneta->attachObject(esferaP);
 
-	ficticioDronNode = planetaNode->createChildSceneNode("mFicticioDronNode");
-
-
-	dronPlaneta = new Dron(ficticioDronNode, 12, 8);
-
+	//Dron
+	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioDronNode");
+	dronNode = ficticioDronNode->createChildSceneNode("mDronNode");
+	dronPlaneta = new Dron(dronNode, 12, 8);
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
 	esferaPlaneta->setScale(3, 3, 3);
 
-	luzFoco = mSM->createLight("LuzFoco");
-	luzFoco->setType(Ogre::Light::LT_SPOTLIGHT);
-	luzFoco->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
-	luzFoco->setDirection(Ogre::Vector3(0, -1, 0));
-	luzFoco->setSpotlightInnerAngle(Ogre::Degree(5.0f));
-	luzFoco->setSpotlightOuterAngle(Ogre::Degree(45.0f));
-	luzFoco->setSpotlightFalloff(0.0f);
-	dronPlaneta->getNode()->attachObject(luzFoco);
+	//Luz para el dron
+	luzFocoDron = mSM->createLight("LuzFocoDron");
+	luzFocoDron->setType(Ogre::Light::LT_SPOTLIGHT);
+	luzFocoDron->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
+	luzFocoDron->setDirection(Ogre::Vector3(0, -1, 0));
+	luzFocoDron->setSpotlightInnerAngle(Ogre::Degree(5.0f));
+	luzFocoDron->setSpotlightOuterAngle(Ogre::Degree(135.0f));
+	luzFocoDron->setSpotlightFalloff(0.0f);
+	dronPlaneta->getNode()->attachObject(luzFocoDron);
 
-	//avion = new Avion(mSM->getRootSceneNode());
+	//Avion
+	ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioAvionNode");
+	avionNode = ficticioAvionNode->createChildSceneNode("mAvionNode");
+	avion = new Avion(avionNode);
 
+	avion->getNode()->setScale(0.1, 0.1, 0.1);
+	avion->getNode()->translate(0, 320, 0);
+	ficticioAvionNode->roll(Ogre::Degree(-20));
+
+	//Luz para el avion
+	luzFocoAvion = mSM->createLight("LuzFocoAvion");
+	luzFocoAvion->setType(Ogre::Light::LT_SPOTLIGHT);
+	luzFocoAvion->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
+	luzFocoAvion->setDirection(Ogre::Vector3(0, -1, 0));
+	luzFocoAvion->setSpotlightInnerAngle(Ogre::Degree(5.0f));
+	luzFocoAvion->setSpotlightOuterAngle(Ogre::Degree(135.0f));
+	luzFocoAvion->setSpotlightFalloff(0.0f);
+	avion->getNode()->attachObject(luzFocoAvion);
+
+	//Plano
 	plano = new Plano(mSM->getRootSceneNode());
 	plano->getmPlanoNode()->pitch(Ogre::Degree(90));
-	plano->getmPlanoNode()->translate(0, 0, -300);
+	plano->getmPlanoNode()->translate(0, 0, -500);
 }
 
 void IG2App::mueveDron() {
-	//ficticioDronNode->roll(Ogre::Degree(-4));
+	ficticioDronNode->roll(Ogre::Degree(-4));
 
-	dronPlaneta->getNode()->translate(0, -320, 0, SceneNode::TS_LOCAL);
+	/*dronPlaneta->getNode()->translate(0, -320, 0, SceneNode::TS_LOCAL);
 	dronPlaneta->getNode()->roll(Ogre::Degree(-4));
-	dronPlaneta->getNode()->translate(0, 320, 0, SceneNode::TS_LOCAL);
+	dronPlaneta->getNode()->translate(0, 320, 0, SceneNode::TS_LOCAL);*/
 }
 void IG2App::rotaDron() {
-	//ficticioDronNode->yaw(Ogre::Degree(-4));
+	ficticioDronNode->yaw(Ogre::Degree(-4));
 
-	dronPlaneta->getNode()->yaw(Ogre::Degree(-4));
+	//dronPlaneta->getNode()->yaw(Ogre::Degree(-4));
+}
+
+void IG2App::mueveAvion() {
+	ficticioAvionNode->pitch(Ogre::Degree(4));
+}
+void IG2App::rotaAvion() {
+	ficticioAvionNode->yaw(Ogre::Degree(-4));
 }
 

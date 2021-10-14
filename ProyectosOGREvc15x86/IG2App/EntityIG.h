@@ -17,15 +17,15 @@ public:
 
 	static void addListener(EntityIG* ent);
 
-protected:
-
-	Ogre::SceneNode* mNode;
-	Ogre::SceneManager* mSM;
-
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt)
 	{
 		return false;
 	};
+
+protected:
+
+	Ogre::SceneNode* mNode;
+	Ogre::SceneManager* mSM;
 
 	virtual void frameRendered(const Ogre::FrameEvent& evt) {};
 

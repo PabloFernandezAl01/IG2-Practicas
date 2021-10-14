@@ -2,8 +2,6 @@
 
 Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 
-	//mNode = node->createChildSceneNode("mNodeAvion");
-
 	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
 	cuerpoNode = mNode->createChildSceneNode("mCuerpoAvion");
 	cuerpoNode->attachObject(esfera);
@@ -28,8 +26,8 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	nodoFicticioAlaI = mNode->createChildSceneNode();
 	nodoFicticioAlaD = mNode->createChildSceneNode();
 
-	aspasMolinoI = new AspasMolino(nodoFicticioAlaI, 5, 13);
-	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 14);
+	aspasMolinoI = new AspasMolino(nodoFicticioAlaI, 5, 20);
+	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 21);
 
 	transformAvion();
 }
@@ -37,6 +35,10 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 void Avion::giraAspasAvion(float ang) {
 	aspasMolinoI->giraAspasMolino(ang);
 	aspasMolinoD->giraAspasMolino(ang);
+}
+
+Ogre::SceneNode* Avion::getNode() {
+	return mNode;
 }
 
 void Avion::transformAvion() {
