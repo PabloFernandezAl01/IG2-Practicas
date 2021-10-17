@@ -1,0 +1,10 @@
+material terrain {
+  technique{
+    pass {
+      texture_unit {
+        texture terrain_texture.jpg
+        colour_op replace
+      }
+    }
+  }
+}

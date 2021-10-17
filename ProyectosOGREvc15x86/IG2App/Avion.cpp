@@ -3,11 +3,14 @@
 Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 
 	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
+	esfera->setMaterialName("rojo");
 	cuerpoNode = mNode->createChildSceneNode("mCuerpoAvion");
 	cuerpoNode->attachObject(esfera);
 
 	Ogre::Entity* alaI = mSM->createEntity("cube.mesh");
 	Ogre::Entity* alaD = mSM->createEntity("cube.mesh");
+	alaI->setMaterialName("ajedrez");
+	alaD->setMaterialName("ajedrez");
 
 	alaINode = mNode->createChildSceneNode("mAlaINode");
 	alaDNode = mNode->createChildSceneNode("mAlaDNode");
@@ -16,10 +19,12 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	alaDNode->attachObject(alaD);
 
 	Ogre::Entity* frente = mSM->createEntity("Barrel.mesh");
+	frente->setMaterialName("naranja");
 	frenteNode = mNode->createChildSceneNode("mFrenteNode");
 	frenteNode->attachObject(frente);
 
 	Ogre::Entity* ninja = mSM->createEntity("ninja.mesh");
+	ninja->setMaterialName("amarillo");
 	pilotoNode = mNode->createChildSceneNode("mPilotoNode");
 	pilotoNode->attachObject(ninja);
 
@@ -30,6 +35,11 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 21);
 
 	transformAvion();
+
+	myTimer = new Ogre::Timer();
+	timeMoving = 0;
+	timeRotating = 0;
+	rndDirection = -1;
 }
 
 void Avion::giraAspasAvion(float ang) {
@@ -41,16 +51,48 @@ Ogre::SceneNode* Avion::getNode() {
 	return mNode;
 }
 
+bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
+	if (evt.keysym.sym == SDLK_k) {
+
+		mNode->getParent()->pitch(Ogre::Degree(4));
+		return true;
+	}
+	else if (evt.keysym.sym == SDLK_l) {
+
+		mNode->getParent()->yaw(Ogre::Degree(-4));
+		return true;
+	}
+	return false;
+}
+
+void Avion::frameRendered(const Ogre::FrameEvent& evt) {
+	timeMoving += evt.timeSinceLastFrame;
+	if (timeMoving > 2) {
+		timeRotating += evt.timeSinceLastFrame;
+
+		if (timeRotating > 3) {
+			timeRotating = 0;
+			timeMoving = 0;
+
+			int r = rand() % 2;
+			if (r == 0) rndDirection = -1;
+			else rndDirection = 1;
+		}
+		else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
+	}
+	else mNode->getParent()->pitch(Ogre::Degree(0.5));
+}
+
 void Avion::transformAvion() {
 	cuerpoNode->setScale(1.5, 1.5, 1.5);
 
 	//Ala izquierda
-	alaINode->setScale(4, 0.2, 0.8);
-	alaINode->translate(-150, 0, 0);
+	alaINode->setScale(1.5, 0.2, 0.8);
+	alaINode->translate(-210, 0, 0);
 
 	//Ala derecha
-	alaDNode->setScale(4, 0.2, 0.8);
-	alaDNode->translate(150, 0, 0);
+	alaDNode->setScale(1.5, 0.2, 0.8);
+	alaDNode->translate(210, 0, 0);
 
 	//Piloto
 	pilotoNode->yaw(Ogre::Degree(180));
@@ -61,12 +103,12 @@ void Avion::transformAvion() {
 	frenteNode->pitch(Ogre::Degree(90));
 
 	//Aspa izquierda
-	aspasMolinoI->getmNode()->setScale(0.3, 0.3, 0.3);
-	aspasMolinoI->getmNode()->translate(-250, 0, 42);
+	aspasMolinoI->getmNode()->setScale(0.2, 0.2, 0.2);
+	aspasMolinoI->getmNode()->translate(-220, 0, 42);
 	aspasMolinoI->giraAspasMolino(20);
 
 	//Aspa derecha
-	aspasMolinoD->getmNode()->setScale(0.3, 0.3, 0.3);
-	aspasMolinoD->getmNode()->translate(250, 0, 42);
+	aspasMolinoD->getmNode()->setScale(0.2, 0.2, 0.2);
+	aspasMolinoD->getmNode()->translate(220, 0, 42);
 	aspasMolinoD->giraAspasMolino(20);
 }

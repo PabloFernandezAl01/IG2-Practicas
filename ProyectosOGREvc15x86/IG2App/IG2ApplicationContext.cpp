@@ -23,6 +23,7 @@ Adaptado de OgreApplicationContext.cpp  en OGREbites\src
 #include <SDL_video.h>
 #include <SDL_syswm.h>
 #include <SDLInputMapping.h>
+#include <iostream>
 
 
 namespace OgreBites {

@@ -7,6 +7,9 @@
 #include "BrazoDron.h"
 #include "RotorDron.h"
 #include "EntityIG.h"
+#include <OgreTimer.h>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 class Dron : public EntityIG {
 public:
@@ -16,11 +19,17 @@ public:
 	Ogre::SceneNode* getNode();
 
 	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const Ogre::FrameEvent& evt);
 private:
 	Ogre::SceneNode* esfera = nullptr;
 
 	int numAspas, numBrazos;
 
 	BrazoDron** arrayBrazos = nullptr;
+
+	Ogre::Timer* myTimer;
+	Ogre::Real timeMoving;
+	Ogre::Real timeRotating;
+	int rndDirection;
 };
 

@@ -1,9 +1,9 @@
 #include "IG2App.h"
-
 #include <OgreEntity.h>
 #include <OgreInput.h>
 #include <SDL_keycode.h>
 #include <OgreMeshManager.h>
+#include <iostream>
 
 using namespace Ogre;
 
@@ -13,43 +13,37 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
       getRoot()->queueEndRendering();
   }
-  else if (evt.keysym.sym == SDLK_g) {
-	  //clock->roll(Ogre::Degree(-1)); //Practica 1.1
-	  //aspasMolino->giraAspasMolino(1);
+  else if (evt.keysym.sym == SDLK_r) {
 
-	  //molino->giraAspasMolino(2);
-	  //rotorDron->giraAspas(2);
-	  
-	  //brazoDron->giraAspas(2);
-
-	  //dron->giraAspas(5);
-
-	  //avion->giraAspasAvion(3);
   }
   else {
 	  for (auto a : EntityIG::appListeners) {
 		  a->keyPressed(evt);
 	  }
   }
-  //else if (evt.keysym.sym == SDLK_c) {
-	 // //molino->mueveCilindroCentral(-1);
-  //}
-  //else if (evt.keysym.sym == SDLK_h) {
-	 // //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
-	 // //molino->giraAspas(-2);
 
-	 // mueveDron();
+
+  //else if (evt.keysym.sym == SDLK_g) {
+	 // //clock->roll(Ogre::Degree(-1)); //Practica 1.1
+	 // //aspasMolino->giraAspasMolino(1);
+
+	 // //molino->giraAspasMolino(2);
+	 // //rotorDron->giraAspas(2);
+	 // 
+	 // //brazoDron->giraAspas(2);
+
+	 // //dron->giraAspas(5);
+
+	 // //avion->giraAspasAvion(3);
   //}
-  //else if (evt.keysym.sym == SDLK_j) {
-	 // rotaDron();
-  //}
-  //else if (evt.keysym.sym == SDLK_k) {
-	 // mueveAvion();
-  //}
-  //else if (evt.keysym.sym == SDLK_l) {
-	 // rotaAvion();
-  //}
-  
+  ////else if (evt.keysym.sym == SDLK_c) {
+	 //// //molino->mueveCilindroCentral(-1);
+  ////}
+  ////else if (evt.keysym.sym == SDLK_h) {
+	 //// //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
+	 //// //molino->giraAspas(-2);
+  ////}
+
   return true;
 }
 
@@ -307,13 +301,16 @@ void IG2App::escenaConFondo() {
 	dronPlaneta->getNode()->translate(0, 320, 0);
 	esferaPlaneta->setScale(3, 3, 3);
 
+	EntityIG::addListener(dronPlaneta);
+	//IG2ApplicationContext::addInputListener(dronPlaneta);
+
 	//Luz para el dron
 	luzFocoDron = mSM->createLight("LuzFocoDron");
 	luzFocoDron->setType(Ogre::Light::LT_SPOTLIGHT);
 	luzFocoDron->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
 	luzFocoDron->setDirection(Ogre::Vector3(0, -1, 0));
 	luzFocoDron->setSpotlightInnerAngle(Ogre::Degree(5.0f));
-	luzFocoDron->setSpotlightOuterAngle(Ogre::Degree(135.0f));
+	luzFocoDron->setSpotlightOuterAngle(Ogre::Degree(10.0f));
 	luzFocoDron->setSpotlightFalloff(0.0f);
 	dronPlaneta->getNode()->attachObject(luzFocoDron);
 
@@ -321,6 +318,9 @@ void IG2App::escenaConFondo() {
 	ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioAvionNode");
 	avionNode = ficticioAvionNode->createChildSceneNode("mAvionNode");
 	avion = new Avion(avionNode);
+
+	EntityIG::addListener(avion);
+	//IG2ApplicationContext::addInputListener(avion);
 
 	avion->getNode()->setScale(0.1, 0.1, 0.1);
 	avion->getNode()->translate(0, 320, 0);
@@ -332,7 +332,7 @@ void IG2App::escenaConFondo() {
 	luzFocoAvion->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
 	luzFocoAvion->setDirection(Ogre::Vector3(0, -1, 0));
 	luzFocoAvion->setSpotlightInnerAngle(Ogre::Degree(5.0f));
-	luzFocoAvion->setSpotlightOuterAngle(Ogre::Degree(135.0f));
+	luzFocoAvion->setSpotlightOuterAngle(Ogre::Degree(10.0f));
 	luzFocoAvion->setSpotlightFalloff(0.0f);
 	avion->getNode()->attachObject(luzFocoAvion);
 
@@ -340,25 +340,5 @@ void IG2App::escenaConFondo() {
 	plano = new Plano(mSM->getRootSceneNode());
 	plano->getmPlanoNode()->pitch(Ogre::Degree(90));
 	plano->getmPlanoNode()->translate(0, 0, -500);
-}
-
-void IG2App::mueveDron() {
-	ficticioDronNode->roll(Ogre::Degree(-4));
-
-	/*dronPlaneta->getNode()->translate(0, -320, 0, SceneNode::TS_LOCAL);
-	dronPlaneta->getNode()->roll(Ogre::Degree(-4));
-	dronPlaneta->getNode()->translate(0, 320, 0, SceneNode::TS_LOCAL);*/
-}
-void IG2App::rotaDron() {
-	ficticioDronNode->yaw(Ogre::Degree(-4));
-
-	//dronPlaneta->getNode()->yaw(Ogre::Degree(-4));
-}
-
-void IG2App::mueveAvion() {
-	ficticioAvionNode->pitch(Ogre::Degree(4));
-}
-void IG2App::rotaAvion() {
-	ficticioAvionNode->yaw(Ogre::Degree(-4));
 }
 

@@ -5,6 +5,7 @@ AspasMolino::AspasMolino(Ogre::SceneNode* node, int numAs, int index) : EntityIG
 	indexAspasMolino = index;
 
 	Ogre::Entity* cilindro = mSM->createEntity("Barrel.mesh");
+	cilindro->setMaterialName("terrain");
 
 	cilindroCentralNode = mNode->createChildSceneNode("mCilindroCentralNode" + std::to_string(indexAspasMolino));
 	cilindroCentralNode->attachObject(cilindro);

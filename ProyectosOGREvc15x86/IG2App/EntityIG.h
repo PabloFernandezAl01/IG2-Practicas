@@ -29,7 +29,7 @@ protected:
 
 	virtual void frameRendered(const Ogre::FrameEvent& evt) {};
 
-	virtual void sendEvent(MessageType msgType, EntityIG* entidad) {};
+	virtual void sendEvent(MessageType msgType, EntityIG* entidad);
 	virtual void receiveEvent(MessageType msgType, EntityIG* entidad) {};
 };
 

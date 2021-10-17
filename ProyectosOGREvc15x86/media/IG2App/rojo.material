@@ -1,0 +1,10 @@
+material rojo // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 1 0 0
+        }
+    }
+}

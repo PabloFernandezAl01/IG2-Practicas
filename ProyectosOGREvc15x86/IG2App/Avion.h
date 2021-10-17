@@ -6,12 +6,18 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include "EntityIG.h"
+#include <OgreTimer.h>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 class Avion : public EntityIG{
 public:
 	Avion(Ogre::SceneNode* node);
 	void giraAspasAvion(float ang);
 	Ogre::SceneNode* getNode();
+
+	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const Ogre::FrameEvent& evt);
 
 private:
 	void transformAvion();
@@ -27,5 +33,10 @@ private:
 
 	AspasMolino* aspasMolinoI = nullptr;
 	AspasMolino* aspasMolinoD = nullptr;
+
+	Ogre::Timer* myTimer;
+	Ogre::Real timeMoving;
+	Ogre::Real timeRotating;
+	int rndDirection;
 };
 

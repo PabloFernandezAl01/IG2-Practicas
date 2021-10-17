@@ -10,3 +10,7 @@ EntityIG::EntityIG(Ogre::SceneNode* node) {
 void EntityIG::addListener(EntityIG* ent) {
 	appListeners.push_back(ent);
 }
+
+void EntityIG::sendEvent(MessageType msgType, EntityIG* entidad) {
+	for (EntityIG* e : appListeners) e->receiveEvent(msgType, entidad);
+}

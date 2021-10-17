@@ -5,7 +5,9 @@ Aspa::Aspa(int index, Ogre::SceneNode* node) : EntityIG(node){
 	aspaIndex = index;
 
 	Ogre::Entity* tab = mSM->createEntity("cube.mesh");
+	tab->setMaterialName("marron");
 	Ogre::Entity* adorno = mSM->createEntity("Barrel.mesh");
+	adorno->setMaterialName("rojo");
 
 	tableroNode = mNode->createChildSceneNode("mTablero" + std::to_string(aspaIndex));
 	tableroNode->attachObject(tab);

@@ -80,13 +80,6 @@ private:
     void planetScene(); //Entrega 2
     void avionScene(); //Ejercicio 21
     void escenaConFondo();
-    
-
-    void rotaDron();
-    void mueveDron();
-
-    void rotaAvion();
-    void mueveAvion();
 };
 
 #endif
