@@ -17,7 +17,11 @@ public:
 	Ogre::SceneNode* getNode();
 
 	bool keyPressed(const OgreBites::KeyboardEvent& evt);
-	virtual void frameRendered(const Ogre::FrameEvent& evt);
+	void frameRendered(const Ogre::FrameEvent& evt);
+
+	void receiveEvent(MessageType msgType, EntityIG* entidad);
+	AspasMolino* getAspaMolinoI() { return aspasMolinoI; }
+	AspasMolino* getAspaMolinoD() { return aspasMolinoD; }
 
 private:
 	void transformAvion();
@@ -30,6 +34,8 @@ private:
 
 	Ogre::SceneNode* nodoFicticioAlaI = nullptr;
 	Ogre::SceneNode* nodoFicticioAlaD = nullptr;
+	Ogre::Entity* alaIEnt = nullptr;
+	Ogre::Entity* alaDEnt = nullptr;
 
 	AspasMolino* aspasMolinoI = nullptr;
 	AspasMolino* aspasMolinoD = nullptr;

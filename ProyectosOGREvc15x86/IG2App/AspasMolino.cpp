@@ -38,11 +38,14 @@ void AspasMolino::giraAspasMolino(float ang) {
 	}
 }
 
-Ogre::SceneNode* AspasMolino::getCilindroCentral()
-{
+Ogre::SceneNode* AspasMolino::getCilindroCentral() {
 	return cilindroCentralNode;
 }
 
 Ogre::SceneNode* AspasMolino::getmNode() {
 	return mNode;
+}
+
+void AspasMolino::frameRendered(const Ogre::FrameEvent& evt) {
+	giraAspasMolino(2);
 }

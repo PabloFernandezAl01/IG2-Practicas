@@ -2,10 +2,10 @@
 #include <iostream>
 
 Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr) : EntityIG(node){
-	Ogre::Entity* e = mSM->createEntity("sphere.mesh");
+	esferaEnt = mSM->createEntity("sphere.mesh");
 	esfera = mNode->createChildSceneNode("mNodeEsferaDron");
 
-	esfera->attachObject(e);
+	esfera->attachObject(esferaEnt);
 
 	numAspas = nAs; numBrazos = nBr;
 
@@ -80,4 +80,16 @@ void Dron::frameRendered(const Ogre::FrameEvent& evt) {
 		else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
 	}
 	else mNode->getParent()->roll(Ogre::Degree(-0.5));
+}
+
+void Dron::receiveEvent(MessageType msgType, EntityIG* entidad) {
+	switch (msgType)
+	{
+	case MessageType::R_EVENT: {
+		esferaEnt->setMaterialName("rojo");
+		break;
+	}
+	default:
+		break;
+	}
 }

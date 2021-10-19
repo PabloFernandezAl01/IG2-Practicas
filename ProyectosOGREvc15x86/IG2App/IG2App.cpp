@@ -13,9 +13,6 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   {
       getRoot()->queueEndRendering();
   }
-  else if (evt.keysym.sym == SDLK_r) {
-
-  }
   else {
 	  for (auto a : EntityIG::appListeners) {
 		  a->keyPressed(evt);
@@ -302,7 +299,7 @@ void IG2App::escenaConFondo() {
 	esferaPlaneta->setScale(3, 3, 3);
 
 	EntityIG::addListener(dronPlaneta);
-	//IG2ApplicationContext::addInputListener(dronPlaneta);
+	IG2ApplicationContext::addInputListener(dronPlaneta);
 
 	//Luz para el dron
 	luzFocoDron = mSM->createLight("LuzFocoDron");
@@ -320,7 +317,9 @@ void IG2App::escenaConFondo() {
 	avion = new Avion(avionNode);
 
 	EntityIG::addListener(avion);
-	//IG2ApplicationContext::addInputListener(avion);
+	IG2ApplicationContext::addInputListener(avion);
+	IG2ApplicationContext::addInputListener(avion->getAspaMolinoI());
+	IG2ApplicationContext::addInputListener(avion->getAspaMolinoD());
 
 	avion->getNode()->setScale(0.1, 0.1, 0.1);
 	avion->getNode()->translate(0, 320, 0);

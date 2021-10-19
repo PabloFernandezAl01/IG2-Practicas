@@ -2,21 +2,21 @@
 
 Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 
-	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
+	Ogre::Entity*  esfera = mSM->createEntity("sphere.mesh");
 	esfera->setMaterialName("rojo");
 	cuerpoNode = mNode->createChildSceneNode("mCuerpoAvion");
 	cuerpoNode->attachObject(esfera);
 
-	Ogre::Entity* alaI = mSM->createEntity("cube.mesh");
-	Ogre::Entity* alaD = mSM->createEntity("cube.mesh");
-	alaI->setMaterialName("ajedrez");
-	alaD->setMaterialName("ajedrez");
+	alaIEnt = mSM->createEntity("cube.mesh");
+	alaDEnt = mSM->createEntity("cube.mesh");
+	alaIEnt->setMaterialName("ajedrez");
+	alaDEnt->setMaterialName("ajedrez");
 
 	alaINode = mNode->createChildSceneNode("mAlaINode");
 	alaDNode = mNode->createChildSceneNode("mAlaDNode");
 
-	alaINode->attachObject(alaI);
-	alaDNode->attachObject(alaD);
+	alaINode->attachObject(alaIEnt);
+	alaDNode->attachObject(alaDEnt);
 
 	Ogre::Entity* frente = mSM->createEntity("Barrel.mesh");
 	frente->setMaterialName("naranja");
@@ -62,6 +62,11 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		mNode->getParent()->yaw(Ogre::Degree(-4));
 		return true;
 	}
+	else if (evt.keysym.sym == SDLK_r) {
+
+		this->sendEvent(MessageType::R_EVENT, this);
+		return true;
+	}
 	return false;
 }
 
@@ -81,6 +86,19 @@ void Avion::frameRendered(const Ogre::FrameEvent& evt) {
 		else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
 	}
 	else mNode->getParent()->pitch(Ogre::Degree(0.5));
+}
+
+void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
+	switch (msgType)
+	{
+	case MessageType::R_EVENT: {
+		alaIEnt->setMaterialName("rojo");
+		alaDEnt->setMaterialName("rojo");
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void Avion::transformAvion() {

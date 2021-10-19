@@ -7,12 +7,14 @@
 #include "EntityIG.h"
 #include "Aspa.h"
 
-class AspasMolino : public EntityIG{
+class AspasMolino : public EntityIG {
 public:
 	AspasMolino(Ogre::SceneNode* node, int numAspas, int index);
 	void giraAspasMolino(float ang);
 	Ogre::SceneNode* getCilindroCentral();
 	Ogre::SceneNode* getmNode();
+
+	void frameRendered(const Ogre::FrameEvent& evt);
 
 private:
 	Ogre::SceneNode* cilindroCentralNode = nullptr;

@@ -6,7 +6,7 @@
 #include <OgreSceneNode.h>
 #include <vector>
 
-enum MessageType {};
+enum MessageType {R_EVENT};
 
 class EntityIG : public OgreBites::InputListener
 {
@@ -22,6 +22,9 @@ public:
 		return false;
 	};
 
+	virtual void sendEvent(MessageType msgType, EntityIG* entidad);
+	virtual void receiveEvent(MessageType msgType, EntityIG* entidad) {};
+
 protected:
 
 	Ogre::SceneNode* mNode;
@@ -29,7 +32,5 @@ protected:
 
 	virtual void frameRendered(const Ogre::FrameEvent& evt) {};
 
-	virtual void sendEvent(MessageType msgType, EntityIG* entidad);
-	virtual void receiveEvent(MessageType msgType, EntityIG* entidad) {};
 };
 
