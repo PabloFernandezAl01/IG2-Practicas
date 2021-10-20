@@ -4,6 +4,8 @@
 #include <SDL_keycode.h>
 #include <OgreMeshManager.h>
 #include <iostream>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 using namespace Ogre;
 
@@ -18,7 +20,6 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 		  a->keyPressed(evt);
 	  }
   }
-
 
   //else if (evt.keysym.sym == SDLK_g) {
 	 // //clock->roll(Ogre::Degree(-1)); //Practica 1.1
@@ -126,21 +127,19 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
+  //simbadScene();
    //avionScene();
    //planetScene();
    //molinoScene();
-   escenaConFondo();
+  //escenaConFondo();
+  cazaDrones();
 }
 
 
 //Practica 0
 void IG2App::simbadScene() {
 	//Simbad
-	Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
-
-	mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
-	mSinbadNode->attachObject(ent);
-	mSinbadNode->setScale(20, 20, 20);
+	simbad = new Simbad(mSM->getRootSceneNode());
 
 	//mSinbadNode->setPosition(400, 100, -300);
 	//mSinbadNode->yaw(Ogre::Degree(-45));
@@ -182,7 +181,7 @@ void IG2App::simbadScene() {
 
 	//Escenario
 
-	Ogre::Entity* ent5 = mSM->createEntity("Columns.mesh");
+	/*Ogre::Entity* ent5 = mSM->createEntity("Columns.mesh");
 
 	mColumnsNode = mSM->getRootSceneNode()->createChildSceneNode("nColumns");
 	mColumnsNode->attachObject(ent5);
@@ -197,7 +196,7 @@ void IG2App::simbadScene() {
 	Ogre::Entity* ent7 = mSM->createEntity("RomanBathUpper.mesh");
 
 	mBathUpper = mSM->getRootSceneNode()->createChildSceneNode("nBathUpper");
-	mBathUpper->attachObject(ent7);
+	mBathUpper->attachObject(ent7);*/
 }
 
 //Practica 1.0
@@ -293,13 +292,17 @@ void IG2App::escenaConFondo() {
 	//Dron
 	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioDronNode");
 	dronNode = ficticioDronNode->createChildSceneNode("mDronNode");
-	dronPlaneta = new Dron(dronNode, 12, 8);
+	dronPlaneta = new Dron(dronNode, 12, 3);
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
 	esferaPlaneta->setScale(3, 3, 3);
 
 	EntityIG::addListener(dronPlaneta);
 	IG2ApplicationContext::addInputListener(dronPlaneta);
+
+	for (int i = 0; i < dronPlaneta->getNumBrazos(); i++) {
+		IG2ApplicationContext::addInputListener(dronPlaneta->getArrayBrazos()[i]->getRotorDron()->getAspasMolino());
+	}
 
 	//Luz para el dron
 	luzFocoDron = mSM->createLight("LuzFocoDron");
@@ -339,5 +342,27 @@ void IG2App::escenaConFondo() {
 	plano = new Plano(mSM->getRootSceneNode());
 	plano->getmPlanoNode()->pitch(Ogre::Degree(90));
 	plano->getmPlanoNode()->translate(0, 0, -500);
+}
+
+void IG2App::cazaDrones() {
+	miniDrones = std::vector<Dron*>();
+	nodosFicticios = std::vector<Ogre::SceneNode*>();
+	nodosDron = std::vector<Ogre::SceneNode*>();
+
+	for (int i = 0; i < 50; i++) {
+		nodosFicticios.push_back(mSM->getRootSceneNode()->createChildSceneNode());
+		nodosDron.push_back(nodosFicticios[i]->createChildSceneNode());
+		miniDrones.push_back(new Dron(nodosDron[i], 12, 8));
+
+		miniDrones[i]->getNode()->translate(0, 320, 0);
+		miniDrones[i]->getNode()->setScale(0.05, 0.05, 0.05);
+
+		int rndY = rand() % 360;
+		int rndZ = rand() % 360;
+
+		nodosFicticios[i]->yaw(Ogre::Degree(rndY));
+		nodosFicticios[i]->roll(Ogre::Degree(rndZ));
+	}
+
 }
 

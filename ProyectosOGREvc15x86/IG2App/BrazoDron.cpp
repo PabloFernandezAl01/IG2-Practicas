@@ -4,6 +4,7 @@ BrazoDron::BrazoDron(Ogre::SceneNode* node, int numAspas, int index) : EntityIG(
 	indexBrazo = index;
 
 	Ogre::Entity* c = mSM->createEntity("Barrel.mesh");
+	c->setMaterialName("bumpy");
 	cilindro = mNode->createChildSceneNode("mNodeCilindroBrazoDron" + std::to_string(indexBrazo));
 
 	cilindro->attachObject(c);
@@ -29,4 +30,9 @@ Ogre::SceneNode* BrazoDron::getmNode() {
 Ogre::SceneNode* BrazoDron::getCilindroNode()
 {
 	return cilindro;
+}
+
+RotorDron* BrazoDron::getRotorDron()
+{
+	return rotorDron;
 }

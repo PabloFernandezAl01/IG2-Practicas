@@ -22,6 +22,8 @@ public:
 	void frameRendered(const Ogre::FrameEvent& evt);
 
 	void receiveEvent(MessageType msgType, EntityIG* entidad);
+	BrazoDron** getArrayBrazos();
+	int getNumBrazos();
 private:
 	Ogre::SceneNode* esfera = nullptr;
 	Ogre::Entity* esferaEnt = nullptr;
@@ -34,5 +36,7 @@ private:
 	Ogre::Real timeMoving;
 	Ogre::Real timeRotating;
 	int rndDirection;
+
+	bool canMove = true;
 };
 

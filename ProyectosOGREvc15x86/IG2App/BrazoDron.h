@@ -15,6 +15,7 @@ public:
 	void giraAspas(float ang);
 	Ogre::SceneNode* getmNode();
 	Ogre::SceneNode* getCilindroNode();
+	RotorDron* getRotorDron();
 
 private:
 	Ogre::SceneNode* cilindro = nullptr;

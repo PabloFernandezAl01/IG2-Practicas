@@ -6,6 +6,7 @@ RotorDron::RotorDron(Ogre::SceneNode* node, int numAs, int index) : EntityIG(nod
 	numAspas = numAs;
 
 	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
+	esfera->setMaterialName("marron_claro");
 	mEsferaNode = mNode->createChildSceneNode("mEsferaNode" + std::to_string(indexRotorDron));
 	mEsferaNode->attachObject(esfera);
 
@@ -35,4 +36,9 @@ void RotorDron::giraAspas(float ang) {
 
 Ogre::SceneNode* RotorDron::getmNode() {
 	return mNode;
+}
+
+AspasMolino* RotorDron::getAspasMolino()
+{
+	return aspasMolino;
 }

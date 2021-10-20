@@ -14,6 +14,7 @@ public:
 	void giraAspas(float ang);
 
 	Ogre::SceneNode* getmNode();
+	AspasMolino* getAspasMolino();
 private:
 	Ogre::SceneNode* mEsferaNode = nullptr;
 	Ogre::SceneNode* mHelicesNode = nullptr;

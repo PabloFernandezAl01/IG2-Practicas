@@ -11,6 +11,9 @@
 #include "Dron.h"
 #include "Avion.h"
 #include "Plano.h"
+#include "EntityIG.h"
+#include "Simbad.h"
+#include <vector>
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -29,7 +32,6 @@ protected:
   OgreBites::TrayManager* mTrayMgr = nullptr;    
   Ogre::SceneNode* mLightNode = nullptr;
   Ogre::SceneNode* mCamNode = nullptr;
-  Ogre::SceneNode* mSinbadNode = nullptr;
   OgreBites::CameraMan* mCamMgr = nullptr;
 
   //Practica 0
@@ -73,6 +75,12 @@ protected:
   Ogre::Light* luzFocoDron = nullptr;
   Ogre::Light* luzFocoAvion = nullptr;
 
+  Simbad* simbad = nullptr;
+
+  std::vector<Dron*> miniDrones;
+  std::vector<Ogre::SceneNode*> nodosFicticios;
+  std::vector<Ogre::SceneNode*> nodosDron;
+
 private:
     void simbadScene(); //Practica 0
     void sphereClockScene(); //Practica 1.0
@@ -80,6 +88,7 @@ private:
     void planetScene(); //Entrega 2
     void avionScene(); //Ejercicio 21
     void escenaConFondo();
+    void cazaDrones();
 };
 
 #endif

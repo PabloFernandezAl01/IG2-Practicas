@@ -1,0 +1,88 @@
+material rojo // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 1 0 0
+        }
+    }
+}
+
+material ajedrez {
+  technique{
+    pass {
+      texture_unit {
+        texture checker.png
+        colour_op replace
+      }
+    }
+  }
+}
+
+material amarillo // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 1 1 0
+        }
+    }
+}
+
+material marron // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 0.5 0.25 0
+        }
+    }
+}
+
+material marron_claro // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 0.9 0.5 0
+        }
+    }
+}
+
+material naranja // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 1 0.6 0.1
+        }
+    }
+}
+
+material terrain {
+  technique{
+    pass {
+      texture_unit {
+        texture terrain_texture.jpg
+        colour_op replace
+      }
+    }
+  }
+}
+
+material bumpy {
+  technique{
+    pass {
+      diffuse 1 1 0
+      texture_unit {
+        texture BumpyMetal.jpg
+        colour_op modulate
+      }
+    }
+  }
+}

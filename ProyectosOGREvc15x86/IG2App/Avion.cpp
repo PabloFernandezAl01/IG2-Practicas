@@ -71,21 +71,23 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 }
 
 void Avion::frameRendered(const Ogre::FrameEvent& evt) {
-	timeMoving += evt.timeSinceLastFrame;
-	if (timeMoving > 2) {
-		timeRotating += evt.timeSinceLastFrame;
+	if (canMove) {
+		timeMoving += evt.timeSinceLastFrame;
+		if (timeMoving > 2) {
+			timeRotating += evt.timeSinceLastFrame;
 
-		if (timeRotating > 3) {
-			timeRotating = 0;
-			timeMoving = 0;
+			if (timeRotating > 3) {
+				timeRotating = 0;
+				timeMoving = 0;
 
-			int r = rand() % 2;
-			if (r == 0) rndDirection = -1;
-			else rndDirection = 1;
+				int r = rand() % 2;
+				if (r == 0) rndDirection = -1;
+				else rndDirection = 1;
+			}
+			else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
 		}
-		else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
+		else mNode->getParent()->pitch(Ogre::Degree(0.5));
 	}
-	else mNode->getParent()->pitch(Ogre::Degree(0.5));
 }
 
 void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
@@ -94,6 +96,8 @@ void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
 	case MessageType::R_EVENT: {
 		alaIEnt->setMaterialName("rojo");
 		alaDEnt->setMaterialName("rojo");
+
+		canMove = false;
 		break;
 	}
 	default:

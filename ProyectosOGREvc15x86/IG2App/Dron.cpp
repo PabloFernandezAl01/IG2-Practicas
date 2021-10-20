@@ -3,6 +3,7 @@
 
 Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr) : EntityIG(node){
 	esferaEnt = mSM->createEntity("sphere.mesh");
+	esferaEnt->setMaterialName("rojo");
 	esfera = mNode->createChildSceneNode("mNodeEsferaDron");
 
 	esfera->attachObject(esferaEnt);
@@ -64,22 +65,23 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt) {
 }
 
 void Dron::frameRendered(const Ogre::FrameEvent& evt) {
+	if (canMove) {
+		timeMoving += evt.timeSinceLastFrame;
+		if (timeMoving > 2) {
+			timeRotating += evt.timeSinceLastFrame;
 
-	timeMoving += evt.timeSinceLastFrame;
-	if (timeMoving > 2) {
-		timeRotating += evt.timeSinceLastFrame;
+			if (timeRotating > 1) {
+				timeRotating = 0;
+				timeMoving = 0;
 
-		if (timeRotating > 1) {
-			timeRotating = 0;
-			timeMoving = 0;
-
-			int r = rand() % 2;
-			if (r == 0) rndDirection = -1;
-			else rndDirection = 1;
+				int r = rand() % 2;
+				if (r == 0) rndDirection = -1;
+				else rndDirection = 1;
+			}
+			else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
 		}
-		else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
+		else mNode->getParent()->roll(Ogre::Degree(-0.5));
 	}
-	else mNode->getParent()->roll(Ogre::Degree(-0.5));
 }
 
 void Dron::receiveEvent(MessageType msgType, EntityIG* entidad) {
@@ -87,9 +89,20 @@ void Dron::receiveEvent(MessageType msgType, EntityIG* entidad) {
 	{
 	case MessageType::R_EVENT: {
 		esferaEnt->setMaterialName("rojo");
+		
+		canMove = false;
 		break;
 	}
 	default:
 		break;
 	}
+}
+
+BrazoDron** Dron::getArrayBrazos() {
+	return arrayBrazos;
+}
+
+int Dron::getNumBrazos()
+{
+	return numBrazos;
 }

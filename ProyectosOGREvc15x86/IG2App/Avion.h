@@ -44,5 +44,7 @@ private:
 	Ogre::Real timeMoving;
 	Ogre::Real timeRotating;
 	int rndDirection;
+
+	bool canMove = true;
 };
 
