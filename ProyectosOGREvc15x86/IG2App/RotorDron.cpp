@@ -7,17 +7,17 @@ RotorDron::RotorDron(Ogre::SceneNode* node, int numAs, int index) : EntityIG(nod
 
 	Ogre::Entity* esfera = mSM->createEntity("sphere.mesh");
 	esfera->setMaterialName("marron_claro");
-	mEsferaNode = mNode->createChildSceneNode("mEsferaNode" + std::to_string(indexRotorDron));
+	mEsferaNode = mNode->createChildSceneNode();
 	mEsferaNode->attachObject(esfera);
 
-	mHelicesNode = mNode->createChildSceneNode("mHelicesNode" + std::to_string(indexRotorDron));
+	mHelicesNode = mNode->createChildSceneNode();
 
 	aspasMolino = new AspasMolino(mHelicesNode, numAspas, indexRotorDron);
 
-	//Oculta los adornos
-	for (int i = 0; i < numAspas; i++) {
-		mSM->getSceneNode("mAdorno" + std::to_string(i+ indexRotorDron * numAspas))->setVisible(false);
-	}
+	////Oculta los adornos
+	//for (int i = 0; i < numAspas; i++) {
+	//	mSM->getSceneNode("mAdorno" + std::to_string(i+ indexRotorDron * numAspas))->setVisible(false);
+	//}
 
 	transformRotorDron();
 }

@@ -2,16 +2,16 @@
 #include <iostream>
 
 Molino::Molino(Ogre::SceneNode* node, int numAspas) : EntityIG(node){
-	mNodoFicticio = mNode->createChildSceneNode("mNodoFicticio");
-	mNodoAspas = mNodoFicticio->createChildSceneNode("mNodoAspas");
+	mNodoFicticio = mNode->createChildSceneNode();
+	mNodoAspas = mNodoFicticio->createChildSceneNode();
 
 	Ogre::Entity* techo = mSM->createEntity("sphere.mesh");
 	Ogre::Entity* cuerpo = mSM->createEntity("Barrel.mesh");
 
-	mTecho = mNode->createChildSceneNode("mTecho");
+	mTecho = mNode->createChildSceneNode();
 	mTecho->attachObject(techo);
 
-	mCuerpo = mNode->createChildSceneNode("mCuerpo");
+	mCuerpo = mNode->createChildSceneNode();
 	mCuerpo->attachObject(cuerpo);
 
 	aspas = new AspasMolino(mNodoAspas, numAspas, 0);

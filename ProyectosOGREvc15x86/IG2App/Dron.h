@@ -10,10 +10,11 @@
 #include <OgreTimer.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+class IG2App;
 
 class Dron : public EntityIG {
 public:
-	Dron(Ogre::SceneNode* node, int numAspas, int numBrazos);
+	Dron(Ogre::SceneNode* node, int numAspas, int numBrazos, const std::vector<Dron*>& drones = std::vector<Dron*>(), const std::vector<Ogre::SceneNode*>& nodosDron = std::vector<Ogre::SceneNode*>(), const std::vector<Ogre::SceneNode*>& nodosFicitcios = std::vector<Ogre::SceneNode*>());
 
 	void giraAspas(float ang);
 	Ogre::SceneNode* getNode();
@@ -24,7 +25,11 @@ public:
 	void receiveEvent(MessageType msgType, EntityIG* entidad);
 	BrazoDron** getArrayBrazos();
 	int getNumBrazos();
+
 private:
+
+	void dronCollision();
+
 	Ogre::SceneNode* esfera = nullptr;
 	Ogre::Entity* esferaEnt = nullptr;
 
@@ -36,6 +41,12 @@ private:
 	Ogre::Real timeMoving;
 	Ogre::Real timeRotating;
 	int rndDirection;
+
+	std::vector<Dron*> miniDrones;
+	std::vector<Ogre::SceneNode*> nodosFicticios;
+	std::vector<Ogre::SceneNode*> nodosDron;
+
+	int timeToMove, timeToRotate;
 
 	bool canMove = true;
 };

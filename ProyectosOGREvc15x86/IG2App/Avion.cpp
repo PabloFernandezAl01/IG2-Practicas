@@ -4,7 +4,7 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 
 	Ogre::Entity*  esfera = mSM->createEntity("sphere.mesh");
 	esfera->setMaterialName("rojo");
-	cuerpoNode = mNode->createChildSceneNode("mCuerpoAvion");
+	cuerpoNode = mNode->createChildSceneNode();
 	cuerpoNode->attachObject(esfera);
 
 	alaIEnt = mSM->createEntity("cube.mesh");
@@ -12,20 +12,20 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	alaIEnt->setMaterialName("ajedrez");
 	alaDEnt->setMaterialName("ajedrez");
 
-	alaINode = mNode->createChildSceneNode("mAlaINode");
-	alaDNode = mNode->createChildSceneNode("mAlaDNode");
+	alaINode = mNode->createChildSceneNode();
+	alaDNode = mNode->createChildSceneNode();
 
 	alaINode->attachObject(alaIEnt);
 	alaDNode->attachObject(alaDEnt);
 
 	Ogre::Entity* frente = mSM->createEntity("Barrel.mesh");
 	frente->setMaterialName("naranja");
-	frenteNode = mNode->createChildSceneNode("mFrenteNode");
+	frenteNode = mNode->createChildSceneNode();
 	frenteNode->attachObject(frente);
 
 	Ogre::Entity* ninja = mSM->createEntity("ninja.mesh");
 	ninja->setMaterialName("amarillo");
-	pilotoNode = mNode->createChildSceneNode("mPilotoNode");
+	pilotoNode = mNode->createChildSceneNode();
 	pilotoNode->attachObject(ninja);
 
 	nodoFicticioAlaI = mNode->createChildSceneNode();

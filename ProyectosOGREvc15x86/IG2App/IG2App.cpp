@@ -131,7 +131,7 @@ void IG2App::setupScene(void)
    //avionScene();
    //planetScene();
    //molinoScene();
-  //escenaConFondo();
+   //escenaConFondo();
   cazaDrones();
 }
 
@@ -268,10 +268,10 @@ void IG2App::molinoScene() {
 
 void IG2App::planetScene() {
 	auto esferaP = mSM->createEntity("sphere.mesh");
-	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode("mEsferaPlaneta");
+	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode();
 	esferaPlaneta->attachObject(esferaP);
 
-	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioDronNode");
+	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
 
 	dronPlaneta = new Dron(ficticioDronNode, 12, 8);
 
@@ -286,12 +286,12 @@ void IG2App::avionScene() {
 
 void IG2App::escenaConFondo() {
 	auto esferaP = mSM->createEntity("sphere.mesh");
-	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode("mEsferaPlaneta");
+	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode();
 	esferaPlaneta->attachObject(esferaP);
 
 	//Dron
-	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioDronNode");
-	dronNode = ficticioDronNode->createChildSceneNode("mDronNode");
+	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
+	dronNode = ficticioDronNode->createChildSceneNode();
 	dronPlaneta = new Dron(dronNode, 12, 3);
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
@@ -315,8 +315,8 @@ void IG2App::escenaConFondo() {
 	dronPlaneta->getNode()->attachObject(luzFocoDron);
 
 	//Avion
-	ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode("mFicticioAvionNode");
-	avionNode = ficticioAvionNode->createChildSceneNode("mAvionNode");
+	ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode();
+	avionNode = ficticioAvionNode->createChildSceneNode();
 	avion = new Avion(avionNode);
 
 	EntityIG::addListener(avion);
@@ -345,17 +345,25 @@ void IG2App::escenaConFondo() {
 }
 
 void IG2App::cazaDrones() {
+	auto esferaP = mSM->createEntity("sphere.mesh");
+	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode();
+	esferaPlaneta->attachObject(esferaP);
+	esferaPlaneta->setScale(3, 3, 3);
+
 	miniDrones = std::vector<Dron*>();
 	nodosFicticios = std::vector<Ogre::SceneNode*>();
 	nodosDron = std::vector<Ogre::SceneNode*>();
 
 	for (int i = 0; i < 50; i++) {
 		nodosFicticios.push_back(mSM->getRootSceneNode()->createChildSceneNode());
-		nodosDron.push_back(nodosFicticios[i]->createChildSceneNode());
-		miniDrones.push_back(new Dron(nodosDron[i], 12, 8));
+		nodosDron.push_back(nodosFicticios[i]->createChildSceneNode("miniDron" + std::to_string(i)));
 
-		miniDrones[i]->getNode()->translate(0, 320, 0);
-		miniDrones[i]->getNode()->setScale(0.05, 0.05, 0.05);
+		auto dron = new Dron(nodosDron[i], 12, 3);
+		miniDrones.push_back(dron);
+		IG2ApplicationContext::addInputListener(dron);
+
+		miniDrones[i]->getNode()->translate(0, 305, 0);
+		miniDrones[i]->getNode()->setScale(0.02, 0.02, 0.02);
 
 		int rndY = rand() % 360;
 		int rndZ = rand() % 360;
@@ -363,6 +371,14 @@ void IG2App::cazaDrones() {
 		nodosFicticios[i]->yaw(Ogre::Degree(rndY));
 		nodosFicticios[i]->roll(Ogre::Degree(rndZ));
 	}
+
+	ficticioDronControlNode = mSM->getRootSceneNode()->createChildSceneNode();
+	dronControlNode = ficticioDronControlNode->createChildSceneNode("dronControlNode");
+	dronControl = new Dron(dronControlNode, 12, 3, miniDrones, nodosDron, nodosFicticios);
+	IG2ApplicationContext::addInputListener(dronControl);
+
+	dronControlNode->setScale(0.07, 0.07, 0.07);
+	dronControlNode->translate(0, 320, 0);
 
 }
 

@@ -1,14 +1,26 @@
 #include "Dron.h"
+#include "IG2App.h"
 #include <iostream>
 
-Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr) : EntityIG(node){
+Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr, const std::vector<Dron*>& drones, const std::vector<Ogre::SceneNode*>& nD, const std::vector<Ogre::SceneNode*>& nF) : EntityIG(node){
+
+	miniDrones = drones;
+	nodosFicticios = nF;
+	nodosDron = nD;
+
 	esferaEnt = mSM->createEntity("sphere.mesh");
-	esferaEnt->setMaterialName("rojo");
-	esfera = mNode->createChildSceneNode("mNodeEsferaDron");
+
+	if (mNode->getName() != "dronControlNode") esferaEnt->setMaterialName("rojo");
+	else esferaEnt->setMaterialName("cabeza");
+	
+	esfera = mNode->createChildSceneNode();
 
 	esfera->attachObject(esferaEnt);
 
 	numAspas = nAs; numBrazos = nBr;
+
+	timeToMove = rand() % 4 + 1;
+	timeToRotate = rand() % 1 + 1;
 
 	float ang = 0;
 	arrayBrazos = new BrazoDron * [numBrazos];
@@ -67,10 +79,11 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt) {
 void Dron::frameRendered(const Ogre::FrameEvent& evt) {
 	if (canMove) {
 		timeMoving += evt.timeSinceLastFrame;
-		if (timeMoving > 2) {
+
+		if (timeMoving > timeToMove) {
 			timeRotating += evt.timeSinceLastFrame;
 
-			if (timeRotating > 1) {
+			if (timeRotating > timeToRotate) {
 				timeRotating = 0;
 				timeMoving = 0;
 
@@ -78,9 +91,17 @@ void Dron::frameRendered(const Ogre::FrameEvent& evt) {
 				if (r == 0) rndDirection = -1;
 				else rndDirection = 1;
 			}
-			else mNode->getParent()->yaw(Ogre::Degree(rndDirection));
+			else {
+				mNode->getParent()->yaw(Ogre::Degree(rndDirection));
+				dronCollision();
+				
+			}
 		}
-		else mNode->getParent()->roll(Ogre::Degree(-0.5));
+		else {
+			mNode->getParent()->roll(Ogre::Degree(-0.5));
+			dronCollision();
+			
+		}
 	}
 }
 
@@ -102,7 +123,20 @@ BrazoDron** Dron::getArrayBrazos() {
 	return arrayBrazos;
 }
 
-int Dron::getNumBrazos()
-{
+int Dron::getNumBrazos() {
 	return numBrazos;
+}
+
+void Dron::dronCollision() {
+	
+	if (mNode->getName() != "dronControlNode") return;
+
+	/*for (int i = 0; i < miniDrones.size(); i++) {
+		AxisAlignedBox miniDron = nodosDron[i]->_getWorldAABB();
+		AxisAlignedBox dron = mSM->getSceneNode("dronControlNode")->_getWorldAABB();
+		if (dron.intersects(miniDron)) {
+			nodosFicticios[i]->removeAndDestroyAllChildren();
+			miniDrones.erase(miniDrones.begin() + i);
+		}
+	}*/
 }

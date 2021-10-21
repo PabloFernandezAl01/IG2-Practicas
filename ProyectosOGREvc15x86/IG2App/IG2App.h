@@ -20,7 +20,7 @@ class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListene
 public:
   explicit IG2App() : IG2ApplicationContext("IG2App") { };  // new -> setup()  
   virtual ~IG2App() { };   // delete -> shutdown()  
- 
+
 protected:
   virtual void setup();
   virtual void shutdown();
@@ -80,6 +80,10 @@ protected:
   std::vector<Dron*> miniDrones;
   std::vector<Ogre::SceneNode*> nodosFicticios;
   std::vector<Ogre::SceneNode*> nodosDron;
+
+  Dron* dronControl = nullptr;
+  Ogre::SceneNode* dronControlNode = nullptr;
+  Ogre::SceneNode* ficticioDronControlNode = nullptr;
 
 private:
     void simbadScene(); //Practica 0

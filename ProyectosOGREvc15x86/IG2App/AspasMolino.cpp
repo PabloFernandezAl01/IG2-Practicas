@@ -7,12 +7,12 @@ AspasMolino::AspasMolino(Ogre::SceneNode* node, int numAs, int index) : EntityIG
 	Ogre::Entity* cilindro = mSM->createEntity("Barrel.mesh");
 	cilindro->setMaterialName("terrain");
 
-	cilindroCentralNode = mNode->createChildSceneNode("mCilindroCentralNode" + std::to_string(indexAspasMolino));
+	cilindroCentralNode = mNode->createChildSceneNode();
 	cilindroCentralNode->attachObject(cilindro);
 	cilindroCentralNode->setScale(10, 8, 10);
 	cilindroCentralNode->pitch(Ogre::Degree(90));
 
-	aspasNode = mNode->createChildSceneNode("mAspasNode" + std::to_string(indexAspasMolino));
+	aspasNode = mNode->createChildSceneNode();
 	numAspas = numAs;
 
 	float ang = 0;
@@ -23,7 +23,7 @@ AspasMolino::AspasMolino(Ogre::SceneNode* node, int numAs, int index) : EntityIG
 
 		arrayAspas[i] = new Aspa(i + indexAspasMolino * numAspas, auxNode);
 		arrayAspas[i]->getNode()->roll(Ogre::Degree(ang), Ogre::Node::TS_PARENT);
-		arrayAspas[i]->getNode()->getChild("mAdorno" + std::to_string(i + indexAspasMolino * numAspas))->roll(Ogre::Degree(-ang), Ogre::Node::TS_LOCAL);
+		//arrayAspas[i]->getNode()->getChild("mAdorno" + std::to_string(i + indexAspasMolino * numAspas))->roll(Ogre::Degree(-ang), Ogre::Node::TS_LOCAL);
 		ang += (360 / numAspas);
 	}
 }
@@ -32,10 +32,10 @@ void AspasMolino::giraAspasMolino(float ang) {
 
 	aspasNode->roll(Ogre::Degree(ang), Ogre::Node::TS_PARENT);
 
-	for (int i = 0; i < numAspas; i++) {
+	/*for (int i = 0; i < numAspas; i++) {
 		auto adorno = mSM->getSceneNode("mAdorno" + std::to_string(i + indexAspasMolino * numAspas));
 		adorno->roll(Ogre::Degree(-ang), Ogre::Node::TS_LOCAL);
-	}
+	}*/
 }
 
 Ogre::SceneNode* AspasMolino::getCilindroCentral() {
