@@ -131,12 +131,11 @@ void Dron::dronCollision() {
 	
 	if (mNode->getName() != "dronControlNode") return;
 
-	/*for (int i = 0; i < miniDrones.size(); i++) {
+	for (int i = 0; i < miniDrones.size(); i++) {
 		AxisAlignedBox miniDron = nodosDron[i]->_getWorldAABB();
 		AxisAlignedBox dron = mSM->getSceneNode("dronControlNode")->_getWorldAABB();
 		if (dron.intersects(miniDron)) {
-			nodosFicticios[i]->removeAndDestroyAllChildren();
 			miniDrones.erase(miniDrones.begin() + i);
 		}
-	}*/
+	}
 }

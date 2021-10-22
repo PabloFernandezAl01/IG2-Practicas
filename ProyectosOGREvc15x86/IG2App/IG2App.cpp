@@ -346,6 +346,7 @@ void IG2App::escenaConFondo() {
 
 void IG2App::cazaDrones() {
 	auto esferaP = mSM->createEntity("sphere.mesh");
+	esferaP->setMaterialName("azulito");
 	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode();
 	esferaPlaneta->attachObject(esferaP);
 	esferaPlaneta->setScale(3, 3, 3);

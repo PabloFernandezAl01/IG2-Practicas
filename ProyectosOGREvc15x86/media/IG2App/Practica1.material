@@ -64,6 +64,17 @@ material naranja // nombre
     }
 }
 
+material azulito // nombre
+{
+    technique // al menos una
+    {
+        pass // al menos uno
+        {
+            diffuse 0.439 0.913 0.941
+        }
+    }
+}
+
 material terrain {
   technique{
     pass {
