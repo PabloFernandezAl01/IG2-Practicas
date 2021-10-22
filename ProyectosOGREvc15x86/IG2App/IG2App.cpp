@@ -131,8 +131,8 @@ void IG2App::setupScene(void)
    //avionScene();
    //planetScene();
    //molinoScene();
-   //escenaConFondo();
-  cazaDrones();
+   escenaConFondo();
+  //cazaDrones();
 }
 
 
