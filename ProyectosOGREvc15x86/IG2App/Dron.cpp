@@ -2,10 +2,8 @@
 #include "IG2App.h"
 #include <iostream>
 
-Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr, const std::vector<Dron*>& drones, const std::vector<Ogre::SceneNode*>& nD, const std::vector<Ogre::SceneNode*>& nF) : EntityIG(node){
-
-	miniDrones = drones;
-	nodosFicticios = nF;
+Dron::Dron(Ogre::SceneNode* node, int nAs, int nBr, const std::vector<Dron*>& mD, const std::vector<Ogre::SceneNode*>& nD) : EntityIG(node){
+	miniDrones = mD;
 	nodosDron = nD;
 
 	esferaEnt = mSM->createEntity("sphere.mesh");
@@ -56,7 +54,7 @@ Ogre::SceneNode* Dron::getNode() {
 
 bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_h) {
-
+		if (mNode->getName() != "dronControlNode") return false;
 		mNode->getParent()->roll(Ogre::Degree(-4));
 
 		/*mNode->translate(0, -320, 0, SceneNode::TS_LOCAL);
@@ -66,7 +64,7 @@ bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		return true;
 	}
 	else if (evt.keysym.sym == SDLK_j) {
-
+		if (mNode->getName() != "dronControlNode") return false;
 		mNode->getParent()->yaw(Ogre::Degree(-4));
 
 		//mNode->yaw(Ogre::Degree(-4));
@@ -136,6 +134,11 @@ void Dron::dronCollision() {
 		AxisAlignedBox dron = mSM->getSceneNode("dronControlNode")->_getWorldAABB();
 		if (dron.intersects(miniDron)) {
 			miniDrones.erase(miniDrones.begin() + i);
+			nodosDron[i]->setVisible(false);
+
+			if (miniDrones.size() <= 0) {
+				esferaEnt->setMaterialName("rojo");
+			}
 		}
 	}
 }

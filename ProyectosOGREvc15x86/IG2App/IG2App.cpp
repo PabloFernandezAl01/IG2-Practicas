@@ -131,8 +131,8 @@ void IG2App::setupScene(void)
    //avionScene();
    //planetScene();
    //molinoScene();
-   escenaConFondo();
-  //cazaDrones();
+   //escenaConFondo();
+  cazaDrones();
 }
 
 
@@ -291,7 +291,7 @@ void IG2App::escenaConFondo() {
 
 	//Dron
 	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
-	dronNode = ficticioDronNode->createChildSceneNode();
+	dronNode = ficticioDronNode->createChildSceneNode("dronControlNode");
 	dronPlaneta = new Dron(dronNode, 12, 3);
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
@@ -355,7 +355,7 @@ void IG2App::cazaDrones() {
 	nodosFicticios = std::vector<Ogre::SceneNode*>();
 	nodosDron = std::vector<Ogre::SceneNode*>();
 
-	for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < 1; i++) {
 		nodosFicticios.push_back(mSM->getRootSceneNode()->createChildSceneNode());
 		nodosDron.push_back(nodosFicticios[i]->createChildSceneNode("miniDron" + std::to_string(i)));
 
@@ -375,7 +375,7 @@ void IG2App::cazaDrones() {
 
 	ficticioDronControlNode = mSM->getRootSceneNode()->createChildSceneNode();
 	dronControlNode = ficticioDronControlNode->createChildSceneNode("dronControlNode");
-	dronControl = new Dron(dronControlNode, 12, 3, miniDrones, nodosDron, nodosFicticios);
+	dronControl = new Dron(dronControlNode, 12, 3, miniDrones, nodosDron);
 	IG2ApplicationContext::addInputListener(dronControl);
 
 	dronControlNode->setScale(0.07, 0.07, 0.07);

@@ -14,7 +14,7 @@ class IG2App;
 
 class Dron : public EntityIG {
 public:
-	Dron(Ogre::SceneNode* node, int numAspas, int numBrazos, const std::vector<Dron*>& drones = std::vector<Dron*>(), const std::vector<Ogre::SceneNode*>& nodosDron = std::vector<Ogre::SceneNode*>(), const std::vector<Ogre::SceneNode*>& nodosFicitcios = std::vector<Ogre::SceneNode*>());
+	Dron(Ogre::SceneNode* node, int numAspas, int numBrazos, const std::vector<Dron*>& miniDrones = std::vector<Dron*>(), const std::vector<Ogre::SceneNode*>& nodosDron = std::vector<Ogre::SceneNode*>());
 
 	void giraAspas(float ang);
 	Ogre::SceneNode* getNode();
@@ -37,14 +37,13 @@ private:
 
 	BrazoDron** arrayBrazos = nullptr;
 
+	std::vector<Dron*> miniDrones;
+	std::vector<Ogre::SceneNode*> nodosDron;
+
 	Ogre::Timer* myTimer;
 	Ogre::Real timeMoving;
 	Ogre::Real timeRotating;
 	int rndDirection;
-
-	std::vector<Dron*> miniDrones;
-	std::vector<Ogre::SceneNode*> nodosFicticios;
-	std::vector<Ogre::SceneNode*> nodosDron;
 
 	int timeToMove, timeToRotate;
 
