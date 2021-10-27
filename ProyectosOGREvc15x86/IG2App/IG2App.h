@@ -18,7 +18,7 @@
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
 public:
-  explicit IG2App() : IG2ApplicationContext("IG2App") { };  // new -> setup()  
+  explicit IG2App() : IG2ApplicationContext("IG2App") { };  // new -> setup()    
   virtual ~IG2App() { };   // delete -> shutdown()  
 
 protected:

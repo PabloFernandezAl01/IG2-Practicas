@@ -8,13 +8,18 @@
 #include <OgreSceneNode.h>
 #include "EntityIG.h"
 #include <OgreTimer.h>
+#include <OgreAnimationState.h>
 
 class Simbad : public EntityIG
 {
 public:
 	Simbad(Ogre::SceneNode* node);
+	Ogre::SceneNode* getNode();
+
+	void frameRendered(const Ogre::FrameEvent& evt);
 private:
-	Ogre::Entity* ent = nullptr;
 	Ogre::SceneNode* mSinbadNode = nullptr;
+	AnimationState* runBase = nullptr;
+	AnimationState* runTop = nullptr;
 };
 

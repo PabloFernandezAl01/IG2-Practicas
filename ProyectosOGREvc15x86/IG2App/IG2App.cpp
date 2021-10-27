@@ -131,8 +131,8 @@ void IG2App::setupScene(void)
    //avionScene();
    //planetScene();
    //molinoScene();
-   //escenaConFondo();
-  cazaDrones();
+   escenaConFondo();
+  //cazaDrones();
 }
 
 
@@ -285,9 +285,15 @@ void IG2App::avionScene() {
 }
 
 void IG2App::escenaConFondo() {
-	auto esferaP = mSM->createEntity("sphere.mesh");
+	/*auto esferaP = mSM->createEntity("sphere.mesh");
+	esferaP->setMaterialName("azulito");
 	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode();
 	esferaPlaneta->attachObject(esferaP);
+	esferaPlaneta->setScale(3, 3, 3);
+
+	simbad = new Simbad(mSM->getRootSceneNode());
+	simbad->getNode()->translate(0, 350, 0);
+	IG2ApplicationContext::addInputListener(simbad); */
 
 	//Dron
 	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
