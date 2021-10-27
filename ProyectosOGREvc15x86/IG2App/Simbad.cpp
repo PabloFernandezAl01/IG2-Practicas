@@ -1,4 +1,5 @@
 #include "Simbad.h"
+#include <iostream>
 
 Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
@@ -10,6 +11,7 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	auto it = aux->getAnimationStateIterator().begin();
 	while (it != aux->getAnimationStateIterator().end()) {
 		auto s = it->first; 
+		std::cout << s << "\n";
 		++it;
 	}
 

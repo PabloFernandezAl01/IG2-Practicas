@@ -285,7 +285,7 @@ void IG2App::avionScene() {
 }
 
 void IG2App::escenaConFondo() {
-	/*auto esferaP = mSM->createEntity("sphere.mesh");
+	auto esferaP = mSM->createEntity("sphere.mesh");
 	esferaP->setMaterialName("azulito");
 	esferaPlaneta = mSM->getRootSceneNode()->createChildSceneNode();
 	esferaPlaneta->attachObject(esferaP);
@@ -293,61 +293,61 @@ void IG2App::escenaConFondo() {
 
 	simbad = new Simbad(mSM->getRootSceneNode());
 	simbad->getNode()->translate(0, 350, 0);
-	IG2ApplicationContext::addInputListener(simbad); */
+	IG2ApplicationContext::addInputListener(simbad); 
 
-	//Dron
-	ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
-	dronNode = ficticioDronNode->createChildSceneNode("dronControlNode");
-	dronPlaneta = new Dron(dronNode, 12, 3);
-	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
-	dronPlaneta->getNode()->translate(0, 320, 0);
-	esferaPlaneta->setScale(3, 3, 3);
+	////Dron
+	//ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
+	//dronNode = ficticioDronNode->createChildSceneNode("dronControlNode");
+	//dronPlaneta = new Dron(dronNode, 12, 3);
+	//dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
+	//dronPlaneta->getNode()->translate(0, 320, 0);
+	//esferaPlaneta->setScale(3, 3, 3);
 
-	EntityIG::addListener(dronPlaneta);
-	IG2ApplicationContext::addInputListener(dronPlaneta);
+	//EntityIG::addListener(dronPlaneta);
+	//IG2ApplicationContext::addInputListener(dronPlaneta);
 
-	for (int i = 0; i < dronPlaneta->getNumBrazos(); i++) {
-		IG2ApplicationContext::addInputListener(dronPlaneta->getArrayBrazos()[i]->getRotorDron()->getAspasMolino());
-	}
+	//for (int i = 0; i < dronPlaneta->getNumBrazos(); i++) {
+	//	IG2ApplicationContext::addInputListener(dronPlaneta->getArrayBrazos()[i]->getRotorDron()->getAspasMolino());
+	//}
 
-	//Luz para el dron
-	luzFocoDron = mSM->createLight("LuzFocoDron");
-	luzFocoDron->setType(Ogre::Light::LT_SPOTLIGHT);
-	luzFocoDron->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
-	luzFocoDron->setDirection(Ogre::Vector3(0, -1, 0));
-	luzFocoDron->setSpotlightInnerAngle(Ogre::Degree(5.0f));
-	luzFocoDron->setSpotlightOuterAngle(Ogre::Degree(10.0f));
-	luzFocoDron->setSpotlightFalloff(0.0f);
-	dronPlaneta->getNode()->attachObject(luzFocoDron);
+	////Luz para el dron
+	//luzFocoDron = mSM->createLight("LuzFocoDron");
+	//luzFocoDron->setType(Ogre::Light::LT_SPOTLIGHT);
+	//luzFocoDron->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
+	//luzFocoDron->setDirection(Ogre::Vector3(0, -1, 0));
+	//luzFocoDron->setSpotlightInnerAngle(Ogre::Degree(5.0f));
+	//luzFocoDron->setSpotlightOuterAngle(Ogre::Degree(10.0f));
+	//luzFocoDron->setSpotlightFalloff(0.0f);
+	//dronPlaneta->getNode()->attachObject(luzFocoDron);
 
-	//Avion
-	ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode();
-	avionNode = ficticioAvionNode->createChildSceneNode();
-	avion = new Avion(avionNode);
+	////Avion
+	//ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode();
+	//avionNode = ficticioAvionNode->createChildSceneNode();
+	//avion = new Avion(avionNode);
 
-	EntityIG::addListener(avion);
-	IG2ApplicationContext::addInputListener(avion);
-	IG2ApplicationContext::addInputListener(avion->getAspaMolinoI());
-	IG2ApplicationContext::addInputListener(avion->getAspaMolinoD());
+	//EntityIG::addListener(avion);
+	//IG2ApplicationContext::addInputListener(avion);
+	//IG2ApplicationContext::addInputListener(avion->getAspaMolinoI());
+	//IG2ApplicationContext::addInputListener(avion->getAspaMolinoD());
 
-	avion->getNode()->setScale(0.1, 0.1, 0.1);
-	avion->getNode()->translate(0, 320, 0);
-	ficticioAvionNode->roll(Ogre::Degree(-20));
+	//avion->getNode()->setScale(0.1, 0.1, 0.1);
+	//avion->getNode()->translate(0, 320, 0);
+	//ficticioAvionNode->roll(Ogre::Degree(-20));
 
-	//Luz para el avion
-	luzFocoAvion = mSM->createLight("LuzFocoAvion");
-	luzFocoAvion->setType(Ogre::Light::LT_SPOTLIGHT);
-	luzFocoAvion->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
-	luzFocoAvion->setDirection(Ogre::Vector3(0, -1, 0));
-	luzFocoAvion->setSpotlightInnerAngle(Ogre::Degree(5.0f));
-	luzFocoAvion->setSpotlightOuterAngle(Ogre::Degree(10.0f));
-	luzFocoAvion->setSpotlightFalloff(0.0f);
-	avion->getNode()->attachObject(luzFocoAvion);
+	////Luz para el avion
+	//luzFocoAvion = mSM->createLight("LuzFocoAvion");
+	//luzFocoAvion->setType(Ogre::Light::LT_SPOTLIGHT);
+	//luzFocoAvion->setDiffuseColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
+	//luzFocoAvion->setDirection(Ogre::Vector3(0, -1, 0));
+	//luzFocoAvion->setSpotlightInnerAngle(Ogre::Degree(5.0f));
+	//luzFocoAvion->setSpotlightOuterAngle(Ogre::Degree(10.0f));
+	//luzFocoAvion->setSpotlightFalloff(0.0f);
+	//avion->getNode()->attachObject(luzFocoAvion);
 
-	//Plano
-	plano = new Plano(mSM->getRootSceneNode());
-	plano->getmPlanoNode()->pitch(Ogre::Degree(90));
-	plano->getmPlanoNode()->translate(0, 0, -500);
+	////Plano
+	//plano = new Plano(mSM->getRootSceneNode());
+	//plano->getmPlanoNode()->pitch(Ogre::Degree(90));
+	//plano->getmPlanoNode()->translate(0, 0, -500);
 }
 
 void IG2App::cazaDrones() {
