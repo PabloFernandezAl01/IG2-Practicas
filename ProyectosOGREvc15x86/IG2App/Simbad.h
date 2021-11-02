@@ -17,8 +17,18 @@ public:
 	Ogre::SceneNode* getNode();
 
 	void frameRendered(const Ogre::FrameEvent& evt);
+	void arma(bool side);
+	void arma();
+	void cambiaEspada();
 private:
 	Ogre::SceneNode* mSinbadNode = nullptr;
+	Ogre::Entity* simbadEnt = nullptr;
+
+	Ogre::Entity* swordL = nullptr;
+	Ogre::Entity* swordR = nullptr;
+
+	bool side = false;
+
 	AnimationState* runBase = nullptr;
 	AnimationState* runTop = nullptr;
 };

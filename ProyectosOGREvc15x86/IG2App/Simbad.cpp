@@ -2,12 +2,12 @@
 #include <iostream>
 
 Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
-	Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
+	simbadEnt = mSM->createEntity("Sinbad.mesh");
 
-	runBase = ent->getAnimationState("RunBase");
-	runTop = ent->getAnimationState("RunTop");
+	runBase = simbadEnt->getAnimationState("RunBase");
+	runTop = simbadEnt->getAnimationState("RunTop");
 
-	AnimationStateSet* aux = ent->getAllAnimationStates();
+	AnimationStateSet* aux = simbadEnt->getAllAnimationStates();
 	auto it = aux->getAnimationStateIterator().begin();
 	while (it != aux->getAnimationStateIterator().end()) {
 		auto s = it->first; 
@@ -16,7 +16,7 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	}
 
 	mSinbadNode = mNode->createChildSceneNode();
-	mSinbadNode->attachObject(ent);
+	mSinbadNode->attachObject(simbadEnt);
 	mSinbadNode->setScale(10, 10, 10);
 
 	runBase->setLoop(true);
@@ -24,6 +24,9 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 
 	runTop->setLoop(true);
 	runTop->setEnabled(true);
+
+	swordL = mSM->createEntity("Sword.mesh");
+	swordR = mSM->createEntity("Sword.mesh");
 }
 
 Ogre::SceneNode* Simbad::getNode() {
@@ -33,4 +36,31 @@ Ogre::SceneNode* Simbad::getNode() {
 void Simbad::frameRendered(const Ogre::FrameEvent& evt) {
 	runBase->addTime(evt.timeSinceLastFrame);
 	runTop->addTime(evt.timeSinceLastFrame);
+
+	//mNode->getParent()->pitch(Ogre::Degree(0.5));
+}
+
+void Simbad::arma(bool s) {
+	side = s;
+
+	if (side) simbadEnt->attachObjectToBone("Handle.L", swordL);
+	else simbadEnt->attachObjectToBone("Handle.R", swordR);
+}
+
+void Simbad::arma() {
+	simbadEnt->attachObjectToBone("Handle.L", swordL);
+	simbadEnt->attachObjectToBone("Handle.R", swordR);
+}
+
+void Simbad::cambiaEspada() {
+	if (side) {
+		simbadEnt->detachObjectFromBone(swordL);
+		simbadEnt->attachObjectToBone("Handle.R", swordR);
+		side = false;
+	}
+	else {
+		simbadEnt->detachObjectFromBone(swordR);
+		simbadEnt->attachObjectToBone("Handle.L", swordL);
+		side = true;
+	}
 }

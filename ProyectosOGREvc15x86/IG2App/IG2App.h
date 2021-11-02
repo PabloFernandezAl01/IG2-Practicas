@@ -76,6 +76,8 @@ protected:
   Ogre::Light* luzFocoAvion = nullptr;
 
   Simbad* simbad = nullptr;
+  Ogre::SceneNode* ficticioSimbadNode = nullptr;
+  Ogre::SceneNode* simbadNode = nullptr;
 
   std::vector<Dron*> miniDrones;
   std::vector<Ogre::SceneNode*> nodosFicticios;

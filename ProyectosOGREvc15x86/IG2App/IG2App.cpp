@@ -291,9 +291,16 @@ void IG2App::escenaConFondo() {
 	esferaPlaneta->attachObject(esferaP);
 	esferaPlaneta->setScale(3, 3, 3);
 
-	simbad = new Simbad(mSM->getRootSceneNode());
+	ficticioSimbadNode = mSM->getRootSceneNode()->createChildSceneNode();
+	simbadNode = ficticioSimbadNode->createChildSceneNode();
+
+	simbad = new Simbad(simbadNode);
 	simbad->getNode()->translate(0, 350, 0);
 	IG2ApplicationContext::addInputListener(simbad); 
+
+	/*simbad->arma(true);
+	simbad->cambiaEspada();*/
+	simbad->arma();
 
 	////Dron
 	//ficticioDronNode = mSM->getRootSceneNode()->createChildSceneNode();
