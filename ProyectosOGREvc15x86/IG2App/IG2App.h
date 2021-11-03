@@ -13,6 +13,7 @@
 #include "Plano.h"
 #include "EntityIG.h"
 #include "Simbad.h"
+#include "Bomba.h"
 #include <vector>
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -71,6 +72,7 @@ protected:
   Avion* avion = nullptr;
 
   Plano* plano = nullptr;
+  Ogre::SceneNode* planoNode = nullptr;
 
   Ogre::Light* luzFocoDron = nullptr;
   Ogre::Light* luzFocoAvion = nullptr;
@@ -87,6 +89,10 @@ protected:
   Ogre::SceneNode* dronControlNode = nullptr;
   Ogre::SceneNode* ficticioDronControlNode = nullptr;
 
+  //Entrega 3
+  Bomba* bomba = nullptr;
+  Ogre::SceneNode* bombaNode = nullptr;
+
 private:
     void simbadScene(); //Practica 0
     void sphereClockScene(); //Practica 1.0
@@ -95,6 +101,7 @@ private:
     void avionScene(); //Ejercicio 21
     void escenaConFondo();
     void cazaDrones();
+    void escenaAgua(); //Ejercicio 47
 };
 
 #endif

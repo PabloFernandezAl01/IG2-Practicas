@@ -20,6 +20,8 @@ public:
 	void arma(bool side);
 	void arma();
 	void cambiaEspada();
+
+	bool keyPressed(const OgreBites::KeyboardEvent& evt);
 private:
 	Ogre::SceneNode* mSinbadNode = nullptr;
 	Ogre::Entity* simbadEnt = nullptr;
@@ -31,5 +33,6 @@ private:
 
 	AnimationState* runBase = nullptr;
 	AnimationState* runTop = nullptr;
+	AnimationState* dance = nullptr;
 };
 

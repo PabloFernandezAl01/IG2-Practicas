@@ -9,8 +9,7 @@
 
 using namespace Ogre;
 
-bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
-{
+bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
   if (evt.keysym.sym == SDLK_ESCAPE)
   {
       getRoot()->queueEndRendering();
@@ -18,6 +17,7 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
   else {
 	  for (auto a : EntityIG::appListeners) {
 		  a->keyPressed(evt);
+
 	  }
   }
 
@@ -131,8 +131,9 @@ void IG2App::setupScene(void)
    //avionScene();
    //planetScene();
    //molinoScene();
-   escenaConFondo();
+   //escenaConFondo();
   //cazaDrones();
+  escenaAgua();
 }
 
 
@@ -295,6 +296,9 @@ void IG2App::escenaConFondo() {
 	simbadNode = ficticioSimbadNode->createChildSceneNode();
 
 	simbad = new Simbad(simbadNode);
+
+	//EntityIG::addListener(simbad);
+
 	simbad->getNode()->translate(0, 350, 0);
 	IG2ApplicationContext::addInputListener(simbad); 
 
@@ -394,5 +398,15 @@ void IG2App::cazaDrones() {
 	dronControlNode->setScale(0.07, 0.07, 0.07);
 	dronControlNode->translate(0, 320, 0);
 
+}
+
+void IG2App::escenaAgua() {
+	bombaNode = mSM->getRootSceneNode()->createChildSceneNode();
+	bomba = new Bomba(bombaNode);
+	IG2ApplicationContext::addInputListener(bomba);
+
+	//Plano
+	planoNode = mSM->getRootSceneNode()->createChildSceneNode();
+	plano = new Plano(planoNode);
 }
 

@@ -12,9 +12,8 @@ class Plano : public EntityIG {
 public:
 	Plano(Ogre::SceneNode* node);
 
-	Ogre::SceneNode* getmPlanoNode();
+	Ogre::SceneNode* getNode();
 private:
-	Ogre::SceneNode* mPlanoNode = nullptr;
 	Ogre::Entity* plano = nullptr;
 };
 

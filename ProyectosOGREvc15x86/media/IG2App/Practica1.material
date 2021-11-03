@@ -20,6 +20,28 @@ material ajedrez {
   }
 }
 
+material aguita {
+  technique{
+    pass {
+      texture_unit {
+        texture Water02.jpg
+        colour_op replace
+      }
+    }
+  }
+}
+
+material bomba {
+  technique{
+    pass {
+      texture_unit {
+        texture checker.png
+        colour_op replace
+      }
+    }
+  }
+}
+
 material amarillo // nombre
 {
     technique // al menos una

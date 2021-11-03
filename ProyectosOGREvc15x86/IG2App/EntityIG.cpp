@@ -1,4 +1,5 @@
 #include "EntityIG.h"
+#include <iostream>
 
 std::vector<EntityIG*> EntityIG::appListeners;
 

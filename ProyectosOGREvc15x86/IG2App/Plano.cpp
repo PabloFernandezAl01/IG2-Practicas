@@ -9,10 +9,11 @@ Plano::Plano(Ogre::SceneNode* node) : EntityIG(node){
 		1080, 800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 
 	plano = mSM->createEntity("mPlane1080x800");
-	mPlanoNode = node->createChildSceneNode();
-	mPlanoNode->attachObject(plano);
+	plano->setMaterialName("aguita");
+
+	mNode->attachObject(plano);
 }
 
-Ogre::SceneNode* Plano::getmPlanoNode() {
-	return mPlanoNode;
+Ogre::SceneNode* Plano::getNode() {
+	return mNode;
 }
