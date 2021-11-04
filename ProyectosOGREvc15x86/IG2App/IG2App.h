@@ -74,6 +74,12 @@ protected:
   Plano* plano = nullptr;
   Ogre::SceneNode* planoNode = nullptr;
 
+  Plano* planoAmarillo = nullptr;
+  Ogre::SceneNode* planoAmarilloNode = nullptr;
+
+  Plano* planoRojo = nullptr;
+  Ogre::SceneNode* planoRojoNode = nullptr;
+
   Ogre::Light* luzFocoDron = nullptr;
   Ogre::Light* luzFocoAvion = nullptr;
 

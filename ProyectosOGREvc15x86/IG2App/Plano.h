@@ -10,10 +10,12 @@
 class Plano : public EntityIG {
 
 public:
-	Plano(Ogre::SceneNode* node);
+	Plano(Ogre::SceneNode* node, std::string entName, std::string materialName);
 
 	Ogre::SceneNode* getNode();
+	void receiveEvent(MessageType msgType, EntityIG* entidad);
 private:
 	Ogre::Entity* plano = nullptr;
+	std::string entName_;
 };
 

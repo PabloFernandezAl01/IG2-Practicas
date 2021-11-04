@@ -20,12 +20,24 @@ material ajedrez {
   }
 }
 
+material piedras {
+  technique{
+    pass {
+      texture_unit {
+        texture BeachStones.png
+        colour_op replace
+      }
+    }
+  }
+}
+
 material aguita {
   technique{
     pass {
       texture_unit {
         texture Water02.jpg
         colour_op replace
+        scroll_anim -0.1 -0.1
       }
     }
   }

@@ -20,6 +20,8 @@ public:
 
 	void frameRendered(const Ogre::FrameEvent& evt);
 	void configAnimation();
+	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	void receiveEvent(MessageType msgType, EntityIG* entidad);
 
 private:
 	Ogre::Entity* bombaEnt = nullptr;

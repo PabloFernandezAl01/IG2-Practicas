@@ -6,7 +6,7 @@
 #include <OgreSceneNode.h>
 #include <vector>
 
-enum MessageType {R_EVENT};
+enum MessageType {R_EVENT, T_EVENT};
 
 class EntityIG : public OgreBites::InputListener
 {
