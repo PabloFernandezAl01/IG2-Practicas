@@ -33,36 +33,45 @@ void Bomba::configAnimation() {
 	TransformKeyFrame* kf;
 
 	float degreePerFrame = 45.0f / 4.0;
-	Vector3 src(0, 0, 1); //WTF
+	Vector3 src(0, 0, 1); //El objeto inicia en el eje Z
 	
+	//La animacion a parte de hacer un vaiven de arriba abajo rota 45 grados en el eje Y
 
 	//Frame 0
 	kf = camino->createNodeKeyFrame(durPaso * 0);
 	kf->setTranslate(keyframePos);
 
+	//Frame 1
 	kf = camino->createNodeKeyFrame(durPaso * 1);
 	keyframePos += Ogre::Vector3::UNIT_Y * longDesplazamiento;
 	kf->setTranslate(keyframePos);
-	kf->setRotation(src.getRotationTo(Vector3(1, 0, 1)));
+	kf->setRotation(src.getRotationTo(Vector3(1, 0, 1))); //Pasa de estar en el eje z a estar en el eje entre z y x (45 grados)
 
+	//Frame 2
 	kf = camino->createNodeKeyFrame(durPaso * 2);
 	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Y * longDesplazamiento;
 	kf->setTranslate(keyframePos);
 
+	//Frame 3
 	kf = camino->createNodeKeyFrame(durPaso * 3);
 	keyframePos += Ogre::Vector3::NEGATIVE_UNIT_Y * longDesplazamiento;
 	kf->setTranslate(keyframePos);
-	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
+	//Reestablecer la rotacion al punto de partida 
+	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));//Pasa de estar en el eje z a estar en el eje entre z y -x (-45 grados)
 
+	//Frame 4
 	kf = camino->createNodeKeyFrame(durPaso * 4);
 	keyframePos += Ogre::Vector3::UNIT_Y * longDesplazamiento;
 	kf->setTranslate(keyframePos);
 
+	//Despues de haber creado la animacion creamos un estado de animacion a partir de ella
+	//La activamos , junto con su loop
 	animState = mSM->createAnimationState("animVV");
 	animState->setLoop(true);
 	animState->setEnabled(true);
 
-	mNode->setInitialState();
+	mNode->setInitialState();  //Conserva los valores de escala y posicion cuando hace la animacion, sin esto , funciona pero el objeto tendria un 
+	                           //Tamaño por defecto
 }
 
 bool Bomba::keyPressed(const OgreBites::KeyboardEvent& evt) {
@@ -79,7 +88,7 @@ void Bomba::receiveEvent(MessageType msgType, EntityIG* entidad) {
 	switch (msgType)
 	{
 	case MessageType::T_EVENT: {
-		animState->setEnabled(false);
+		animState->setEnabled(false); //Desactivar la animacion 
 		break;
 	}
 	default:
