@@ -9,6 +9,8 @@
 #include "EntityIG.h"
 #include <OgreTimer.h>
 #include <OgreAnimationState.h>
+#include <OgreAnimation.h>
+#include <OgreKeyFrame.h>
 
 class Simbad : public EntityIG
 {
@@ -20,10 +22,10 @@ public:
 	void arma(bool side);
 	void arma();
 	void cambiaEspada();
+	void configAnimation();
 
 	bool keyPressed(const OgreBites::KeyboardEvent& evt);
 private:
-	Ogre::SceneNode* mSinbadNode = nullptr;
 	Ogre::Entity* simbadEnt = nullptr;
 
 	Ogre::Entity* swordL = nullptr;
@@ -34,5 +36,7 @@ private:
 	AnimationState* runBase = nullptr;
 	AnimationState* runTop = nullptr;
 	AnimationState* dance = nullptr;
-};
 
+	Animation* anim = nullptr;
+	AnimationState* animState = nullptr;
+};

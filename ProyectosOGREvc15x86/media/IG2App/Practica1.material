@@ -24,7 +24,7 @@ material piedras {
   technique{
     pass {
       texture_unit {
-        texture BeachStones.png
+        texture BeachStones.jpg
         colour_op replace
       }
     }

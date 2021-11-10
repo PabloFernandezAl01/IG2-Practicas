@@ -16,9 +16,9 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 		++it;
 	}
 
-	mSinbadNode = mNode->createChildSceneNode();
-	mSinbadNode->attachObject(simbadEnt);
-	mSinbadNode->setScale(10, 10, 10);
+	mNode->attachObject(simbadEnt);
+	mNode->translate(-405, 50, 350);
+	mNode->setScale(10, 10, 10);
 
 	runBase->setLoop(true);
 	runBase->setEnabled(true);
@@ -31,13 +31,17 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 
 	swordL = mSM->createEntity("Sword.mesh");
 	swordR = mSM->createEntity("Sword.mesh");
+
+	configAnimation();
 }
 
 Ogre::SceneNode* Simbad::getNode() {
-	return mSinbadNode;
+	return mNode;
 }
 
 void Simbad::frameRendered(const Ogre::FrameEvent& evt) {
+
+	animState->addTime(evt.timeSinceLastFrame);
 
 	if (runBase->getEnabled() && runTop->getEnabled()) {
 
@@ -94,6 +98,58 @@ void Simbad::cambiaEspada() {
 		simbadEnt->attachObjectToBone("Handle.L", swordL);
 		side = true;
 	}
+}
+
+void Simbad::configAnimation() {
+	Ogre::Real duracion = 10;
+	float longDesplazamiento = 900;
+
+	anim = mSM->createAnimation("animSimbad", duracion);
+
+	NodeAnimationTrack* camino = anim->createNodeTrack(0);
+	camino->setAssociatedNode(mNode);
+
+	Vector3 keyframePos(-405, 50, 350);
+	Ogre::Real durPaso = duracion / 6.0;
+	TransformKeyFrame* kf;
+
+	Vector3 src(0, 0, 1);
+
+	//Frame 0
+	kf = camino->createNodeKeyFrame(durPaso * 0);
+	kf->setRotation(src.getRotationTo(Vector3(0, 0, 1)));
+
+	//Frame 1
+	kf = camino->createNodeKeyFrame(durPaso * 1);
+	kf->setRotation(src.getRotationTo(Vector3(1, 0, -1)));
+
+	//Frame 2
+	kf = camino->createNodeKeyFrame(durPaso * 2);
+	keyframePos = Vector3(1, 0, -1) * longDesplazamiento;
+	kf->setRotation(src.getRotationTo(Vector3(1, 0, -1)));
+	kf->setTranslate(keyframePos);
+
+	//Frame 3
+	kf = camino->createNodeKeyFrame(durPaso * 3);
+	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
+	kf->setTranslate(keyframePos);
+
+	//Frame 4
+	kf = camino->createNodeKeyFrame(durPaso * 4);
+	keyframePos = Vector3(-1, 0, 1) * longDesplazamiento;
+	kf->setTranslate(keyframePos);
+	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
+
+	//Frame 5
+	kf = camino->createNodeKeyFrame(durPaso * 5);
+	kf->setTranslate(keyframePos);
+	kf->setRotation(src.getRotationTo(Vector3(0, 0, 1)));
+
+	animState = mSM->createAnimationState("animSimbad");
+	animState->setLoop(true);
+	animState->setEnabled(true);
+
+	mNode->setInitialState();
 }
 
 bool Simbad::keyPressed(const OgreBites::KeyboardEvent& evt) {

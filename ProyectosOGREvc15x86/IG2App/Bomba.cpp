@@ -32,7 +32,6 @@ void Bomba::configAnimation() {
 	Ogre::Real durPaso = duracion / 4.0;
 	TransformKeyFrame* kf;
 
-	float degreePerFrame = 45.0f / 4.0;
 	Vector3 src(0, 0, 1); //El objeto inicia en el eje Z
 	
 	//La animacion a parte de hacer un vaiven de arriba abajo rota 45 grados en el eje Y
@@ -78,6 +77,7 @@ bool Bomba::keyPressed(const OgreBites::KeyboardEvent& evt) {
 
 	if (evt.keysym.sym == SDLK_t) {
 		sendEvent(T_EVENT, nullptr);
+		animState->setEnabled(false);
 
 		return true;
 	}

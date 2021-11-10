@@ -406,19 +406,21 @@ void IG2App::escenaAgua() {
 
 	//Plano agua
 	planoNode = mSM->getRootSceneNode()->createChildSceneNode();
-	plano = new Plano(planoNode, "mPlane1080x800", "aguita");
+	plano = new Plano(planoNode, "mPlane1080x1080", "aguita");
+	IG2ApplicationContext::addInputListener(plano);
+	EntityIG::addListener(plano);
 
 	//Plano amarillo
 	planoAmarilloNode = mSM->getRootSceneNode()->createChildSceneNode();
 	planoAmarillo = new Plano(planoAmarilloNode, "mPlaneAmarillo1080x800", "amarillo");
 	planoAmarillo->getNode()->setScale(0.25, 0.1, 0.25);
-	planoAmarillo->getNode()->translate(-405, 1, -300);
+	planoAmarillo->getNode()->translate(-405, 1, 400);
 
 	//Plano rojo
 	planoRojoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	planoRojo = new Plano(planoRojoNode, "mPlaneRojo1080x800", "rojo");
 	planoRojo->getNode()->setScale(0.25, 0.1, 0.25);
-	planoRojo->getNode()->translate(405, 1, 300);
+	planoRojo->getNode()->translate(405, 1, -400);
 
 	//Simbad
 	ficticioSimbadNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -428,7 +430,6 @@ void IG2App::escenaAgua() {
 
 	//EntityIG::addListener(simbad); //WTF
 
-	simbad->getNode()->translate(-405, 50, -300);
 	IG2ApplicationContext::addInputListener(simbad);
 	simbad->arma();
 }
