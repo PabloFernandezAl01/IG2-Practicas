@@ -18,6 +18,8 @@
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
 #include <OgreParticleSystemRenderer.h>
+#include <OgreBillboard.h>
+#include <OgreBillboardParticleRenderer.h>
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -105,7 +107,8 @@ protected:
   Ogre::Entity* caritaFelizEnt = nullptr;
   Ogre::SceneNode* caritaFelizNode = nullptr;
 
-  //BillboardSet* bbSet = nullptr;
+  BillboardSet* bbSet = nullptr;
+  
   ParticleSystem* pSystem = nullptr;
   Ogre::SceneNode* nieblaNode = nullptr;
 

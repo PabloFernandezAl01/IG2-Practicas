@@ -10,129 +10,129 @@
 using namespace Ogre;
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
-  if (evt.keysym.sym == SDLK_ESCAPE)
-  {
-      getRoot()->queueEndRendering();
-  }
-  else {
-	  for (auto a : EntityIG::appListeners) {
-		  a->keyPressed(evt);
-	  }
-  }
+	if (evt.keysym.sym == SDLK_ESCAPE)
+	{
+		getRoot()->queueEndRendering();
+	}
+	else {
+		for (auto a : EntityIG::appListeners) {
+			a->keyPressed(evt);
+		}
+	}
 
-  //else if (evt.keysym.sym == SDLK_g) {
-	 // //clock->roll(Ogre::Degree(-1)); //Practica 1.1
-	 // //aspasMolino->giraAspasMolino(1);
+	//else if (evt.keysym.sym == SDLK_g) {
+	   // //clock->roll(Ogre::Degree(-1)); //Practica 1.1
+	   // //aspasMolino->giraAspasMolino(1);
 
-	 // //molino->giraAspasMolino(2);
-	 // //rotorDron->giraAspas(2);
-	 // 
-	 // //brazoDron->giraAspas(2);
+	   // //molino->giraAspasMolino(2);
+	   // //rotorDron->giraAspas(2);
+	   // 
+	   // //brazoDron->giraAspas(2);
 
-	 // //dron->giraAspas(5);
+	   // //dron->giraAspas(5);
 
-	 // //avion->giraAspasAvion(3);
-  //}
-  ////else if (evt.keysym.sym == SDLK_c) {
-	 //// //molino->mueveCilindroCentral(-1);
-  ////}
-  ////else if (evt.keysym.sym == SDLK_h) {
-	 //// //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
-	 //// //molino->giraAspas(-2);
-  ////}
+	   // //avion->giraAspasAvion(3);
+	//}
+	////else if (evt.keysym.sym == SDLK_c) {
+	   //// //molino->mueveCilindroCentral(-1);
+	////}
+	////else if (evt.keysym.sym == SDLK_h) {
+	   //// //spheres->roll(Ogre::Degree(-1)); //Practica 1.1
+	   //// //molino->giraAspas(-2);
+	////}
 
-  return true;
+	return true;
 }
 
 void IG2App::shutdown()
 {
-  mShaderGenerator->removeSceneManager(mSM);  
-  mSM->removeRenderQueueListener(mOverlaySystem);  
-					
-  mRoot->destroySceneManager(mSM);  
+	mShaderGenerator->removeSceneManager(mSM);
+	mSM->removeRenderQueueListener(mOverlaySystem);
 
-  delete mTrayMgr;  mTrayMgr = nullptr;
-  delete mCamMgr; mCamMgr = nullptr;
-  
-  // do not forget to call the base 
-  IG2ApplicationContext::shutdown();
+	mRoot->destroySceneManager(mSM);
+
+	delete mTrayMgr;  mTrayMgr = nullptr;
+	delete mCamMgr; mCamMgr = nullptr;
+
+	// do not forget to call the base 
+	IG2ApplicationContext::shutdown();
 }
 
 void IG2App::setup(void)
 {
-  // do not forget to call the base first
-  IG2ApplicationContext::setup();
+	// do not forget to call the base first
+	IG2ApplicationContext::setup();
 
-  mSM = mRoot->createSceneManager();  
+	mSM = mRoot->createSceneManager();
 
-  // register our scene with the RTSS
-  mShaderGenerator->addSceneManager(mSM);
+	// register our scene with the RTSS
+	mShaderGenerator->addSceneManager(mSM);
 
-  mSM->addRenderQueueListener(mOverlaySystem);
+	mSM->addRenderQueueListener(mOverlaySystem);
 
-  mTrayMgr = new OgreBites::TrayManager("TrayGUISystem", mWindow.render);  
-  mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-  addInputListener(mTrayMgr);
+	mTrayMgr = new OgreBites::TrayManager("TrayGUISystem", mWindow.render);
+	mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
+	addInputListener(mTrayMgr);
 
-  addInputListener(this);   
-  setupScene();
+	addInputListener(this);
+	setupScene();
 }
 
 void IG2App::setupScene(void)
 {
-  // create the camera
-  Camera* cam = mSM->createCamera("Cam");
-  cam->setNearClipDistance(1); 
-  cam->setFarClipDistance(10000);
-  cam->setAutoAspectRatio(true);
-  //cam->setPolygonMode(Ogre::PM_WIREFRAME); 
+	// create the camera
+	Camera* cam = mSM->createCamera("Cam");
+	cam->setNearClipDistance(1);
+	cam->setFarClipDistance(10000);
+	cam->setAutoAspectRatio(true);
+	//cam->setPolygonMode(Ogre::PM_WIREFRAME); 
 
-  mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
-  mCamNode->attachObject(cam);
+	mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(cam);
 
-  mCamNode->setPosition(0, 0, 1000);
-  mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
-  //mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
-  
-  // and tell it to render into the main window
-  Viewport* vp = getRenderWindow()->addViewport(cam);
-  vp->setBackgroundColour(Ogre::ColourValue(0.6, 0.7, 0.8));
+	mCamNode->setPosition(0, 0, 1000);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+	//mCamNode->setDirection(Ogre::Vector3(0, 0, -1));  
 
-  //------------------------------------------------------------------------
+	// and tell it to render into the main window
+	Viewport* vp = getRenderWindow()->addViewport(cam);
+	vp->setBackgroundColour(Ogre::ColourValue(0.6, 0.7, 0.8));
 
-  // without light we would just get a black screen 
+	//------------------------------------------------------------------------
 
-  Light* luz = mSM->createLight("Luz");
-  luz->setType(Ogre::Light::LT_DIRECTIONAL);
-  luz->setDiffuseColour(0.75, 0.75, 0.75);
+	// without light we would just get a black screen 
 
-  mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
-  //mLightNode = mCamNode->createChildSceneNode("nLuz");
-  mLightNode->attachObject(luz);
+	Light* luz = mSM->createLight("Luz");
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDiffuseColour(0.75, 0.75, 0.75);
 
-  mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
-  //lightNode->setPosition(0, 0, 1000);
- 
-  //------------------------------------------------------------------------
+	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	//mLightNode = mCamNode->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
 
-  mCamMgr = new OgreBites::CameraMan(mCamNode);
-  addInputListener(mCamMgr);
-  mCamMgr->setStyle(OgreBites::CS_ORBIT);
+	mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
+	//lightNode->setPosition(0, 0, 1000);
 
-  //mCamMgr->setTarget(mSinbadNode);  
-  //mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
+	//------------------------------------------------------------------------
 
-  //------------------------------------------------------------------------
+	mCamMgr = new OgreBites::CameraMan(mCamNode);
+	addInputListener(mCamMgr);
+	mCamMgr->setStyle(OgreBites::CS_ORBIT);
 
-  // finally something to render
+	//mCamMgr->setTarget(mSinbadNode);  
+	//mCamMgr->setYawPitchDist(Radian(0), Degree(30), 100);
 
-  //simbadScene();
-   //avionScene();
-   //planetScene();
-   //molinoScene();
-   //escenaConFondo();
-  //cazaDrones();
-  escenaAgua();
+	//------------------------------------------------------------------------
+
+	// finally something to render
+
+	//simbadScene();
+	 //avionScene();
+	 //planetScene();
+	 //molinoScene();
+	 //escenaConFondo();
+	//cazaDrones();
+	escenaAgua();
 }
 
 
@@ -209,7 +209,7 @@ void IG2App::sphereClockScene() {
 
 	//Esferas
 	for (int i = 0; i < 12; i++) {
-		std::string name = "Hora" + std::to_string(i+1);
+		std::string name = "Hora" + std::to_string(i + 1);
 		Ogre::Entity* ent = mSM->createEntity("sphere.mesh");
 		mHourNode[i] = spheres->createChildSceneNode(name);
 		mHourNode[i]->attachObject(ent);
@@ -222,7 +222,7 @@ void IG2App::sphereClockScene() {
 
 		mSM->getSceneNode(name)->setScale(0.4, 0.4, 0.4);
 
-		if(i % 2 == 0) mSM->getSceneNode(name)->setScale(0.2, 0.2, 0.2);
+		if (i % 2 == 0) mSM->getSceneNode(name)->setScale(0.2, 0.2, 0.2);
 		else mSM->getSceneNode(name)->setScale(0.4, 0.4, 0.4);
 	}
 
@@ -277,7 +277,7 @@ void IG2App::planetScene() {
 
 	dronPlaneta->getNode()->setScale(0.05, 0.05, 0.05);
 	dronPlaneta->getNode()->translate(0, 320, 0);
-	esferaPlaneta->setScale(3, 3, 3);	
+	esferaPlaneta->setScale(3, 3, 3);
 }
 
 void IG2App::avionScene() {
@@ -299,7 +299,7 @@ void IG2App::escenaConFondo() {
 	//EntityIG::addListener(simbad);
 
 	simbad->getNode()->translate(0, 350, 0);
-	IG2ApplicationContext::addInputListener(simbad); 
+	IG2ApplicationContext::addInputListener(simbad);
 
 	/*simbad->arma(true);
 	simbad->cambiaEspada();*/
@@ -456,19 +456,33 @@ void IG2App::escenaAgua() {
 	caritaFelizNode->setScale(0.2, 0.2, 0.2);
 	caritaFelizNode->translate(400, 20, -400);
 
-	//Sistema particulas niebla
-	/*bbSet = mSM->createBillboardSet("niebla", 1000);
+	
+
+	//Creamos el grupo de bilboards
+	bbSet = mSM->createBillboardSet("niebla", 1000);
 	bbSet->setDefaultDimensions(200, 200);
 	bbSet->setMaterialName("smoke");
 
+	//Asociamos a la escena el bilboard
 	nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
 	nieblaNode->attachObject(bbSet);
-	nieblaNode->translate(0, 100, 0);*/
+	nieblaNode->translate(0, 100, 0);
 
-	pSystem = mSM->createParticleSystem("parSysNiebla", "niebla");
+	//Rellenamos el grupo con los elementos 
+	Billboard* niebla1 = bbSet->createBillboard(Vector3(0, 200, 0));
+	Billboard* niebla2 = bbSet->createBillboard(Vector3(20, 200, 0));
+	Billboard* niebla3 = bbSet->createBillboard(Vector3(40, 200, 0));
+	Billboard* niebla4 = bbSet->createBillboard(Vector3(60, 200, 0));
+	Billboard* niebla5 = bbSet->createBillboard(Vector3(80, 200, 0));
+	Billboard* niebla6 = bbSet->createBillboard(Vector3(-20, 200, 0));
+	Billboard* niebla7 = bbSet->createBillboard(Vector3(-40, 200, 0));
+	Billboard* niebla8 = bbSet->createBillboard(Vector3(-60, 200, 0));
+	Billboard* niebla9 = bbSet->createBillboard(Vector3(-80, 200, 0));
+	Billboard* niebla10 = bbSet->createBillboard(Vector3(20, 200, 20));
+	Billboard* niebla11 = bbSet->createBillboard(Vector3(40, 200, -20));
+	Billboard* niebla12 = bbSet->createBillboard(Vector3(60, 200, 40));
+	Billboard* niebla13 = bbSet->createBillboard(Vector3(80, 200, -40));
 
-	nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
-	nieblaNode->attachObject(pSystem);
 
 }
 
