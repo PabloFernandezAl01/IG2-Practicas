@@ -54,6 +54,21 @@ material bomba {
   }
 }
 
+material smoke {
+  technique{
+    pass {
+    lighting off
+    scene_blend alpha_blend
+    depth_write off
+    diffuse vertexcolour
+      texture_unit {
+        texture smoke.png
+        tex_address_mode clamp
+      }
+    }
+  }
+}
+
 material amarillo // nombre
 {
     technique // al menos una
@@ -115,6 +130,18 @@ material terrain {
       texture_unit {
         texture terrain_texture.jpg
         colour_op replace
+      }
+    }
+  }
+}
+
+material 10Points {
+  technique{
+    pass {
+      lighting off
+      texture_unit {
+        texture 10points.png
+        tex_address_mode clamp
       }
     }
   }

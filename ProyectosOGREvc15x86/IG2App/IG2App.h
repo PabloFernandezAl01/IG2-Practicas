@@ -15,6 +15,9 @@
 #include "Simbad.h"
 #include "Bomba.h"
 #include <vector>
+#include <OgreParticleSystem.h>
+#include <OgreParticleSystemManager.h>
+#include <OgreParticleSystemRenderer.h>
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -98,6 +101,13 @@ protected:
   //Entrega 3
   Bomba* bomba = nullptr;
   Ogre::SceneNode* bombaNode = nullptr;
+
+  Ogre::Entity* caritaFelizEnt = nullptr;
+  Ogre::SceneNode* caritaFelizNode = nullptr;
+
+  //BillboardSet* bbSet = nullptr;
+  ParticleSystem* pSystem = nullptr;
+  Ogre::SceneNode* nieblaNode = nullptr;
 
 private:
     void simbadScene(); //Practica 0

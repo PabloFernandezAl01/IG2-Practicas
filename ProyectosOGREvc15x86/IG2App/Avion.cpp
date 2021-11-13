@@ -40,6 +40,9 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	timeMoving = 0;
 	timeRotating = 0;
 	rndDirection = -1;
+
+	create10PointsBillBoard();
+	createRibbon();
 }
 
 void Avion::giraAspasAvion(float ang) {
@@ -71,6 +74,47 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 }
 
 void Avion::frameRendered(const Ogre::FrameEvent& evt) {
+	//cazaDrones(evt);
+	escenaAgua(evt);
+}
+
+void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
+	switch (msgType)
+	{
+	case MessageType::R_EVENT: {
+		alaIEnt->setMaterialName("rojo");
+		alaDEnt->setMaterialName("rojo");
+
+		canMove = false;
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void Avion::create10PointsBillBoard() {
+	bbSet = mSM->createBillboardSet("10Points", 1);
+	bbSet->setDefaultDimensions(150, 150);
+	bbSet->setMaterialName("10Points");
+
+	mNode->attachObject(bbSet);
+	bb = bbSet->createBillboard(Vector3(150, 50, -200));
+}
+
+void Avion::createRibbon() {
+	/*pSystem = mSM->createParticleSystem("psSmoke", "IG2App/smoke");
+	pSystem->setEmitting(false);
+	mNode->attachObject(pSystem);*/
+
+	/*ribbonTrail = mSM->createRibbonTrail("ribbon");
+	ribbonTrail->setMaterialName("smoke");
+	ribbonTrail->setTrailLength(400);
+
+	ribbonTrail->addNode(mNode);*/
+}
+
+void Avion::cazaDrones(const Ogre::FrameEvent& evt) {
 	if (canMove) {
 		timeMoving += evt.timeSinceLastFrame;
 		if (timeMoving > 2) {
@@ -90,20 +134,10 @@ void Avion::frameRendered(const Ogre::FrameEvent& evt) {
 	}
 }
 
-void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
-	switch (msgType)
-	{
-	case MessageType::R_EVENT: {
-		alaIEnt->setMaterialName("rojo");
-		alaDEnt->setMaterialName("rojo");
-
-		canMove = false;
-		break;
-	}
-	default:
-		break;
-	}
+void Avion::escenaAgua(const Ogre::FrameEvent& evt) {
+	mNode->getParent()->yaw(Ogre::Degree(-0.5));
 }
+
 
 void Avion::transformAvion() {
 	cuerpoNode->setScale(1.5, 1.5, 1.5);

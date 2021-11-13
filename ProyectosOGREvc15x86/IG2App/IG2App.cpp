@@ -96,7 +96,7 @@ void IG2App::setupScene(void)
   
   // and tell it to render into the main window
   Viewport* vp = getRenderWindow()->addViewport(cam);
-  vp->setBackgroundColour(Ogre::ColourValue(0.7, 0.8, 0.9));
+  vp->setBackgroundColour(Ogre::ColourValue(0.6, 0.7, 0.8));
 
   //------------------------------------------------------------------------
 
@@ -432,5 +432,43 @@ void IG2App::escenaAgua() {
 
 	IG2ApplicationContext::addInputListener(simbad);
 	simbad->arma();
+
+	//Avion
+	ficticioAvionNode = mSM->getRootSceneNode()->createChildSceneNode();
+	avionNode = ficticioAvionNode->createChildSceneNode();
+	avion = new Avion(avionNode);
+
+	EntityIG::addListener(avion);
+	IG2ApplicationContext::addInputListener(avion);
+	IG2ApplicationContext::addInputListener(avion->getAspaMolinoI());
+	IG2ApplicationContext::addInputListener(avion->getAspaMolinoD());
+	avion->getNode()->setScale(0.1, 0.1, 0.1);
+	avion->getNode()->translate(200, 320, 0);
+
+
+	//Cara feliz
+	caritaFelizEnt = mSM->createEntity("sphere.mesh");
+	caritaFelizEnt->setMaterialName("cabeza");
+
+	caritaFelizNode = mSM->getRootSceneNode()->createChildSceneNode();
+	caritaFelizNode->attachObject(caritaFelizEnt);
+
+	caritaFelizNode->setScale(0.2, 0.2, 0.2);
+	caritaFelizNode->translate(400, 20, -400);
+
+	//Sistema particulas niebla
+	/*bbSet = mSM->createBillboardSet("niebla", 1000);
+	bbSet->setDefaultDimensions(200, 200);
+	bbSet->setMaterialName("smoke");
+
+	nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
+	nieblaNode->attachObject(bbSet);
+	nieblaNode->translate(0, 100, 0);*/
+
+	pSystem = mSM->createParticleSystem("parSysNiebla", "niebla");
+
+	nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
+	nieblaNode->attachObject(pSystem);
+
 }
 

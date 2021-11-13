@@ -17,7 +17,7 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	}
 
 	mNode->attachObject(simbadEnt);
-	mNode->translate(-405, 50, 350);
+	mNode->translate(-400, 50, 400);
 	mNode->setScale(10, 10, 10);
 
 	runBase->setLoop(true);
@@ -102,14 +102,14 @@ void Simbad::cambiaEspada() {
 
 void Simbad::configAnimation() {
 	Ogre::Real duracion = 10;
-	float longDesplazamiento = 900;
+	float longDesplazamiento = 800;
 
 	anim = mSM->createAnimation("animSimbad", duracion);
 
 	NodeAnimationTrack* camino = anim->createNodeTrack(0);
 	camino->setAssociatedNode(mNode);
 
-	Vector3 keyframePos(-405, 50, 350);
+	Vector3 keyframePos(-400, 50, 400);
 	Ogre::Real durPaso = duracion / 6.0;
 	TransformKeyFrame* kf;
 
@@ -132,18 +132,18 @@ void Simbad::configAnimation() {
 	//Frame 3
 	kf = camino->createNodeKeyFrame(durPaso * 3);
 	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
-	kf->setTranslate(keyframePos);
+    kf->setTranslate(keyframePos);
 
 	//Frame 4
 	kf = camino->createNodeKeyFrame(durPaso * 4);
-	keyframePos = Vector3(-1, 0, 1) * longDesplazamiento;
-	kf->setTranslate(keyframePos);
+	keyframePos = Vector3(-1, 0, 1) * longDesplazamiento/7;
 	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
+	kf->setTranslate(keyframePos);
 
 	//Frame 5
 	kf = camino->createNodeKeyFrame(durPaso * 5);
-	kf->setTranslate(keyframePos);
 	kf->setRotation(src.getRotationTo(Vector3(0, 0, 1)));
+	kf->setTranslate(keyframePos);
 
 	animState = mSM->createAnimationState("animSimbad");
 	animState->setLoop(true);

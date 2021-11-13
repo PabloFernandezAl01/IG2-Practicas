@@ -7,6 +7,13 @@
 #include <OgreSceneNode.h>
 #include "EntityIG.h"
 #include <OgreTimer.h>
+#include <OgreBillboard.h>
+#include <OgreBillboardSet.h>
+#include <OgreParticleSystem.h>
+#include <OgreParticleSystemManager.h>
+#include <OgreParticleSystemRenderer.h>
+#include <OgreBillboardChain.h>
+#include <OgreRibbonTrail.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
@@ -22,6 +29,12 @@ public:
 	void receiveEvent(MessageType msgType, EntityIG* entidad);
 	AspasMolino* getAspaMolinoI() { return aspasMolinoI; }
 	AspasMolino* getAspaMolinoD() { return aspasMolinoD; }
+
+	void create10PointsBillBoard();
+	void createRibbon();
+
+	void cazaDrones(const Ogre::FrameEvent& evt);
+	void escenaAgua(const Ogre::FrameEvent& evt);
 
 private:
 	void transformAvion();
@@ -46,5 +59,11 @@ private:
 	int rndDirection;
 
 	bool canMove = true;
+
+	BillboardSet* bbSet = nullptr;
+	Billboard* bb = nullptr;
+
+	//ParticleSystem* pSystem = nullptr;
+	//RibbonTrail* ribbonTrail = nullptr;
 };
 
