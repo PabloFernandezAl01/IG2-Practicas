@@ -11,6 +11,9 @@
 #include <OgreAnimationState.h>
 #include <OgreAnimation.h>
 #include <OgreKeyFrame.h>
+#include <OgreParticleSystem.h>
+#include <OgreParticleSystemManager.h>
+#include <OgreParticleSystemRenderer.h>
 
 class Bomba : public EntityIG {
 
@@ -20,8 +23,10 @@ public:
 
 	void frameRendered(const Ogre::FrameEvent& evt);
 	void configAnimation();
-	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	bool teclaPulsada(const OgreBites::KeyboardEvent& evt);
 	void receiveEvent(MessageType msgType, EntityIG* entidad);
+
+	void createParticleSystem();
 
 private:
 	Ogre::Entity* bombaEnt = nullptr;
@@ -30,5 +35,8 @@ private:
 	Animation* anim = nullptr;
 	AnimationState* animState = nullptr;
 
+
+
+	ParticleSystem* pSystem = nullptr;
 };
 

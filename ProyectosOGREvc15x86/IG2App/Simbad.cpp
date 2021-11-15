@@ -7,6 +7,7 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	runBase = simbadEnt->getAnimationState("RunBase");
 	runTop = simbadEnt->getAnimationState("RunTop");
 	dance = simbadEnt->getAnimationState("Dance");
+	idleBase = simbadEnt->getAnimationState("IdleBase");
 
 	AnimationStateSet* aux = simbadEnt->getAllAnimationStates();
 	auto it = aux->getAnimationStateIterator().begin();
@@ -29,6 +30,9 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	dance->setLoop(true);
 	dance->setEnabled(false);
 
+	idleBase->setLoop(true);
+	idleBase->setEnabled(false);
+
 	swordL = mSM->createEntity("Sword.mesh");
 	swordR = mSM->createEntity("Sword.mesh");
 
@@ -41,38 +45,41 @@ Ogre::SceneNode* Simbad::getNode() {
 
 void Simbad::frameRendered(const Ogre::FrameEvent& evt) {
 
-	animState->addTime(evt.timeSinceLastFrame);
+	if (!dead) {
+		animState->addTime(evt.timeSinceLastFrame);
 
-	if (runBase->getEnabled() && runTop->getEnabled()) {
+		if (runBase->getEnabled() && runTop->getEnabled()) {
 
-		if (runBase->hasEnded() && runTop->hasEnded()) {
-			runBase->setEnabled(false);
-			runTop->setEnabled(false);
+			if (runBase->hasEnded() && runTop->hasEnded()) {
+				runBase->setEnabled(false);
+				runTop->setEnabled(false);
 
-			dance->setEnabled(true);
-			dance->setLoop(true);
+				dance->setEnabled(true);
+				dance->setLoop(true);
+			}
+			else {
+				runBase->addTime(evt.timeSinceLastFrame);
+				runTop->addTime(evt.timeSinceLastFrame);
+			}
 		}
-		else {
-			runBase->addTime(evt.timeSinceLastFrame);
-			runTop->addTime(evt.timeSinceLastFrame);
+
+		if (dance->getEnabled()) {
+			if (dance->hasEnded()) {
+				dance->setEnabled(false);
+
+				runBase->setEnabled(true);
+				runTop->setEnabled(true);
+
+				runBase->setLoop(true);
+				runTop->setLoop(true);
+			}
+			else dance->addTime(evt.timeSinceLastFrame);
+
 		}
 	}
-
-	if (dance->getEnabled()) {
-		if (dance->hasEnded()) {
-			dance->setEnabled(false);
-
-			runBase->setEnabled(true);
-			runTop->setEnabled(true);
-
-			runBase->setLoop(true);
-			runTop->setLoop(true);
-		}
-		else dance->addTime(evt.timeSinceLastFrame);
-
+	else {
+		idleBase->addTime(evt.timeSinceLastFrame);
 	}
-
-	//mNode->getParent()->pitch(Ogre::Degree(0.5));
 }
 
 void Simbad::arma(bool s) {
@@ -110,7 +117,7 @@ void Simbad::configAnimation() {
 	camino->setAssociatedNode(mNode);
 
 	Vector3 keyframePos(-400, 50, 400);
-	Ogre::Real durPaso = duracion / 6.0;
+	Ogre::Real durPaso = duracion / 5.0;
 	TransformKeyFrame* kf;
 
 	Vector3 src(0, 0, 1);
@@ -136,7 +143,7 @@ void Simbad::configAnimation() {
 
 	//Frame 4
 	kf = camino->createNodeKeyFrame(durPaso * 4);
-	keyframePos = Vector3(-1, 0, 1) * longDesplazamiento/7;
+	keyframePos = Vector3(0, 0, 0);
 	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
 	kf->setTranslate(keyframePos);
 
@@ -152,9 +159,27 @@ void Simbad::configAnimation() {
 	mNode->setInitialState();
 }
 
-bool Simbad::keyPressed(const OgreBites::KeyboardEvent& evt) {
+void Simbad::receiveEvent(MessageType msgType, EntityIG* entidad) {
+	switch (msgType)
+	{
+	case MessageType::E_EVENT: {
+		dead = true;
+
+		idleBase->setEnabled(true);
+
+		animState->setEnabled(false);
+		runBase->setEnabled(false);
+		runTop->setEnabled(false);
+		dance->setEnabled(false);
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+bool Simbad::teclaPulsada(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_c) {
-		
 		runBase->setLoop(!runBase->getLoop());
 		runTop->setLoop(!runTop->getLoop());
 

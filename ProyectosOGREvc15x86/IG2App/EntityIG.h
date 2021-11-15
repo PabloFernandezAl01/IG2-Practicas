@@ -6,7 +6,7 @@
 #include <OgreSceneNode.h>
 #include <vector>
 
-enum MessageType {R_EVENT, T_EVENT};
+enum MessageType {R_EVENT, T_EVENT, E_EVENT};
 
 class EntityIG : public OgreBites::InputListener
 {
@@ -17,7 +17,7 @@ public:
 
 	static void addListener(EntityIG* ent);
 
-	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt)
+	virtual bool teclaPulsada(const OgreBites::KeyboardEvent& evt)
 	{
 		return false;
 	};

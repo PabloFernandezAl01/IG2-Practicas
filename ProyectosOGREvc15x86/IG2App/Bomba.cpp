@@ -9,6 +9,7 @@ Bomba::Bomba(Ogre::SceneNode* node) : EntityIG(node){
 
 	mNode->setScale(10, 10, 10);
 	configAnimation();
+	createParticleSystem();
 }
 
 Ogre::SceneNode* Bomba::getNode() {
@@ -63,22 +64,18 @@ void Bomba::configAnimation() {
 	keyframePos += Ogre::Vector3::UNIT_Y * longDesplazamiento;
 	kf->setTranslate(keyframePos);
 
-	//Despues de haber creado la animacion creamos un estado de animacion a partir de ella
-	//La activamos , junto con su loop
+	//Despues de haber creado la animacion creamos un estado de animacion a partir de ella la activamos , junto con su loop
 	animState = mSM->createAnimationState("animVV");
 	animState->setLoop(true);
 	animState->setEnabled(true);
 
-	mNode->setInitialState();  //Conserva los valores de escala y posicion cuando hace la animacion, sin esto , funciona pero el objeto tendria un 
-	                           //Tamaño por defecto
+	mNode->setInitialState();  //Conserva los valores de escala y posicion cuando hace la animacion, sin esto , funciona pero el objeto tendria un tamaño por defecto
 }
 
-bool Bomba::keyPressed(const OgreBites::KeyboardEvent& evt) {
+bool Bomba::teclaPulsada(const OgreBites::KeyboardEvent& evt) {
 
 	if (evt.keysym.sym == SDLK_t) {
 		sendEvent(T_EVENT, nullptr);
-		animState->setEnabled(false);
-
 		return true;
 	}
 	return false;
@@ -94,4 +91,9 @@ void Bomba::receiveEvent(MessageType msgType, EntityIG* entidad) {
 	default:
 		break;
 	}
+}
+
+void Bomba::createParticleSystem() {
+	pSystem = mSM->createParticleSystem("humoBomba", "HumoBomba");
+	mNode->attachObject(pSystem);
 }

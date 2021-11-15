@@ -52,7 +52,7 @@ Ogre::SceneNode* Dron::getNode() {
 	return mNode;
 }
 
-bool Dron::keyPressed(const OgreBites::KeyboardEvent& evt) {
+bool Dron::teclaPulsada(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_h) {
 		if (mNode->getName() != "dronControlNode") return false;
 		mNode->getParent()->roll(Ogre::Degree(-4));

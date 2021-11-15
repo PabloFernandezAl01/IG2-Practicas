@@ -113,14 +113,14 @@ protected:
   Ogre::SceneNode* nieblaNode = nullptr;
 
 private:
-    void simbadScene(); //Practica 0
-    void sphereClockScene(); //Practica 1.0
-    void molinoScene(); //Pratica 1.1
-    void planetScene(); //Entrega 2
-    void avionScene(); //Ejercicio 21
-    void escenaConFondo();
-    void cazaDrones();
-    void escenaAgua(); //Ejercicio 47
+    void simbadScene();       //Practica 0
+    void sphereClockScene();  //Practica 1.0
+    void molinoScene();       //Practica 1.1
+    void planetScene();       //Practica 1.2
+    void avionScene();        //Practica 1.2
+    void escenaConFondo();    //Practica 1.2
+    void cazaDrones();        //Practica 1.2
+    void escenaAgua();        //Practica 1.3
 };
 
 #endif

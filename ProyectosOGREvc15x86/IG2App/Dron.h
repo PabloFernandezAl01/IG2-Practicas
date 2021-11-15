@@ -19,7 +19,7 @@ public:
 	void giraAspas(float ang);
 	Ogre::SceneNode* getNode();
 
-	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	bool teclaPulsada(const OgreBites::KeyboardEvent& evt);
 	void frameRendered(const Ogre::FrameEvent& evt);
 
 	void receiveEvent(MessageType msgType, EntityIG* entidad);

@@ -1,10 +1,13 @@
 #include "Avion.h"
+#include <iostream>
 
 Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 
+	nodoIntermedio = mNode->createChildSceneNode();
+
 	Ogre::Entity*  esfera = mSM->createEntity("sphere.mesh");
 	esfera->setMaterialName("rojo");
-	cuerpoNode = mNode->createChildSceneNode();
+	cuerpoNode = nodoIntermedio->createChildSceneNode();
 	cuerpoNode->attachObject(esfera);
 
 	alaIEnt = mSM->createEntity("cube.mesh");
@@ -12,24 +15,24 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	alaIEnt->setMaterialName("ajedrez");
 	alaDEnt->setMaterialName("ajedrez");
 
-	alaINode = mNode->createChildSceneNode();
-	alaDNode = mNode->createChildSceneNode();
+	alaINode = nodoIntermedio->createChildSceneNode();
+	alaDNode = nodoIntermedio->createChildSceneNode();
 
 	alaINode->attachObject(alaIEnt);
 	alaDNode->attachObject(alaDEnt);
 
 	Ogre::Entity* frente = mSM->createEntity("Barrel.mesh");
 	frente->setMaterialName("naranja");
-	frenteNode = mNode->createChildSceneNode();
+	frenteNode = nodoIntermedio->createChildSceneNode();
 	frenteNode->attachObject(frente);
 
 	Ogre::Entity* ninja = mSM->createEntity("ninja.mesh");
 	ninja->setMaterialName("amarillo");
-	pilotoNode = mNode->createChildSceneNode();
+	pilotoNode = nodoIntermedio->createChildSceneNode();
 	pilotoNode->attachObject(ninja);
 
-	nodoFicticioAlaI = mNode->createChildSceneNode();
-	nodoFicticioAlaD = mNode->createChildSceneNode();
+	nodoFicticioAlaI = nodoIntermedio->createChildSceneNode();
+	nodoFicticioAlaD = nodoIntermedio->createChildSceneNode();
 
 	aspasMolinoI = new AspasMolino(nodoFicticioAlaI, 5, 20);
 	aspasMolinoD = new AspasMolino(nodoFicticioAlaD, 5, 21);
@@ -40,9 +43,11 @@ Avion::Avion(Ogre::SceneNode* node) : EntityIG(node){
 	timeMoving = 0;
 	timeRotating = 0;
 	rndDirection = -1;
+	explosionTime = 0;
 
 	create10PointsBillBoard();
-	createRibbon();
+	createRibbonTrail();
+	createExplosionSystem();
 }
 
 void Avion::giraAspasAvion(float ang) {
@@ -54,7 +59,7 @@ Ogre::SceneNode* Avion::getNode() {
 	return mNode;
 }
 
-bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
+bool Avion::teclaPulsada(const OgreBites::KeyboardEvent& evt) {
 	if (evt.keysym.sym == SDLK_k) {
 
 		mNode->getParent()->pitch(Ogre::Degree(4));
@@ -66,8 +71,11 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		return true;
 	}
 	else if (evt.keysym.sym == SDLK_r) {
-
 		this->sendEvent(MessageType::R_EVENT, this);
+		return true;
+	}
+	else if (evt.keysym.sym == SDLK_e) {
+		this->sendEvent(MessageType::E_EVENT, this);
 		return true;
 	}
 	return false;
@@ -88,6 +96,16 @@ void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
 		canMove = false;
 		break;
 	}
+	case MessageType::E_EVENT: {
+		explosionSystem->setEmitting(true);
+		pSystem->setEmitting(false);
+		nodoIntermedio->setVisible(false);
+		bbSet->setVisible(false);
+		isExploding = true;
+
+		canMove = false;
+		break;
+	}
 	default:
 		break;
 	}
@@ -102,16 +120,16 @@ void Avion::create10PointsBillBoard() {
 	bb = bbSet->createBillboard(Vector3(150, 50, -200));
 }
 
-void Avion::createRibbon() {
-	/*pSystem = mSM->createParticleSystem("psSmoke", "IG2App/smoke");
-	pSystem->setEmitting(false);
-	mNode->attachObject(pSystem);*/
+void Avion::createRibbonTrail() {
+	pSystem = mSM->createParticleSystem("estela", "Estela");
+	pSystem->setEmitting(true);
+	mNode->attachObject(pSystem);
+}
 
-	/*ribbonTrail = mSM->createRibbonTrail("ribbon");
-	ribbonTrail->setMaterialName("smoke");
-	ribbonTrail->setTrailLength(400);
-
-	ribbonTrail->addNode(mNode);*/
+void Avion::createExplosionSystem() {
+	explosionSystem = mSM->createParticleSystem("explosion", "Explosion");
+	explosionSystem->setEmitting(false);
+	mNode->attachObject(explosionSystem);
 }
 
 void Avion::cazaDrones(const Ogre::FrameEvent& evt) {
@@ -135,7 +153,15 @@ void Avion::cazaDrones(const Ogre::FrameEvent& evt) {
 }
 
 void Avion::escenaAgua(const Ogre::FrameEvent& evt) {
-	mNode->getParent()->yaw(Ogre::Degree(-0.5));
+	if (isExploding) {
+		explosionTime += evt.timeSinceLastFrame;
+		if (explosionTime > 1) {
+			isExploding = false;
+			explosionSystem->setEmitting(false);
+		}
+	}
+
+	if(canMove) mNode->getParent()->yaw(Ogre::Degree(-0.5));
 }
 
 

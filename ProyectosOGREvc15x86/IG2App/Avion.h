@@ -23,7 +23,7 @@ public:
 	void giraAspasAvion(float ang);
 	Ogre::SceneNode* getNode();
 
-	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	bool teclaPulsada(const OgreBites::KeyboardEvent& evt);
 	void frameRendered(const Ogre::FrameEvent& evt);
 
 	void receiveEvent(MessageType msgType, EntityIG* entidad);
@@ -31,7 +31,8 @@ public:
 	AspasMolino* getAspaMolinoD() { return aspasMolinoD; }
 
 	void create10PointsBillBoard();
-	void createRibbon();
+	void createRibbonTrail();
+	void createExplosionSystem();
 
 	void cazaDrones(const Ogre::FrameEvent& evt);
 	void escenaAgua(const Ogre::FrameEvent& evt);
@@ -39,6 +40,7 @@ public:
 private:
 	void transformAvion();
 
+	Ogre::SceneNode* nodoIntermedio = nullptr;
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
 	Ogre::SceneNode* alaDNode = nullptr;
@@ -56,14 +58,16 @@ private:
 	Ogre::Timer* myTimer;
 	Ogre::Real timeMoving;
 	Ogre::Real timeRotating;
+	Ogre::Real explosionTime;
 	int rndDirection;
 
 	bool canMove = true;
+	bool isExploding = false;
 
 	BillboardSet* bbSet = nullptr;
 	Billboard* bb = nullptr;
 
-	//ParticleSystem* pSystem = nullptr;
-	//RibbonTrail* ribbonTrail = nullptr;
+	ParticleSystem* pSystem = nullptr;
+	ParticleSystem* explosionSystem = nullptr;
 };
 

@@ -23,8 +23,9 @@ public:
 	void arma();
 	void cambiaEspada();
 	void configAnimation();
+	void receiveEvent(MessageType msgType, EntityIG* entidad);
 
-	bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	bool teclaPulsada(const OgreBites::KeyboardEvent& evt);
 private:
 	Ogre::Entity* simbadEnt = nullptr;
 
@@ -32,10 +33,12 @@ private:
 	Ogre::Entity* swordR = nullptr;
 
 	bool side = false;
+	bool dead = false;
 
 	AnimationState* runBase = nullptr;
 	AnimationState* runTop = nullptr;
 	AnimationState* dance = nullptr;
+	AnimationState* idleBase = nullptr;
 
 	Animation* anim = nullptr;
 	AnimationState* animState = nullptr;
