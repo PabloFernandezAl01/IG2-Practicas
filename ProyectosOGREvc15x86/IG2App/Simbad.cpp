@@ -8,6 +8,7 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	runTop = simbadEnt->getAnimationState("RunTop");
 	dance = simbadEnt->getAnimationState("Dance");
 	idleBase = simbadEnt->getAnimationState("IdleBase");
+	idleTop = simbadEnt->getAnimationState("IdleTop");
 
 	AnimationStateSet* aux = simbadEnt->getAllAnimationStates();
 	auto it = aux->getAnimationStateIterator().begin();
@@ -31,10 +32,12 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	dance->setEnabled(false);
 
 	idleBase->setLoop(true);
-	idleBase->setEnabled(false);
+	idleBase->setEnabled(true);
 
 	swordL = mSM->createEntity("Sword.mesh");
 	swordR = mSM->createEntity("Sword.mesh");
+
+	time = 0;
 
 	configAnimation();
 }
@@ -44,6 +47,13 @@ Ogre::SceneNode* Simbad::getNode() {
 }
 
 void Simbad::frameRendered(const Ogre::FrameEvent& evt) {
+	if (counting) {
+		time += evt.timeSinceLastFrame;
+		if (time >= 5) {
+			counting = false;
+			sendEvent(MessageType::EXPLOTA_BOMBA, this);
+		}
+	}
 
 	if (!dead) {
 		animState->addTime(evt.timeSinceLastFrame);
@@ -79,6 +89,7 @@ void Simbad::frameRendered(const Ogre::FrameEvent& evt) {
 	}
 	else {
 		idleBase->addTime(evt.timeSinceLastFrame);
+		idleTop->addTime(evt.timeSinceLastFrame);
 	}
 }
 
@@ -125,7 +136,6 @@ void Simbad::configAnimation() {
 	//Frame 0
 	kf = camino->createNodeKeyFrame(durPaso * 0);
 	kf->setRotation(src.getRotationTo(Vector3(0, 0, 1)));
-	//kf->setTranslate(Vector3(0,0,0));
 
 	//Frame 1
 	kf = camino->createNodeKeyFrame(durPaso * 1);
@@ -172,6 +182,11 @@ void Simbad::receiveEvent(MessageType msgType, EntityIG* entidad) {
 		runBase->setEnabled(false);
 		runTop->setEnabled(false);
 		dance->setEnabled(false);
+
+		mNode->pitch(Ogre::Degree(-90));
+		mNode->translate(0, -40, 0);
+
+		counting = true;
 		break;
 	}
 	default:

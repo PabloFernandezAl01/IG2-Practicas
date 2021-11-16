@@ -34,11 +34,14 @@ private:
 
 	bool side = false;
 	bool dead = false;
+	bool counting = false;
+	Ogre::Real time;
 
 	AnimationState* runBase = nullptr;
 	AnimationState* runTop = nullptr;
 	AnimationState* dance = nullptr;
 	AnimationState* idleBase = nullptr;
+	AnimationState* idleTop = nullptr;
 
 	Animation* anim = nullptr;
 	AnimationState* animState = nullptr;

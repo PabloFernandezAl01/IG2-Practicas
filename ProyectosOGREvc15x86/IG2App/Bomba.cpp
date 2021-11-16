@@ -2,12 +2,14 @@
 #include <iostream>
 
 Bomba::Bomba(Ogre::SceneNode* node) : EntityIG(node){
+	nodoIntermedio = mNode->createChildSceneNode();
+
 	bombaEnt = mSM->createEntity("Barrel.mesh");
 	bombaEnt->setMaterialName("bomba");
 
-	mNode->attachObject(bombaEnt);
+	nodoIntermedio->attachObject(bombaEnt);
 
-	mNode->setScale(10, 10, 10);
+	nodoIntermedio->setScale(10, 10, 10);
 	configAnimation();
 	createParticleSystem();
 }
@@ -88,6 +90,12 @@ void Bomba::receiveEvent(MessageType msgType, EntityIG* entidad) {
 		animState->setEnabled(false); //Desactivar la animacion 
 		break;
 	}
+	case MessageType::EXPLOTA_BOMBA: {
+		pSystem->setEmitting(true);
+		nodoIntermedio->setVisible(false);
+		animState->setEnabled(false);
+		break;
+	}
 	default:
 		break;
 	}
@@ -95,5 +103,6 @@ void Bomba::receiveEvent(MessageType msgType, EntityIG* entidad) {
 
 void Bomba::createParticleSystem() {
 	pSystem = mSM->createParticleSystem("humoBomba", "HumoBomba");
+	pSystem->setEmitting(false);
 	mNode->attachObject(pSystem);
 }

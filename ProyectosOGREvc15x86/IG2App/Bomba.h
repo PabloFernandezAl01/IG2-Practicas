@@ -30,12 +30,11 @@ public:
 
 private:
 	Ogre::Entity* bombaEnt = nullptr;
-	Ogre::SceneNode* bombaNode = nullptr;
+
+	Ogre::SceneNode* nodoIntermedio = nullptr;
 
 	Animation* anim = nullptr;
 	AnimationState* animState = nullptr;
-
-
 
 	ParticleSystem* pSystem = nullptr;
 };
