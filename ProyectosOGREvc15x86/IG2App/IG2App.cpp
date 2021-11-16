@@ -438,18 +438,18 @@ void IG2App::escenaAgua() {
 	nieblaNode->translate(300, 0, 0);
 
 	//Rellenamos el grupo con los elementos 
-	Billboard* niebla1 = bbSet->createBillboard(Vector3(0, 200, 0));
-	Billboard* niebla2 = bbSet->createBillboard(Vector3(20, 200, 0));
-	Billboard* niebla3 = bbSet->createBillboard(Vector3(40, 200, 0));
-	Billboard* niebla4 = bbSet->createBillboard(Vector3(60, 200, 0));
-	Billboard* niebla5 = bbSet->createBillboard(Vector3(80, 200, 0));
-	Billboard* niebla6 = bbSet->createBillboard(Vector3(-20, 200, 0));
-	Billboard* niebla7 = bbSet->createBillboard(Vector3(-40, 200, 0));
-	Billboard* niebla8 = bbSet->createBillboard(Vector3(-60, 200, 0));
-	Billboard* niebla9 = bbSet->createBillboard(Vector3(-80, 200, 0));
-	Billboard* niebla10 = bbSet->createBillboard(Vector3(20, 200, 20));
-	Billboard* niebla11 = bbSet->createBillboard(Vector3(40, 200, -20));
-	Billboard* niebla12 = bbSet->createBillboard(Vector3(60, 200, 40));
-	Billboard* niebla13 = bbSet->createBillboard(Vector3(80, 200, -40));
+	Billboard* niebla1 = bbSet->createBillboard(Vector3(0, 290, 0));
+	Billboard* niebla2 = bbSet->createBillboard(Vector3(10, 290, 0));
+	Billboard* niebla3 = bbSet->createBillboard(Vector3(30, 290, 0));
+	Billboard* niebla4 = bbSet->createBillboard(Vector3(50, 290, 0));
+	Billboard* niebla5 = bbSet->createBillboard(Vector3(70, 290, 0));
+	Billboard* niebla6 = bbSet->createBillboard(Vector3(-10, 290, 0));
+	Billboard* niebla7 = bbSet->createBillboard(Vector3(-30, 290, 0));
+	Billboard* niebla8 = bbSet->createBillboard(Vector3(-50, 290, 0));
+	Billboard* niebla9 = bbSet->createBillboard(Vector3(-70, 290, 0));
+	Billboard* niebla10 = bbSet->createBillboard(Vector3(10, 290, 20));
+	Billboard* niebla11 = bbSet->createBillboard(Vector3(30, 290, -20));
+	Billboard* niebla12 = bbSet->createBillboard(Vector3(50, 290, 40));
+	Billboard* niebla13 = bbSet->createBillboard(Vector3(70, 290, -40));
 }
 

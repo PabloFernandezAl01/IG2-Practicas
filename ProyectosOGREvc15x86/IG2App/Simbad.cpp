@@ -117,7 +117,7 @@ void Simbad::configAnimation() {
 	camino->setAssociatedNode(mNode);
 
 	Vector3 keyframePos(-400, 50, 400);
-	Ogre::Real durPaso = duracion / 5.0;
+	Ogre::Real durPaso = duracion / 5.0; // Duracion del paso=  duracion en segundos/ numero de keyframes-1
 	TransformKeyFrame* kf;
 
 	Vector3 src(0, 0, 1);
@@ -125,6 +125,7 @@ void Simbad::configAnimation() {
 	//Frame 0
 	kf = camino->createNodeKeyFrame(durPaso * 0);
 	kf->setRotation(src.getRotationTo(Vector3(0, 0, 1)));
+	//kf->setTranslate(Vector3(0,0,0));
 
 	//Frame 1
 	kf = camino->createNodeKeyFrame(durPaso * 1);
@@ -143,7 +144,7 @@ void Simbad::configAnimation() {
 
 	//Frame 4
 	kf = camino->createNodeKeyFrame(durPaso * 4);
-	keyframePos = Vector3(0, 0, 0);
+	keyframePos = Vector3(0, 0, 0); //Si quieres volver al punto donde empiezas pones 0 0 0 por que es en local no la posicion real de simbad 
 	kf->setRotation(src.getRotationTo(Vector3(-1, 0, 1)));
 	kf->setTranslate(keyframePos);
 

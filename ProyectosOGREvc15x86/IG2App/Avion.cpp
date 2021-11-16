@@ -97,13 +97,13 @@ void Avion::receiveEvent(MessageType msgType, EntityIG* entidad) {
 		break;
 	}
 	case MessageType::E_EVENT: {
-		explosionSystem->setEmitting(true);
-		pSystem->setEmitting(false);
-		nodoIntermedio->setVisible(false);
-		bbSet->setVisible(false);
-		isExploding = true;
+		explosionSystem->setEmitting(true); //Hacemos que se active elsistema de particulas de la explosion 
+		pSystem->setEmitting(false); //Quitamos la estela 
+		nodoIntermedio->setVisible(false); //Invisibilizamos el nodo intermedio 
+		bbSet->setVisible(false); //Quitamos el cartel del bilboard
+		isExploding = true; //Booleano de control de la explosion
 
-		canMove = false;
+		canMove = false; //Deshabilitamos el movimeinto para el avion 
 		break;
 	}
 	default:
@@ -123,11 +123,11 @@ void Avion::create10PointsBillBoard() {
 void Avion::createRibbonTrail() {
 	pSystem = mSM->createParticleSystem("estela", "Estela");
 	pSystem->setEmitting(true);
-	mNode->attachObject(pSystem);
+	mNode->attachObject(pSystem); //Para que siga al avion lo unimos a su nodo central 
 }
 
 void Avion::createExplosionSystem() {
-	explosionSystem = mSM->createParticleSystem("explosion", "Explosion");
+	explosionSystem = mSM->createParticleSystem("explosion", "Explosion"); //Lo que hace que cambie de color es el colour interpolator 
 	explosionSystem->setEmitting(false);
 	mNode->attachObject(explosionSystem);
 }
@@ -153,11 +153,13 @@ void Avion::cazaDrones(const Ogre::FrameEvent& evt) {
 }
 
 void Avion::escenaAgua(const Ogre::FrameEvent& evt) {
+	//Si se ha pulsado la e este bool debe de estar a true 
+	//Todo el codigo  es para que la explosion dure un segundo y se desvanezca 
 	if (isExploding) {
 		explosionTime += evt.timeSinceLastFrame;
 		if (explosionTime > 1) {
-			isExploding = false;
-			explosionSystem->setEmitting(false);
+			isExploding = false; //Bool de control para contar desactivado
+			explosionSystem->setEmitting(false); //Desaparicion de la bomba 
 		}
 	}
 
