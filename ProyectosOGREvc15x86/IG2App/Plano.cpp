@@ -11,7 +11,7 @@ Plano::Plano(Ogre::SceneNode* node, std::string entName, std::string materialNam
 		1080, 1080, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 
 	plano = mSM->createEntity(entName);
-	plano->setMaterialName(materialName);
+	if(materialName != "") plano->setMaterialName(materialName);
 
 	mNode->attachObject(plano);
 

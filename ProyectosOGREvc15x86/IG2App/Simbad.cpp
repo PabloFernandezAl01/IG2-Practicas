@@ -19,7 +19,8 @@ Simbad::Simbad(Ogre::SceneNode* node) : EntityIG(node){
 	}
 
 	mNode->attachObject(simbadEnt);
-	mNode->translate(-400, 50, 400);
+	mNode->translate(-400, 50, 400); //Evitar mover a simbad porque si no se rompe el ejercicio 42
+	//mNode->translate(0, 350, 0);
 	mNode->setScale(10, 10, 10);
 
 	runBase->setLoop(true);
@@ -91,6 +92,11 @@ void Simbad::frameRendered(const Ogre::FrameEvent& evt) {
 		idleBase->addTime(evt.timeSinceLastFrame);
 		idleTop->addTime(evt.timeSinceLastFrame);
 	}
+
+	//Ejercicio 44
+	/*mNode->getParent()->pitch(Ogre::Degree(0.5));
+	runBase->addTime(evt.timeSinceLastFrame);
+	runTop->addTime(evt.timeSinceLastFrame);*/
 }
 
 void Simbad::arma(bool s) {
