@@ -20,12 +20,33 @@ material ajedrez {
   }
 }
 
+
+
 material piedras {
   technique{
     pass {
       texture_unit {
         texture BeachStones.jpg
         colour_op replace
+      }
+    }
+  }
+}
+
+material space {
+	technique{
+    pass {
+    lighting off
+      texture_unit {
+      tex_coord_set 0
+        texture lightMap.jpg
+        color_op modulate
+      }
+      texture_unit {
+        tex_coord_set 0
+        texture spaceSky.jpg
+        color_op modulate
+        rotate_anim 0.01
       }
     }
   }

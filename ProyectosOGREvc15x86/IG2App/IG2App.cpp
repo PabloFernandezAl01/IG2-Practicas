@@ -83,7 +83,7 @@ void IG2App::setupScene(void)
 
 	Light* luz = mSM->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(0.75, 0.75, 0.75);
+	luz->setDiffuseColour(1, 1, 1);
 
 	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");
@@ -390,11 +390,11 @@ void IG2App::escenaAgua() {
 	planoAmarillo->getNode()->setScale(0.25, 0.1, 0.25);
 	planoAmarillo->getNode()->translate(-405, 1, 405);
 
-	//Plano rojo
-	planoRojoNode = mSM->getRootSceneNode()->createChildSceneNode();
-	planoRojo = new Plano(planoRojoNode, "mPlaneRojo1080x800", "rojo");
-	planoRojo->getNode()->setScale(0.25, 0.1, 0.25);
-	planoRojo->getNode()->translate(405, 1, -405);
+	////Plano rojo
+	//planoRojoNode = mSM->getRootSceneNode()->createChildSceneNode();
+	//planoRojo = new Plano(planoRojoNode, "mPlaneRojo1080x800", "rojo");
+	//planoRojo->getNode()->setScale(0.25, 0.1, 0.25);
+	//planoRojo->getNode()->translate(405, 1, -405);
 
 	//Simbad
 	ficticioSimbadNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -432,24 +432,26 @@ void IG2App::escenaAgua() {
 	bbSet->setDefaultDimensions(200, 200);
 	bbSet->setMaterialName("smoke");
 
-	//Asociamos a la escena el bilboard
-	nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
-	nieblaNode->attachObject(bbSet);
-	nieblaNode->translate(300, 0, 0);
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "space", 1, 1, true, 1.0, 100, 100);
 
-	//Rellenamos el grupo con los elementos 
-	bbSet->createBillboard(Vector3(-20, 290, 0));
-	bbSet->createBillboard(Vector3(-10, 290, 0));
-	bbSet->createBillboard(Vector3(10, 290, 0));
-	bbSet->createBillboard(Vector3(30, 290, 0));
-	bbSet->createBillboard(Vector3(50, 290, 0));
-	bbSet->createBillboard(Vector3(-30, 290, 0));
-	bbSet->createBillboard(Vector3(-50, 290, 0));
-	bbSet->createBillboard(Vector3(-70, 290, 0));
-	bbSet->createBillboard(Vector3(-90, 290, 0));
-	bbSet->createBillboard(Vector3(-10, 290, 20));
-	bbSet->createBillboard(Vector3(10, 290, -20));
-	bbSet->createBillboard(Vector3(30, 290, 40));
-	bbSet->createBillboard(Vector3(50, 290, -40));
+	////Asociamos a la escena el bilboard
+	//nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
+	//nieblaNode->attachObject(bbSet);
+	//nieblaNode->translate(300, 0, 0);
+
+	////Rellenamos el grupo con los elementos 
+	//bbSet->createBillboard(Vector3(-20, 290, 0));
+	//bbSet->createBillboard(Vector3(-10, 290, 0));
+	//bbSet->createBillboard(Vector3(10, 290, 0));
+	//bbSet->createBillboard(Vector3(30, 290, 0));
+	//bbSet->createBillboard(Vector3(50, 290, 0));
+	//bbSet->createBillboard(Vector3(-30, 290, 0));
+	//bbSet->createBillboard(Vector3(-50, 290, 0));
+	//bbSet->createBillboard(Vector3(-70, 290, 0));
+	//bbSet->createBillboard(Vector3(-90, 290, 0));
+	//bbSet->createBillboard(Vector3(-10, 290, 20));
+	//bbSet->createBillboard(Vector3(10, 290, -20));
+	//bbSet->createBillboard(Vector3(30, 290, 40));
+	//bbSet->createBillboard(Vector3(50, 290, -40));
 }
 
