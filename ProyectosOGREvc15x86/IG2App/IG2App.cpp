@@ -105,6 +105,8 @@ void IG2App::setupScene(void)
 
 	// finally something to render
 
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "space", 1, 1, true, 1.0, 100, 100);
+
 	//simbadScene();
 	//avionScene();
 	//planetScene();
@@ -431,8 +433,6 @@ void IG2App::escenaAgua() {
 	bbSet = mSM->createBillboardSet("niebla", 1000);
 	bbSet->setDefaultDimensions(200, 200);
 	bbSet->setMaterialName("smoke");
-
-	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "space", 1, 1, true, 1.0, 100, 100);
 
 	////Asociamos a la escena el bilboard
 	//nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
