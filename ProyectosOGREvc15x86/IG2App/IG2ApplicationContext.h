@@ -156,6 +156,8 @@ namespace OgreBites
 		*/
 		virtual NativeWindowPair createWindow(const Ogre::String& name);
 
+		
+
 	protected:
 
 		Ogre::Root* mRoot;        // OGRE root

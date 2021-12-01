@@ -34,6 +34,9 @@ protected:
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
       
+  //Camera
+  Camera* cam = nullptr;
+
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    
   Ogre::SceneNode* mLightNode = nullptr;
@@ -84,6 +87,9 @@ protected:
 
   Plano* planoRojo = nullptr;
   Ogre::SceneNode* planoRojoNode = nullptr;
+
+  Plano* planoEspejo = nullptr;
+  Ogre::SceneNode* planoEspejoNode = nullptr;
 
   Ogre::Light* luzFocoDron = nullptr;
   Ogre::Light* luzFocoAvion = nullptr;

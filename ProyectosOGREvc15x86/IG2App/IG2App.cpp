@@ -60,7 +60,7 @@ void IG2App::setup(void)
 void IG2App::setupScene(void)
 {
 	// create the camera
-	Camera* cam = mSM->createCamera("Cam");
+	cam = mSM->createCamera("Cam");
 	cam->setNearClipDistance(1);
 	cam->setFarClipDistance(10000);
 	cam->setAutoAspectRatio(true);
@@ -392,6 +392,15 @@ void IG2App::escenaAgua() {
 	planoAmarillo->getNode()->setScale(0.25, 0.1, 0.25);
 	planoAmarillo->getNode()->translate(-405, 1, 405);
 
+	//Plano Espejo
+	planoEspejoNode = mSM->getRootSceneNode()->createChildSceneNode();
+	planoEspejo = new Plano(planoEspejoNode, "mPlaneEspejo1080x800", "");
+	planoEspejo->getNode()->setScale(0.7, 0.1, 1);
+	planoEspejo->getNode()->translate(550, 375, 0);
+	planoEspejo->getNode()->roll(Ogre::Degree(90));
+
+	planoEspejo->setEspejo(cam);
+
 	////Plano rojo
 	//planoRojoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	//planoRojo = new Plano(planoRojoNode, "mPlaneRojo1080x800", "rojo");
@@ -433,6 +442,9 @@ void IG2App::escenaAgua() {
 	bbSet = mSM->createBillboardSet("niebla", 1000);
 	bbSet->setDefaultDimensions(200, 200);
 	bbSet->setMaterialName("smoke");
+
+	//Espejo plano
+	plano->setReflejo(cam);
 
 	////Asociamos a la escena el bilboard
 	//nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
