@@ -396,7 +396,7 @@ void IG2App::escenaAgua() {
 	planoEspejoNode = mSM->getRootSceneNode()->createChildSceneNode();
 	planoEspejo = new Plano(planoEspejoNode, "mPlaneEspejo1080x800", "");
 	planoEspejo->getNode()->setScale(0.7, 0.1, 1);
-	planoEspejo->getNode()->translate(550, 375, 0);
+	planoEspejo->getNode()->translate(545, 375, 0);
 	planoEspejo->getNode()->roll(Ogre::Degree(90));
 
 	planoEspejo->setEspejo(cam);

@@ -130,6 +130,7 @@
     <ClInclude Include="IG2App.h" />
     <ClInclude Include="Molino.h" />
     <ClInclude Include="Plano.h" />
+    <ClInclude Include="RenderTargetListener.h" />
     <ClInclude Include="RotorDron.h" />
     <ClInclude Include="Simbad.h" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClCompile Include="IG2App.cpp" />
     <ClCompile Include="Molino.cpp" />
     <ClCompile Include="Plano.cpp" />
+    <ClCompile Include="RenderTargetListener.cpp" />
     <ClCompile Include="RotorDron.cpp" />
     <ClCompile Include="Simbad.cpp" />
   </ItemGroup>

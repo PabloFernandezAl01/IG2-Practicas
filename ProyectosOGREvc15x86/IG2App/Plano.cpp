@@ -60,7 +60,7 @@ void Plano::setReflejo(Ogre::Camera* cam) {
 	mNode->attachObject(mpRef);
 
 	camRef->setNearClipDistance(1);
-	camRef->setFarClipDistance(100);
+	camRef->setFarClipDistance(10000);
 	camRef->enableReflection(mpRef);
 	camRef->enableCustomNearClipPlane(mpRef);
 
@@ -90,10 +90,10 @@ void Plano::setReflejo(Ogre::Camera* cam) {
 void Plano::setEspejo(Camera* cam) {
 	cam->getParentSceneNode()->attachObject(camRefEspejo);
 
-	mpRefEspejo = new Ogre::MovablePlane(Ogre::Vector3::NEGATIVE_UNIT_X, 0);
+	mpRefEspejo = new Ogre::MovablePlane(Ogre::Vector3::UNIT_Y, 0);
 	mNode->attachObject(mpRefEspejo);
 
-	camRefEspejo->setNearClipDistance(100);
+	camRefEspejo->setNearClipDistance(1);
 	camRefEspejo->setFarClipDistance(10000);
 	camRefEspejo->enableReflection(mpRefEspejo);
 	camRefEspejo->enableCustomNearClipPlane(mpRefEspejo);
