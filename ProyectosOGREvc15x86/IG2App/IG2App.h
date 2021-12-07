@@ -20,6 +20,7 @@
 #include <OgreParticleSystemRenderer.h>
 #include <OgreBillboard.h>
 #include <OgreBillboardParticleRenderer.h>
+#include "Carita.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -110,7 +111,7 @@ protected:
   Bomba* bomba = nullptr;
   Ogre::SceneNode* bombaNode = nullptr;
 
-  Ogre::Entity* caritaFelizEnt = nullptr;
+  Carita* caraFeliz = nullptr;
   Ogre::SceneNode* caritaFelizNode = nullptr;
 
   BillboardSet* bbSet = nullptr;

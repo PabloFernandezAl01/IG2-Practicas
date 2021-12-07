@@ -375,6 +375,14 @@ void IG2App::cazaDrones() {
 }
 
 void IG2App::escenaAgua() {
+
+
+	//Cara feliz
+	caritaFelizNode = mSM->getRootSceneNode()->createChildSceneNode();
+	caraFeliz = new Carita(caritaFelizNode);
+
+
+
 	bombaNode = mSM->getRootSceneNode()->createChildSceneNode();
 	bomba = new Bomba(bombaNode);
 	IG2ApplicationContext::addInputListener(bomba);
@@ -382,7 +390,7 @@ void IG2App::escenaAgua() {
 
 	//Plano agua
 	planoNode = mSM->getRootSceneNode()->createChildSceneNode();
-	plano = new Plano(planoNode, "mPlane1080x1080", "aguita");
+	plano = new Plano(planoNode, "mPlane1080x1080", "aguita",caraFeliz);
 	IG2ApplicationContext::addInputListener(plano);
 	EntityIG::addListener(plano);
 
@@ -399,7 +407,7 @@ void IG2App::escenaAgua() {
 	planoEspejo->getNode()->translate(545, 375, 0);
 	planoEspejo->getNode()->roll(Ogre::Degree(90));
 
-	planoEspejo->setEspejo(cam);
+	//planoEspejo->setEspejo(cam);
 
 	////Plano rojo
 	//planoRojoNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -429,14 +437,9 @@ void IG2App::escenaAgua() {
 	avion->getNode()->translate(200, 320, 0);
 
 
-	//Cara feliz
-	caritaFelizEnt = mSM->createEntity("sphere.mesh");
-	caritaFelizEnt->setMaterialName("cabeza");
 
-	caritaFelizNode = mSM->getRootSceneNode()->createChildSceneNode();
-	caritaFelizNode->attachObject(caritaFelizEnt);
-	caritaFelizNode->setScale(0.2, 0.2, 0.2);
-	caritaFelizNode->translate(505, 20, -405);
+	
+	
 
 	//Creamos el grupo de bilboards
 	bbSet = mSM->createBillboardSet("niebla", 1000);

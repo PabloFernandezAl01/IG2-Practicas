@@ -124,13 +124,13 @@
     <ClInclude Include="Avion.h" />
     <ClInclude Include="Bomba.h" />
     <ClInclude Include="BrazoDron.h" />
+    <ClInclude Include="Carita.h" />
     <ClInclude Include="Dron.h" />
     <ClInclude Include="EntityIG.h" />
     <ClInclude Include="IG2ApplicationContext.h" />
     <ClInclude Include="IG2App.h" />
     <ClInclude Include="Molino.h" />
     <ClInclude Include="Plano.h" />
-    <ClInclude Include="RenderTargetListener.h" />
     <ClInclude Include="RotorDron.h" />
     <ClInclude Include="Simbad.h" />
   </ItemGroup>
@@ -140,6 +140,7 @@
     <ClCompile Include="Avion.cpp" />
     <ClCompile Include="Bomba.cpp" />
     <ClCompile Include="BrazoDron.cpp" />
+    <ClCompile Include="Carita.cpp" />
     <ClCompile Include="Dron.cpp" />
     <ClCompile Include="EntityIG.cpp" />
     <ClCompile Include="IG2ApplicationContext.cpp" />
@@ -147,7 +148,6 @@
     <ClCompile Include="IG2App.cpp" />
     <ClCompile Include="Molino.cpp" />
     <ClCompile Include="Plano.cpp" />
-    <ClCompile Include="RenderTargetListener.cpp" />
     <ClCompile Include="RotorDron.cpp" />
     <ClCompile Include="Simbad.cpp" />
   </ItemGroup>
