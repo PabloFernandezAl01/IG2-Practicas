@@ -6,24 +6,20 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 
+Carita::Carita(Ogre::SceneNode* mCaraNode) :EntityIG(mCaraNode) {
 
-
-Carita::Carita(Ogre::SceneNode* mCaraNode) :EntityIG(mCaraNode)
-{
 	Ogre::Entity*  caritaFelizEnt = mSM->createEntity("sphere.mesh");
 	caritaFelizEnt->setMaterialName("cabeza");
 
-	
 	mNode->attachObject(caritaFelizEnt);
 	mNode->setScale(0.2, 0.2, 0.2);
 	mNode->translate(505, 20, -405);
+}
+
+void Carita::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
 
 }
-void Carita::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
-{
-	
-}
-void Carita::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
-{
-	mNode->pitch(Ogre::Degree(45));
+
+void Carita::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
+
 }

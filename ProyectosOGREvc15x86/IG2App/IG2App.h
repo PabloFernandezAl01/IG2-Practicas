@@ -111,8 +111,8 @@ protected:
   Bomba* bomba = nullptr;
   Ogre::SceneNode* bombaNode = nullptr;
 
-  Carita* caraFeliz = nullptr;
-  Ogre::SceneNode* caritaFelizNode = nullptr;
+  Carita* carita = nullptr;
+  Ogre::SceneNode* caritaNode = nullptr;
 
   BillboardSet* bbSet = nullptr;
   
