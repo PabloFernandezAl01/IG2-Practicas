@@ -105,7 +105,7 @@ void IG2App::setupScene(void)
 
 	// finally something to render
 
-	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "space", 1, 1, true, 1.0, 100, 100);
+	mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -50), "SpaceSkyGLSL", 1, 1, true, 1.0, 100, 100);
 
 	//simbadScene();
 	//avionScene();
@@ -391,7 +391,8 @@ void IG2App::escenaAgua() {
 	IG2ApplicationContext::addInputListener(plano);
 	EntityIG::addListener(plano);
 	//Espejo plano
-		plano->setReflejo(cam);
+	//plano->setReflejo(cam);
+
 	//Plano amarillo
 	planoAmarilloNode = mSM->getRootSceneNode()->createChildSceneNode();
 	planoAmarillo = new Plano(planoAmarilloNode, "mPlaneAmarillo1080x800", "amarillo");

@@ -4,12 +4,12 @@
 Bomba::Bomba(Ogre::SceneNode* node) : EntityIG(node){
 	nodoIntermedio = mNode->createChildSceneNode();
 
-	bombaEnt = mSM->createEntity("Barrel.mesh");
-	bombaEnt->setMaterialName("bomba");
+	bombaEnt = mSM->createEntity("uv_sphere.mesh");
+	bombaEnt->setMaterialName("HolesAndLightingGLSL");
 
 	nodoIntermedio->attachObject(bombaEnt);
 
-	nodoIntermedio->setScale(10, 10, 10);
+	nodoIntermedio->setScale(0.3, 0.3, 0.3);
 	configAnimation();
 	createParticleSystem();
 }

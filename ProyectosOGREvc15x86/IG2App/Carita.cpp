@@ -17,7 +17,7 @@ Carita::Carita(Ogre::SceneNode* mCaraNode) :EntityIG(mCaraNode) {
 }
 
 void Carita::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
-
+	
 }
 
 void Carita::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
