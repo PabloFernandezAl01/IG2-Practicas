@@ -393,7 +393,8 @@ void IG2App::escenaAgua() {
 	plano = new Plano(planoNode, "mPlane1080x1080", "aguita",caraFeliz);
 	IG2ApplicationContext::addInputListener(plano);
 	EntityIG::addListener(plano);
-
+	//Espejo plano
+		plano->setReflejo(cam);
 	//Plano amarillo
 	planoAmarilloNode = mSM->getRootSceneNode()->createChildSceneNode();
 	planoAmarillo = new Plano(planoAmarilloNode, "mPlaneAmarillo1080x800", "amarillo");
@@ -407,7 +408,7 @@ void IG2App::escenaAgua() {
 	planoEspejo->getNode()->translate(545, 375, 0);
 	planoEspejo->getNode()->roll(Ogre::Degree(90));
 
-	//planoEspejo->setEspejo(cam);
+	planoEspejo->setEspejo(cam);
 
 	////Plano rojo
 	//planoRojoNode = mSM->getRootSceneNode()->createChildSceneNode();
@@ -446,8 +447,7 @@ void IG2App::escenaAgua() {
 	bbSet->setDefaultDimensions(200, 200);
 	bbSet->setMaterialName("smoke");
 
-	//Espejo plano
-	plano->setReflejo(cam);
+	
 
 	////Asociamos a la escena el bilboard
 	//nieblaNode = mSM->getRootSceneNode()->createChildSceneNode();
