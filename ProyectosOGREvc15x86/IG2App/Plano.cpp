@@ -1,9 +1,9 @@
 #include "Plano.h"
 
-Plano::Plano(Ogre::SceneNode* node, std::string entName, std::string materialName, Carita* cF) : EntityIG(node){
+Plano::Plano(Ogre::SceneNode* node, std::string entName, std::string materialName, Carita* caritaFeliz) : EntityIG(node){
 
 	entName_ = entName;
-	carafeliz = cF;
+	carita  = caritaFeliz;
 	//Plano
 	Ogre::MeshManager::getSingleton().createPlane(entName,
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -73,7 +73,8 @@ void Plano::setReflejo(Ogre::Camera* cam) {
 		0, PF_R8G8B8, TU_RENDERTARGET);
 
 	RenderTexture* renderTexture = rttRef->getBuffer()->getRenderTarget();
-	if (carafeliz != nullptr)renderTexture->addListener(carafeliz);
+	if (carita != nullptr) renderTexture->addListener(carita);
+
 	Viewport* vpt = renderTexture->addViewport(camRef);
 	vpt->setClearEveryFrame(true);
 	vpt->setBackgroundColour(ColourValue::Black);

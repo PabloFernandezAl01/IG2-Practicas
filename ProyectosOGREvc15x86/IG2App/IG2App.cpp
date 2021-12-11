@@ -376,12 +376,9 @@ void IG2App::cazaDrones() {
 
 void IG2App::escenaAgua() {
 
-
 	//Cara feliz
-	caritaFelizNode = mSM->getRootSceneNode()->createChildSceneNode();
-	caraFeliz = new Carita(caritaFelizNode);
-
-
+	caritaNode = mSM->getRootSceneNode()->createChildSceneNode();
+	carita = new Carita(caritaNode);
 
 	bombaNode = mSM->getRootSceneNode()->createChildSceneNode();
 	bomba = new Bomba(bombaNode);
@@ -390,7 +387,7 @@ void IG2App::escenaAgua() {
 
 	//Plano agua
 	planoNode = mSM->getRootSceneNode()->createChildSceneNode();
-	plano = new Plano(planoNode, "mPlane1080x1080", "aguita",caraFeliz);
+	plano = new Plano(planoNode, "mPlane1080x1080", "aguita", carita);
 	IG2ApplicationContext::addInputListener(plano);
 	EntityIG::addListener(plano);
 	//Espejo plano
@@ -437,10 +434,6 @@ void IG2App::escenaAgua() {
 	avion->getNode()->setScale(0.1, 0.1, 0.1);
 	avion->getNode()->translate(200, 320, 0);
 
-
-
-	
-	
 
 	//Creamos el grupo de bilboards
 	bbSet = mSM->createBillboardSet("niebla", 1000);
