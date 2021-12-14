@@ -8,7 +8,7 @@
 
 Carita::Carita(Ogre::SceneNode* mCaraNode) :EntityIG(mCaraNode) {
 
-	Ogre::Entity*  caritaFelizEnt = mSM->createEntity("sphere.mesh");
+	caritaFelizEnt = mSM->createEntity("sphere.mesh");
 	caritaFelizEnt->setMaterialName("cabeza");
 
 	mNode->attachObject(caritaFelizEnt);
@@ -17,7 +17,9 @@ Carita::Carita(Ogre::SceneNode* mCaraNode) :EntityIG(mCaraNode) {
 }
 
 void Carita::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
+	caritaFelizEnt->setMaterialName("cabeza");
 }
 
 void Carita::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt) {
+	caritaFelizEnt->setMaterialName("cabeza_invertida");
 }

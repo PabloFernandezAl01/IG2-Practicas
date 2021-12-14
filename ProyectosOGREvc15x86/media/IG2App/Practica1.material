@@ -187,6 +187,17 @@ material cabeza {
       texture spotlight_image.png
       env_map spherical
       }
+   }
+  }
+}
+
+material cabeza_invertida {
+  technique {
+    pass {
+    texture_unit {
+      texture spotlight_image_inverted.png
+      env_map spherical
+      }
     }
   }
 }

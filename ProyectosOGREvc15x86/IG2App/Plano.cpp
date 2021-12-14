@@ -23,7 +23,6 @@ Plano::Plano(Ogre::SceneNode* node, std::string entName, std::string materialNam
 	else if (entName_ == "mPlaneEspejo1080x800") {
 		camRefEspejo = mSM->createCamera("camRefEspejo");
 	}
-	
 }
 
 Ogre::SceneNode* Plano::getNode() {

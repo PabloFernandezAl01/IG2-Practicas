@@ -8,4 +8,7 @@ public:
 
 	void postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt);
 	void preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt);
+
+private:
+	Ogre::Entity* caritaFelizEnt = nullptr;
 };
