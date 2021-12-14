@@ -5,8 +5,6 @@ uniform sampler2D textureT; // tipo sampler2D para texturas
 uniform sampler2D tex_front; // tipo sampler2D para texturas
 uniform sampler2D tex_back; // tipo sampler2D para texturas
 
-uniform float Flipping;
-
 out vec4 fFragColor;        // out del fragment shader
 
 void main() {
