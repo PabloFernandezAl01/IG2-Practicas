@@ -31,6 +31,7 @@ public:
 	void frameRendered(const Ogre::FrameEvent& evt);
 	void setReflejo(Ogre::Camera* cam);
 	void setEspejo(Camera* cam);
+
 private:
 	Ogre::Entity* plano = nullptr;
 	std::string entName_;

@@ -66,8 +66,6 @@ fragment_program SpaceSkyFS glsl //nombre para el shader
   {
     param_named texturaL int 0 // 1º unidad de textura ‐> *
     param_named texturaM int 1 // 2º unidad de textura ‐> *
-    param_named BF float 0.7
-    param_named intLuzAmb float 1.0
   }
 }
 
@@ -107,6 +105,7 @@ vertex_program SpaceVS glsl //nombre para el shader
   default_params // valores para las variable uniform
   {
     param_named_auto modelViewProjMat worldviewproj_matrix
+    param_named_auto sintime sintime_0_2pi 5
   }
 }
 
@@ -117,27 +116,11 @@ fragment_program SpaceFS glsl //nombre para el shader
   {
     param_named texturaL int 0 // 1º unidad de textura ‐> *
     param_named texturaM int 1 // 2º unidad de textura ‐> *
-    param_named ZF float 0.5
   }
 }
 
 material SpaceGLSL {
   technique {
-    pass {
-        vertex_program_ref SpaceSkyVS
-        { // params ‐> default_params
-        }
-        fragment_program_ref SpaceSkyFS
-        { // params ‐> default_params
-        }
-
-        texture_unit { // int 0
-          texture lightMap.jpg 2d
-        }
-        texture_unit { //int 1
-          texture spaceSky.jpg 2d
-        }
-    }
     pass {
         vertex_program_ref SpaceVS
         { // params ‐> default_params
