@@ -1,11 +1,18 @@
 #ifndef __IG2App_H__
 #define __IG2App_H__
 
-#include "IG2ApplicationContext.h"
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
+#include <vector>
+#include <OgreParticleSystem.h>
+#include <OgreParticleSystemManager.h>
+#include <OgreParticleSystemRenderer.h>
+#include <OgreBillboard.h>
+#include <OgreBillboardParticleRenderer.h>
+
+#include "IG2ApplicationContext.h"
 #include "Molino.h"
 #include "BrazoDron.h"
 #include "Dron.h"
@@ -14,12 +21,6 @@
 #include "EntityIG.h"
 #include "Simbad.h"
 #include "Bomba.h"
-#include <vector>
-#include <OgreParticleSystem.h>
-#include <OgreParticleSystemManager.h>
-#include <OgreParticleSystemRenderer.h>
-#include <OgreBillboard.h>
-#include <OgreBillboardParticleRenderer.h>
 #include "Carita.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
